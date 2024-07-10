@@ -8,10 +8,10 @@ export default function App({ Component, pageProps }: AppProps) {
 	const pageKey = router.asPath
 
 	return (
-        <Layout>
-		<AnimatePresence initial={false} mode="wait">
-			<Component key={pageKey} {...pageProps} />
-		</AnimatePresence>
-        </Layout>
+		<Layout>
+			<AnimatePresence initial={false} mode="wait">
+				<Component key={pageKey} {...pageProps} />
+			</AnimatePresence>
+		</Layout>
 	)
 }

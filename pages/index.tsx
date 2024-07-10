@@ -23,7 +23,7 @@ export default function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
           <div className="IndexPage">
             <Link href="./cloverindex">
               <Image
-                src="/UMGJwOh.gif"
+                src="/gif.gif"
                 layout="fill"
                 objectFit="cover"
                 alt="tet"

@@ -50,7 +50,7 @@ export default function Footer() {
         <MenuItem {...item} className={styles.menuitem} onClick={() => setOpen(false)}>
           <Link href="./cloverindex"> INDEX </Link>
         </MenuItem>
-        
+
         <MenuItem {...item} className={styles.menuitem}>SHOP</MenuItem>
         <MenuItem {...item} className={styles.menuitem}>COFFEE</MenuItem>
         <MenuItem {...item} className={styles.menuitem}>ABOUT</MenuItem>

@@ -1,11 +1,58 @@
-.container {
+/* .container {
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 10
+} */
+
+.container2 {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: 'absolute';
+  z-index: 1
 }
+
+.container {
+  position: relative;
+  height: 200vh; /* Adjust height to have enough scrolling space */
+}
+
+.fullscreenImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vh;
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  background-color: white;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .title a {
   color: #0070f3;
@@ -166,6 +213,33 @@
   right: 20px; /* Adjust as needed */
   z-index: 10; /* Ensure this is higher than the image's z-index */
   color: black;
+}
+
+.toppage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease; /* Smooth sliding animation */
+}
+
+.topview.slideup {
+  transform: translateY(-100%); /* Slide up to reveal the bottom view */
+}
+
+
+.bottompage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  z-index: 1; /* Ensure it's above the top view */
+  /* Add any other styles for the bottom view */
 }
 
 .menu {
