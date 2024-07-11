@@ -5,11 +5,11 @@ type PageTransitionProps = HTMLMotionProps<'div'>
 type PageTransitionRef = React.ForwardedRef<HTMLDivElement>
 
 function PageTransition({ children, ...rest }: PageTransitionProps, ref: PageTransitionRef) {
-	const onTheRight = { y: '-100%' }
-	const inTheCenter = { y: 0 }
-	const onTheLeft = { y: '-100%' }
+	const onTheRight = { y: '0%', opacity: 0 }
+	const inTheCenter = { y: 0, opacity: 1 }
+	const onTheLeft = { y: '0%', opacity: 0 }
 
-	const transition = { duration: 0.5, ease: 'easeInOut' }
+	const transition = { duration: .7, ease: 'easeInOut' }
 
 	return (
 		<motion.div

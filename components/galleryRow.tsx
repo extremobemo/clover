@@ -1,58 +1,51 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 
-interface Photo {
-  url: string;
-  description: string;
-}
+const GalleryRow = ({ photos, handleClick, clickedImage }) => {
+  const router = useRouter();
 
-interface GalleryRowProps {
-  photos: Photo[];
-}
-
-const GalleryRow: React.FC<GalleryRowProps> = ({ photos }) => {
   return (
-    <div className="gallery-row">
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '10px',
+      padding: '0 5vw', // Responsive padding using viewport width
+      flexWrap: 'wrap', // Allow items to wrap to the next line if needed
+    }}>
       {photos.map((photo, index) => (
-        <div key={index} className="gallery-item">
-          <motion.img
-            whileHover={{ scale: 1.2 }}
-            src={photo.url}
-            alt={photo.description}
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-            }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
+        <motion.div
+          key={index}
+          onClick={(e) => handleClick(photo.url, e)}
+          style={{
+            cursor: 'pointer',
+            maxWidth: '700px',
+            flex: '1 0 200px', // Flex properties to control sizing
+            margin: '40px', // Spacing between items
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center', // Center content horizontally
+          }}
+          initial={{ opacity: 1 }}
+          // animate={{ opacity: clickedImage === photo.url ? 1 : 0.5 }}
+        >
+          <div style={{ height: '80vh', marginBottom: '10px', position: 'relative', width: '100%' }}>
+            <motion.img
+            whileHover={{scale: 1.1}}
+              src={photo.url}
+              style={{
+                height: '100%',
+                width: '100%',
+                objectFit: 'cover',
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+        </motion.div>
       ))}
-      <style jsx>{`
-        .gallery-row {
-          display: flex;
-          justify-content: center; /* Change from space-between to center */
-          width: 100%;
-          padding: 0 5%;
-          box-sizing: border-box;
-          flex-wrap: wrap;
-        }
-        .gallery-item {
-          position: relative;
-          height: 800px; /* Adjust height as needed */
-          flex: 1;
-          margin: 0 2%;
-        }
-        @media (max-width: 768px) {
-          .gallery-item {
-            flex: 0 0 100%;
-            margin: 10px 0;
-          }
-        }
-      `}</style>
     </div>
   );
-}
+};
 
 export default GalleryRow;
