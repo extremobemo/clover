@@ -1,68 +1,48 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, ForwardedRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import styles from '../styles/Home.module.css';
-import Image from 'next/image';
-import GalleryRow from '../components/galleryRow';
-import router from 'next/router';
 import { useRouter } from 'next/router';
 import PageTransition from "../components/PageTransition";
+import { AdvancedImage } from '@cloudinary/react';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import GreenBar from '../components/bar';
 
-type IndexPageProps = {};
-type IndexPageRef = React.ForwardedRef<HTMLDivElement>;
+interface GalleryPageProps { }
 
-const photos2 = [
-  { url: '/ANGUS CLOUD_SNS_CM_9.jpg', description: 'Photo 1' },
-  { url: '/ANGUS CLOUD_SNS_CM_7.jpg', description: 'Photo 2' },
-  { url: '/ANGUS CLOUD_SNS_CM_5.jpg', description: 'Photo 3' },
-];
-
-const photos = [
-  { url: '/STUDIO BUDS_CIAN_C2_2.jpg', description: 'Photo 1' },
-  { url: '/GQ FITNESS 2022_9.jpg', description: 'Photo 2' },
-];
-
-const photos3 = [
-  { url: '/GQ FITNESS 2022_9.jpg', description: 'Photo 1' },
-];
-
-
-const photos5 = [
-  { url: '/ee mcd 21.jpg', description: 'Photo 1' },
-  { url: '/ee mcd 22.jpg', description: 'Photo 1' },
-];
-
-
-const photos4 = [
-  { url: '/ee mcd 20.jpg', description: 'Photo 1' },
-];
-
-
-export default function Home(props: IndexPageProps, ref: IndexPageRef) {
-  const [clickedImage, setClickedImage] = useState<string | null>(null); // Example clickedImage state
-
+const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
+  const [clickedImage, setClickedImage] = useState<string | null>(null);
+  const [photos, setPhotos] = useState<Cloudinary[]>([]);
   const controls = useAnimation();
   const [scrollY, setScrollY] = useState(0);
   const [imageOffScreen, setImageOffScreen] = useState(false);
-
   const router = useRouter();
+  const [scaleFactor, setScaleFactor] = useState(1.0);
+  const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered index
+  const [showGreenBar, setShowGreenBar] = useState(false); // State to track green bar visibility
 
-  const handleClick = (url) => {
-    setClickedImage(url);
-
-    const base64ImageUrl = Buffer.from(url).toString('base64');
-    
-    // Navigate to ImagePage with base64 data URI
-    router.push(`/image?src=${base64ImageUrl}`);
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
   };
 
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
+
+  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
+
+  const handleClick = (cloudImage) => {
+    console.log(cloudImage)
+    router.push(`/image?public_id=${cloudImage.publicID}`);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setScrollY(scrollPosition);
-
-      // Adjust this threshold to determine when the image is completely off-screen
-      const threshold = window.innerHeight; // Example threshold, adjust as needed
+      const threshold = window.innerHeight;
       if (scrollPosition > threshold) {
         setImageOffScreen(true);
       }
@@ -70,18 +50,60 @@ export default function Home(props: IndexPageProps, ref: IndexPageRef) {
 
     window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Clean up the event listener
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await fetch('/api/photos');
+        const data = await response.json();
+        const cloudinaryImages = data.map((photo: any) => (
+          cld.image(photo.public_id)
+            .format('auto')
+            .quality('auto')
+            .resize(auto().gravity(autoGravity()).width(500))
+        ));
+        setPhotos(cloudinaryImages);
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+    };
+
+    fetchPhotos();
+  }, []);
+
+  useEffect(() => {
+    const threshold = window.innerHeight;
+    if (!imageOffScreen) {
+      const scaleStart = 0.5;
+      const scaleEnd = 1.0;
+      const scaleRange = scaleEnd - scaleStart;
+      let newScaleFactor = (scrollY / threshold) * scaleRange + scaleStart;
+      newScaleFactor = Math.min(Math.max(newScaleFactor, scaleStart), scaleEnd);
+      setScaleFactor(newScaleFactor);
+    }
+
+    const blurAmount = Math.min((scrollY / threshold) * 5, 5);
     controls.start({
+      // filter: `blur(${blurAmount}px)`,
       y: -scrollY,
-      // opacity: 1 - scrollY/10000,
       transition: { type: 'linear', ease: 'easeOut', duration: 0 },
     });
+
+    if (imageOffScreen) {
+      
+      setTimeout(() => {
+        setShowGreenBar(true);
+      }, 100); // Adjust the delay as needed
+     
+    }
   }, [scrollY, controls]);
 
+
+  const leftColumn = photos.filter((_, index) => index % 2 === 0);
+  const rightColumn = photos.filter((_, index) => index % 2 !== 0);
   return (
     <div>
       {!imageOffScreen && (
@@ -106,17 +128,44 @@ export default function Home(props: IndexPageProps, ref: IndexPageRef) {
         </div>
       )}
 
-      <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: (imageOffScreen ? 'scroll' : 'hidden') }}>
+      {showGreenBar && (
+        <GreenBar text="CLOVER." />
+      )}
+      
+      <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: imageOffScreen ? 'scroll' : 'hidden' }}>
       <PageTransition ref={ref}>
+         
+         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+           {leftColumn.map((img, index) => (
+             <div key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}
+             style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >
+              <motion.div whileHover={{scale: 1.1}} transition={{ duration: 0.3 }}>
+               <AdvancedImage cldImg={img} className="advanced-image" 
+               style={{ width: '100%' }} transition={{ duration: 0.3 }}
+               onClick={() => handleClick(img)} />
+               </motion.div>
+             </div>
+           ))}
+         </div>
+         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+           {rightColumn.map((img, index) => (
+             <div key={index} onMouseEnter={() => handleMouseEnter(index + leftColumn.length)} onMouseLeave={handleMouseLeave} 
+             style={{ marginBottom: '20px', transform: `scale(${ scaleFactor})` }}>
+               <motion.div whileHover={{scale: 1.1}} transition={{ duration: 0.3 }}>
+               <AdvancedImage cldImg={img} className="advanced-image"
+                style={{ width: '100%' }}  transition={{ duration: 0.3 }}
+                onClick={() => handleClick(img)} />
+               </motion.div>
+             </div>
+           ))}
+         </div>
+       </div>
 
-        <GalleryRow photos={photos} handleClick={handleClick} clickedImage={clickedImage} />
-        <GalleryRow photos={photos2} handleClick={handleClick} clickedImage={clickedImage} />
-        <GalleryRow photos={photos3} handleClick={handleClick} clickedImage={clickedImage} />
-        <GalleryRow photos={photos5} handleClick={handleClick} clickedImage={clickedImage} />
-        <GalleryRow photos={photos4} handleClick={handleClick} clickedImage={clickedImage} />
-
-        </PageTransition>
+    </PageTransition>
       </div>
     </div>
   );
-}
+});
+
+export default GalleryPage;

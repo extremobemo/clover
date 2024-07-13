@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <div className={styles.extremobemo}>
       <Menu
-        label="CLOVER"
+        label={<div style={{ marginTop: '25px' }}>CLOVER</div>}
         open={open1}
         setOpen={setOpen}
         animate={open1 ? "open" : "closed"}

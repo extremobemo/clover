@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "@ariakit/react": "^0.4.7",
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
+    "cloudinary": "^2.2.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.13",
     "next": "latest",

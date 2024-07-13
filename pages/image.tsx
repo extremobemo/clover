@@ -1,46 +1,32 @@
-// pages/image.js
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import PageTransition from "../components/PageTransition";
+import { AdvancedImage } from '@cloudinary/react';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+// import styles from '../styles/Image.module.css'; // Create a CSS module for styling
 
-const ImagePage = () => {
+const ImagePage: React.FC = () => {
   const router = useRouter();
-  const { src } = router.query;
-
-  // Decode base64 data URI to get the original image URL
-  const decodedSrc = src ? Buffer.from(src as string, 'base64').toString() : null;
-
-  if (!decodedSrc) {
-    console.log('Error: Image source not found. Router query:', router.query);
-    return (
-      <div>
-        <p>Error: Image source not found.</p>
-      </div>
-    );
+  const  src  = router.query;
+  console.log(src.public_id)
+  if (!src) {
+    return <p>Loading...</p>;
   }
 
+  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
+  const image = cld.image(src.public_id).format('auto').quality('auto').resize(auto().gravity(autoGravity()).width(500));
+
   return (
-    <div style={{
-      display: 'block',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      marginTop: 'auto',
-      marginBottom: 'auto',
-      // justifyContent: 'center',
-      // alignItems: 'center',
-      width: '60vh', // Ensure the image is centered vertically
-      
-    }}>
-      <PageTransition>
-        <Image
-          src={decodedSrc}
-          alt="Clicked Image"
-          objectFit="contain"
-          layout="responsive"
-          width={400}
-          height={200}
-        />
-      </PageTransition>
+    <div>
+     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10vh' }}>
+              <div style={{ maxWidth: '40%', textAlign: 'left', paddingRight: '20px' }}>
+                <h2>WE THE BEST MUSIC</h2>
+                <p>GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!! GATORADE!!</p>
+              </div>
+              <div style={{ width: '40%' }}>
+                <AdvancedImage cldImg={image} className="advanced-image" style={{ width: '100%' }}/>
+              </div>
+            </div>
     </div>
   );
 };

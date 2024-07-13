@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-const GalleryRow = ({ photos, handleClick, clickedImage }) => {
-  const router = useRouter();
+const GalleryRow = ({ photos, handleClick }) => {
+  // Check if photos is an array
+  const photosArray = Array.isArray(photos) ? photos : [photos];
 
   return (
     <div style={{
@@ -13,7 +14,7 @@ const GalleryRow = ({ photos, handleClick, clickedImage }) => {
       padding: '0 5vw', // Responsive padding using viewport width
       flexWrap: 'wrap', // Allow items to wrap to the next line if needed
     }}>
-      {photos.map((photo, index) => (
+      {photosArray.map((photo, index) => (
         <motion.div
           key={index}
           onClick={(e) => handleClick(photo.url, e)}
@@ -30,16 +31,12 @@ const GalleryRow = ({ photos, handleClick, clickedImage }) => {
           initial={{ opacity: 1 }}
           // animate={{ opacity: clickedImage === photo.url ? 1 : 0.5 }}
         >
-          <div style={{ height: '80vh', marginBottom: '10px', position: 'relative', width: '100%' }}>
-            <motion.img
-            whileHover={{scale: 1.1}}
+          <div style={{ height: '80vh', width: 'auto', marginBottom: '10px', position: 'relative', width: '100%' }}>
+            <Image
               src={photo.url}
-              style={{
-                height: '100%',
-                width: '100%',
-                objectFit: 'cover',
-              }}
-              transition={{ duration: 0.3 }}
+              layout='fill'
+              objectFit='cover'
+              alt={photo.description || `Photo ${index + 1}`} // Use description or fallback to default alt text
             />
           </div>
         </motion.div>
