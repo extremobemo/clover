@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
 import PageTransition from "../components/PageTransition";
 import { AdvancedImage } from '@cloudinary/react';
-import { Cloudinary } from '@cloudinary/url-gen';
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import GreenBar from '../components/bar';
@@ -13,7 +13,7 @@ interface GalleryPageProps { }
 
 const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
   const [clickedImage, setClickedImage] = useState<string | null>(null);
-  const [photos, setPhotos] = useState<Cloudinary[]>([]);
+  const [photos, setPhotos] = useState<CloudinaryImage[]>([]);
   const controls = useAnimation();
   const [scrollY, setScrollY] = useState(0);
   const [imageOffScreen, setImageOffScreen] = useState(false);
