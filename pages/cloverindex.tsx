@@ -93,11 +93,11 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
     });
 
     if (imageOffScreen) {
-      
+
       setTimeout(() => {
         setShowGreenBar(true);
       }, 100); // Adjust the delay as needed
-     
+
     }
   }, [scrollY, controls]);
 
@@ -131,38 +131,38 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
       {showGreenBar && (
         <GreenBar text="CLOVER." />
       )}
-      
-      <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: imageOffScreen ? 'scroll' : 'hidden' }}>
-      <PageTransition ref={ref}>
-         
-         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-           {leftColumn.map((img, index) => (
-             <div key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}
-             style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >
-              <motion.div whileHover={{scale: 1.1}} transition={{ duration: 0.3 }}>
-               <AdvancedImage cldImg={img} className="advanced-image" 
-               style={{ width: '100%' }} transition={{ duration: 0.3 }}
-               onClick={() => handleClick(img)} />
-               </motion.div>
-             </div>
-           ))}
-         </div>
-         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-           {rightColumn.map((img, index) => (
-             <div key={index} onMouseEnter={() => handleMouseEnter(index + leftColumn.length)} onMouseLeave={handleMouseLeave} 
-             style={{ marginBottom: '20px', transform: `scale(${ scaleFactor})` }}>
-               <motion.div whileHover={{scale: 1.1}} transition={{ duration: 0.3 }}>
-               <AdvancedImage cldImg={img} className="advanced-image"
-                style={{ width: '100%' }}  transition={{ duration: 0.3 }}
-                onClick={() => handleClick(img)} />
-               </motion.div>
-             </div>
-           ))}
-         </div>
-       </div>
 
-    </PageTransition>
+      <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: imageOffScreen ? 'scroll' : 'hidden' }}>
+        <PageTransition ref={ref}>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              {leftColumn.map((img, index) => (
+                <div key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}
+                  style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >
+                  <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                    <AdvancedImage cldImg={img} className="advanced-image"
+                      style={{ width: '100%' }} transition={{ duration: 0.3 }}
+                      onClick={() => handleClick(img)} />
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              {rightColumn.map((img, index) => (
+                <div key={index} onMouseEnter={() => handleMouseEnter(index + leftColumn.length)} onMouseLeave={handleMouseLeave}
+                  style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }}>
+                  <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                    <AdvancedImage cldImg={img} className="advanced-image"
+                      style={{ width: '100%' }} transition={{ duration: 0.3 }}
+                      onClick={() => handleClick(img)} />
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </PageTransition>
       </div>
     </div>
   );

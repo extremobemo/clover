@@ -10,7 +10,7 @@ interface BarProps {
 const GreenBar: React.FC<BarProps> = ({ text }) => {
   return (
     <div className={`${styles.greenBar} ${styles.greenBarVisible}`}>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -9,8 +9,8 @@ export default function App({ Component, pageProps }: AppProps) {
 	const pageKey = router.asPath
 
 	return (
-    <ScrollProvider>
-						<AnimatePresence initial={false} mode="wait">
+		<ScrollProvider>
+			<AnimatePresence initial={false} mode="wait">
 				<Component key={pageKey} {...pageProps} />
 			</AnimatePresence>
 		</ScrollProvider>

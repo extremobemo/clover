@@ -29,9 +29,9 @@ const GalleryRow = ({ photos, handleClick }) => {
             textAlign: 'center', // Center content horizontally
           }}
           initial={{ opacity: 1 }}
-          // animate={{ opacity: clickedImage === photo.url ? 1 : 0.5 }}
+        // animate={{ opacity: clickedImage === photo.url ? 1 : 0.5 }}
         >
-          <div style={{ height: '80vh', width: 'auto', marginBottom: '10px', position: 'relative', width: '100%' }}>
+          <div style={{ height: '80vh', width: 'auto', marginBottom: '10px', position: 'relative' }}>
             <Image
               src={photo.url}
               layout='fill'
