@@ -13,6 +13,10 @@ const ImagePage: React.FC = () => {
     return <p>Loading...</p>;
   }
 
+  if (!src || typeof src.public_id !== 'string') {
+    return <p>Loading...</p>;
+  }
+  
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
   const image = cld.image(src.public_id).format('auto').quality('auto').resize(auto().gravity(autoGravity()).width(500));
 
