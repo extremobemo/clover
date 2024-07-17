@@ -1,6 +1,6 @@
 import React, { useRef, useState, useLayoutEffect, useCallback } from "react"
 import ResizeObserver from "resize-observer-polyfill"
-import styles from "../../styles/HorizontalGallery.module.scss"
+import styles from "../../styles/Home.module.css"
 
 import { useRouter } from 'next/router';
 import { AdvancedImage } from '@cloudinary/react';
