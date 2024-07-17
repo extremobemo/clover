@@ -8,12 +8,18 @@ import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import GreenBar from '../components/bar';
+import { quality } from '@cloudinary/url-gen/actions/delivery';
 
 interface GalleryPageProps { }
 
+interface Photo {
+  image: CloudinaryImage;
+  folder: string;
+}
+
 const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
   const [clickedImage, setClickedImage] = useState<string | null>(null);
-  const [photos, setPhotos] = useState<CloudinaryImage[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const controls = useAnimation();
   const [scrollY, setScrollY] = useState(0);
   const [imageOffScreen, setImageOffScreen] = useState(false);
@@ -34,17 +40,29 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
   const handleClick = (cloudImage) => {
-    console.log(cloudImage)
-    router.push(`/image?public_id=${cloudImage.publicID}`);
+    router.push(`/horizontalScrollGalery?public_id=${cloudImage}`);
+    // router.push(`/image?public_id=${cloudImage}`);
   };
 
   useEffect(() => {
+    const savedImageOffScreen = sessionStorage.getItem('imageOffScreen');
+    const savedScaleFactor = sessionStorage.getItem('scaleFactor');
+
+    if (savedImageOffScreen) {
+      setImageOffScreen(JSON.parse(savedImageOffScreen));
+    }
+
+    if (savedScaleFactor) {
+      setScaleFactor(parseFloat(savedScaleFactor));
+    }
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setScrollY(scrollPosition);
       const threshold = window.innerHeight;
       if (scrollPosition > threshold) {
         setImageOffScreen(true);
+        sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
       }
     };
 
@@ -59,18 +77,24 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
       try {
         const response = await fetch('/api/photos');
         const data = await response.json();
-        const cloudinaryImages = data.map((photo: any) => (
-          cld.image(photo.public_id)
+  
+        const cloudinaryPhotos = data.map((photo: any) => {
+          const cloudImage = cld.image(photo.public_id)
             .format('auto')
             .quality('auto')
-            .resize(auto().gravity(autoGravity()).width(500))
-        ));
-        setPhotos(cloudinaryImages);
+            .resize(auto().gravity(autoGravity()).width(500));
+  
+          return {
+            image: cloudImage,
+            folder: photo.folder,
+          };
+        });
+        setPhotos(cloudinaryPhotos);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     };
-
+  
     fetchPhotos();
   }, []);
 
@@ -83,6 +107,7 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
       let newScaleFactor = (scrollY / threshold) * scaleRange + scaleStart;
       newScaleFactor = Math.min(Math.max(newScaleFactor, scaleStart), scaleEnd);
       setScaleFactor(newScaleFactor);
+      sessionStorage.setItem('scaleFactor', JSON.stringify(newScaleFactor));
     }
 
     const blurAmount = Math.min((scrollY / threshold) * 5, 5);
@@ -104,6 +129,8 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
 
   const leftColumn = photos.filter((_, index) => index % 2 === 0);
   const rightColumn = photos.filter((_, index) => index % 2 !== 0);
+  console.log(leftColumn)
+  console.log(rightColumn)
   return (
     <div>
       {!imageOffScreen && (
@@ -137,25 +164,25 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              {leftColumn.map((img, index) => (
+              {leftColumn.map((photo, index) => (
                 <div key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}
                   style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >
                   <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                    <AdvancedImage cldImg={img} className="advanced-image"
+                    <AdvancedImage cldImg={photo.image.delivery(quality("auto"))} className="advanced-image"
                       style={{ width: '100%' }} transition={{ duration: 0.3 }}
-                      onClick={() => handleClick(img)} />
+                      onClick={() => handleClick(photo.folder)} />
                   </motion.div>
                 </div>
               ))}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              {rightColumn.map((img, index) => (
+              {rightColumn.map((photo, index) => (
                 <div key={index} onMouseEnter={() => handleMouseEnter(index + leftColumn.length)} onMouseLeave={handleMouseLeave}
                   style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }}>
                   <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                    <AdvancedImage cldImg={img} className="advanced-image"
+                    <AdvancedImage cldImg={photo.image} className="advanced-image"
                       style={{ width: '100%' }} transition={{ duration: 0.3 }}
-                      onClick={() => handleClick(img)} />
+                      onClick={() => handleClick(photo.folder)} />
                   </motion.div>
                 </div>
               ))}

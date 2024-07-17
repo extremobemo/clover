@@ -1,5 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs/promises'; // Use fs/promises for async file operations
+import path from 'path';
+
+// Define a type for the response data
+interface ImageData {
+  public_id: string;
+  url: string;
+  folder: string;
+}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -10,31 +19,34 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       api_secret: process.env.CLOUDINARY_API_SECRET,
     });
 
-    // Fetch root folders from Cloudinary
-    const { folders } = await cloudinary.api.root_folders();
+    // Read folder names from the folders.txt file asynchronously
+    const filePath = path.resolve('./public/content.txt');
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    const folderNames = fileContent.split('\n').filter(Boolean);
 
-    // Array to store results
-    const results = [];
+    // Construct image URLs based on naming convention
+    const results: ImageData[] = folderNames.map((folderName) => {
+      // Extract the subject name and image number
+      const match = folderName.match(/^([^-]+)-(\d+)$/);
 
-    // Loop through each folder and fetch one image from each
-    for (const folder of folders) {
-      // Construct a search query for one image in the folder
-      const searchQuery = cloudinary.search
-        .expression(`folder:${folder.name}/`)
-        .max_results(1) // Fetch only one image per folder
-        .execute();
-
-      // Await the search query execution
-      const result = await searchQuery;
-      if (result.resources.length > 0) {
-        // Push the first resource (image) found to the results array
-        results.push(result.resources[0]);
+      if (!match || match.length !== 3) {
+        throw new Error(`Invalid folder name format: ${folderName}`);
       }
-      console.log(result)
-    }
 
+      const subjectName = match[1];
+      const imageName = `${subjectName}-0`;
+
+      console.log(folderName)
+      return {
+        public_id: imageName,
+        url: cloudinary.url(imageName, {
+          format: 'jpg',
+          quality: '1',
+        }),
+        folder: folderName,
+      };
+    });
     // Send the results array as JSON response
-   
     res.status(200).json(results);
 
   } catch (error) {
