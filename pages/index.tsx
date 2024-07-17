@@ -1,81 +1,129 @@
-import Head from 'next/head';
+import React, { useState, useEffect, ForwardedRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import styles from '../styles/Home.module.css';
-import PageTransition from "../components/PageTransition";
-import Link from 'next/link';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
+import PageTransition from "../components/common/PageTransition";
+import { AdvancedImage  } from '@cloudinary/react';
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import GreenBar from '../components/common/bar';
+import { quality } from '@cloudinary/url-gen/actions/delivery';
+import { indexScrollHandler } from './hooks/indexScrollHandler';
 
-type IndexPageProps = {};
-type IndexPageRef = React.ForwardedRef<HTMLDivElement>;
+interface GalleryPageProps { }
 
-export default function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
+interface Photo {
+  image: CloudinaryImage;
+  folder: string;
+}
+
+const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const controls = useAnimation();
+  const [scrollY, setScrollY] = useState(0);
+  const [imageOffScreen, setImageOffScreen] = useState(false);
+  const router = useRouter();
+  const [scaleFactor, setScaleFactor] = useState(1.0);
+  const [showGreenBar, setShowGreenBar] = useState(false); // State to track green bar visibility
+
+  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
+
+  indexScrollHandler(setImageOffScreen, setShowGreenBar, setScrollY, setScaleFactor);
+
+  const handleClick = (folderName: string) => {
+    router.push(`/gallery?public_id=${folderName}`);
+  };
+
+  // Fetch Hero Photos
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await fetch('/api/photos');
+        const data = await response.json();
+
+        const cloudinaryPhotos = data.map((photo: any) => {
+          const cloudImage = cld.image(photo.public_id)
+            .format('auto')
+            .quality('auto')
+            .resize(auto().gravity(autoGravity()).width(500));
+
+          return {
+            image: cloudImage,
+            folder: photo.folder,
+          };
+        });
+        setPhotos(cloudinaryPhotos);
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+    };
+    console.log("fetching photos!")
+    fetchPhotos();
+  }, []);
+
+  useEffect(() => {
+    const threshold = window.innerHeight;
+    if (!sessionStorage.getItem('imageOffScreen')) {
+      const scaleStart = 0.5;
+      const scaleEnd = 1.0;
+      const scaleRange = scaleEnd - scaleStart;
+      let newScaleFactor = (scrollY / threshold) * scaleRange + scaleStart;
+      newScaleFactor = Math.min(Math.max(newScaleFactor, scaleStart), scaleEnd);
+      setScaleFactor(newScaleFactor);
+      sessionStorage.setItem('scaleFactor', JSON.stringify(newScaleFactor));
+    }
+
+    controls.start({
+      y: -scrollY,
+      transition: { type: 'linear', ease: 'easeOut', duration: 0 },
+    });
+  }, [scrollY, controls]);
+
+  const leftColumn = photos.filter((_, index) => index % 2 === 0);
+  const rightColumn = photos.filter((_, index) => index % 2 !== 0);
+  const columns = [leftColumn, rightColumn]
 
   return (
-    <div className={styles.container}>
-
-      <PageTransition ref={ref}>
-        <Head>
-          <title>CLOVER.</title>
-          <link rel="icon" href="/61532173-four-leaf-clover-icon.jpg" />
-        </Head>
-
-        <main>
-
-          <div className="IndexPage">
-            <Link href="./cloverindex">
-              <Image
-                src="/gif.gif"
-                layout="fill"
-                objectFit="cover"
-                alt="tet"
+    <div>
+      {!imageOffScreen && (
+        <div style={{ position: 'relative', height: '200vh' }}>
+          <motion.div className={styles.fullscreenImage} animate={controls}>
+            <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+              <motion.video
+                src="/bts.mp4"
+                style={{ width: '100%', height: '100%', objectFit: 'cover',position: 'absolute'}}
+                transition={{ duration: 0.3 }}
+                autoPlay loop muted
               />
-            </Link>
+            </div>
+          </motion.div>
+        </div>
+      )}
+       {showGreenBar && (<GreenBar text="CLOVER." />)}
+      <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: imageOffScreen ? 'scroll' : 'hidden' }}>
+        <PageTransition>
+       
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+            {columns.map((column, columnIndex) =>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {column.map((photo, index) => (
+                  <div key={index}
+                    style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >
+                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                      <AdvancedImage cldImg={photo.image.delivery(quality("auto"))} className="advanced-image"
+                        style={{ width: '100%' }} transition={{ duration: 0.3 }}
+                        onClick={() => handleClick(photo.folder)} />
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </main>
-
-        <style jsx>{`
-          main {
-            padding: 0;
-            margin: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-          }
-
-          .IndexPage {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-          }
-
-          .IndexPage :global(img) {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        `}</style>
-
-        <style jsx global>{`
-          html,
-          body {
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-          }
-          * {
-            box-sizing: border-box;
-          }
-        `}</style>
-      </PageTransition>
+        </PageTransition>
+      </div>
     </div>
   );
-}
+});
+
+export default GalleryPage;
