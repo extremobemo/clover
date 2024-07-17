@@ -9,7 +9,7 @@ import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import GreenBar from '../components/common/bar';
 import { quality } from '@cloudinary/url-gen/actions/delivery';
-import { indexScrollHandler } from './hooks/indexScrollHandler';
+import { indexScrollHandler } from '../hooks/indexScrollHandler';
 
 interface GalleryPageProps { }
 
