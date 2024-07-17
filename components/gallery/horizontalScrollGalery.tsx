@@ -63,18 +63,18 @@ const SmoothScroll = () => {
 
   useLayoutEffect(() => {
     const resizeObserver = new ResizeObserver(entries => onResize(entries))
-    resizeObserver.observe(ghostRef.current)
+    
     return () => resizeObserver.disconnect()
   }, [onResize])
 
-  const { scrollYProgress } = useViewportScroll()
-  const transform = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, -scrollRange + viewportW]
-  )
-  const physics = { damping: 15, mass: 0.27, stiffness: 55 }
-  const spring = useSpring(transform, physics)
+  // const { scrollYProgress } = useViewportScroll()
+  // const transform = useTransform(
+  //   scrollYProgress,
+  //   [0, 1],
+  //   [0, -scrollRange + viewportW]
+  // )
+  // const physics = { damping: 15, mass: 0.27, stiffness: 55 }
+  // const spring = useSpring(transform, physics)
 
   return (
     <>
@@ -82,7 +82,7 @@ const SmoothScroll = () => {
       <PageTransition>
         <motion.section
           ref={scrollRef}
-          style={{ x: spring }}
+          
           className={styles.thumbnailscontainer}
         >
           <div className={styles.thumbnails}>
@@ -101,7 +101,7 @@ const SmoothScroll = () => {
         </motion.section>
         </PageTransition>
       </div>
-      <div ref={ghostRef} style={{ height: scrollRange }} className={styles.ghost} />
+
     </>
   );
   
