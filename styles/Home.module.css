@@ -100,7 +100,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50px; /* Adjust the height as needed */
+  height: calc(60px + env(safe-area-inset-bottom));
   background-color: green;
   z-index: 10;
   transform: translateY(100%);
@@ -239,7 +239,7 @@
 
 .extremobemo {
   position: fixed;
-  bottom: 20px; /* Adjust as needed */
+  bottom: 10px; /* Adjust as needed */
   right: 20px; /* Adjust as needed */
   z-index: 10; /* Ensure this is higher than the image's z-index */
   color: black;
@@ -375,4 +375,13 @@
     width: 700px;
     margin: 0px;
   }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center horizontally */
+  height: 80vh;
+  width: 500px;
+  margin: 0px;
 }

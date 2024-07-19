@@ -1,11 +1,12 @@
 import React, { useRef, useState, useLayoutEffect, useCallback } from "react"
 import ResizeObserver from "resize-observer-polyfill"
 import styles from "../../styles/Home.module.css"
+import Footer from '../common/footer'
 
 import { useRouter } from 'next/router';
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
-import { auto } from '@cloudinary/url-gen/actions/resize';
+import { auto, scale } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { quality } from '@cloudinary/url-gen/actions/delivery';
 import { useEffect } from 'react';
@@ -63,7 +64,7 @@ const SmoothScroll = () => {
 
   useLayoutEffect(() => {
     const resizeObserver = new ResizeObserver(entries => onResize(entries))
-    
+
     return () => resizeObserver.disconnect()
   }, [onResize])
 
@@ -79,32 +80,42 @@ const SmoothScroll = () => {
   return (
     <>
       <div className={styles.scrollcontainer}>
-      <PageTransition>
-        <motion.section
-          ref={scrollRef}
-          
-          className={styles.thumbnailscontainer}
-        >
-          <div className={styles.thumbnails}>
-            {photos.map((photo, index) => (
-              <div className={styles.thumbnail} key={index}>  
-                <AdvancedImage cldImg={photo}/> 
+        <PageTransition>
+          <motion.section
+            ref={scrollRef}
+
+            className={styles.thumbnailscontainer}
+          >
+            <div className={styles.thumbnails}>
+
+              <div className={styles.textContainer}>
+                <h1>WE THE BEST MUSIC</h1>
+                <p>GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE!</p>
               </div>
-            ))}
-            
-            {/* Render empty placeholders based on how many photos you expect */}
-            {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
-              <div className={styles.thumbnail} key={`placeholder-${index}`} />
-            ))}
 
-          </div>
-        </motion.section>
+              {photos.map((photo, index) => (
+                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                  <div className={styles.thumbnail} key={index}>
+                    <AdvancedImage cldImg={photo} />
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Render empty placeholders based on how many photos you expect */}
+              {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
+                <div className={styles.thumbnail} key={`placeholder-${index}`} />
+              ))}
+
+            </div>
+          </motion.section>
+         
         </PageTransition>
+        
       </div>
-
+      <Footer />
     </>
   );
-  
+
 }
 
 export default SmoothScroll

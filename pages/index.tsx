@@ -106,7 +106,7 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
        
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
             {columns.map((column, columnIndex) =>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {column.map((photo, index) => (
                   <div key={index}
                     style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >

@@ -3,6 +3,7 @@ import { Menu, MenuItem } from "../common/Menu";
 import Link from 'next/link';
 import { useState } from "react";
 import type { MotionProps, Variants } from "framer-motion";
+import Image from 'next/image';
 
 const menu = {
   closed: {
@@ -39,7 +40,13 @@ export default function Footer() {
   return (
     <div className={styles.extremobemo}>
       <Menu
-        label={<div style={{ marginTop: '25px' }}>CLOVER</div>}
+        label={
+          <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+          <Image src={'/logofooter.png'} alt="Clover Footer" layout="fill"
+                  objectFit="contain"
+                  style={{ width: '100%', height: '100%' }} />
+          </div>
+        }
         open={open1}
         setOpen={setOpen}
         animate={open1 ? "open" : "closed"}
@@ -48,7 +55,7 @@ export default function Footer() {
         variants={menu}
       >
         <MenuItem {...item} className={styles.menuitem} onClick={() => setOpen(false)}>
-          <Link href="./cloverindex"> INDEX </Link>
+          <Link href="/"> INDEX </Link>
         </MenuItem>
 
         <MenuItem {...item} className={styles.menuitem}>SHOP</MenuItem>
