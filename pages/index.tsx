@@ -99,9 +99,8 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
         </div>
       )}
        {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
-      <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: imageOffScreen ? 'scroll' : 'hidden' }}>
+      <div style={{ position: 'static', top: 12, left: 0, right: 0}}>
         <PageTransition>
-       
           <div style={{ display: 'flex', justifyContent: 'center'}}>
             {columns.map((column, columnIndex) =>
               <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
