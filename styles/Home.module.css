@@ -96,7 +96,7 @@
 }
 
 .greenBar {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
@@ -168,6 +168,12 @@
   }
 }
 
+.image-container {
+  .animate{
+    transition: all 0.5s ease;
+    }
+  will-change: transform;
+}
 
 .button {
   display: flex;
@@ -360,7 +366,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 160px;
+  padding: 0px 80px;
 
   .thumbnails {
     position: relative;
@@ -371,9 +377,7 @@
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    height: 80vh;
-    width: 700px;
-    margin: 0px;
+    margin: 40px;
   }
 }
 
@@ -382,6 +386,6 @@
   flex-direction: column;
   justify-content: center; /* Center horizontally */
   height: 80vh;
-  width: 500px;
+  width: 40vw;
   margin: 0px;
 }

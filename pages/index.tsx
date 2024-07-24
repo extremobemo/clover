@@ -88,28 +88,26 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
     <div>
       {!imageOffScreen && (
         <div style={{ position: 'relative', height: '200vh' }}>
-          <motion.div className={styles.fullscreenImage} animate={controls}>
             <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-              <motion.video
+              <video className={styles.fullscreenImage}
                 src="/bts.mp4"
                 style={{ width: '100%', height: '100%', objectFit: 'cover',position: 'absolute'}}
-                transition={{ duration: 0.3 }}
+                // transition={{ duration: 0.3 }}
                 autoPlay loop muted
               />
             </div>
-          </motion.div>
         </div>
       )}
        {showGreenBar && (<GreenBar text="CLOVER." />)}
       <div style={{ position: 'fixed', top: 12, left: 0, right: 0, bottom: 0, overflowY: imageOffScreen ? 'scroll' : 'hidden' }}>
         <PageTransition>
        
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center'}}>
             {columns.map((column, columnIndex) =>
               <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {column.map((photo, index) => (
                   <div key={index}
-                    style={{ marginBottom: '20px', transform: `scale(${scaleFactor})` }} >
+                    style={{ marginBottom: '40px', marginRight: '20px', marginLeft: '20px', transform: `scale(${scaleFactor})` }} >
                     <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
                       <AdvancedImage cldImg={photo.image.delivery(quality("auto"))} className="advanced-image"
                         style={{ width: '100%' }} transition={{ duration: 0.3 }}

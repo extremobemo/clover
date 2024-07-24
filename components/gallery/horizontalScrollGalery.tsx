@@ -88,7 +88,8 @@ const SmoothScroll = () => {
           >
             <div className={styles.thumbnails}>
 
-              <div className={styles.textContainer}>
+              <div className={styles.textContainer}
+              style={{maxWidth: '40%'}}>
                 <h1>WE THE BEST MUSIC</h1>
                 <p>GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE!</p>
               </div>
@@ -96,7 +97,7 @@ const SmoothScroll = () => {
               {photos.map((photo, index) => (
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
                   <div className={styles.thumbnail} key={index}>
-                    <AdvancedImage cldImg={photo} />
+                    <AdvancedImage cldImg={photo} style={{ height: '70vh' }}/>
                   </div>
                 </motion.div>
               ))}
