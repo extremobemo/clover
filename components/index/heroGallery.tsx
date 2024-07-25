@@ -58,17 +58,16 @@ const HeroGallery = () => {
   const columns = [leftColumn, rightColumn]
 
   return (
-    <div style={{height: '100vh'}}>
-        <PageTransition>
+    <div style={{height: '100%'}}>
           <div style={{ display: 'flex', justifyContent: 'center'}}>
             {columns.map((column, columnIndex) =>
-              <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div key={columnIndex} style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {column.map((photo, index) => (
                   <div key={index}
-                    style={{ marginBottom: '40px', marginRight: '20px', marginLeft: '20px', transform: `scale(${1.0})` }} >
+                    style={{ marginTop: '20px', marginBottom: '20px', marginRight: '20px', marginLeft: '20px' }} >
                     <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
                       <AdvancedImage cldImg={photo.image} className="advanced-image"
-                        style={{ width: '100%' }} transition={{ duration: 0.3 }}
+                        style={{ width: '100%' }}
                         onClick={() => handleClick(photo.folder)} />
                     </motion.div>
                   </div>
@@ -76,7 +75,6 @@ const HeroGallery = () => {
               </div>
             )}
           </div>
-        </PageTransition>
       </div>
   );
 

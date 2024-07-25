@@ -8,7 +8,7 @@ class MyDocument extends Document {
         <Head>
           {/* Other head elements */}
           <meta name="theme-color" content="#168816" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          
         </Head>
         <body>
           <Main />

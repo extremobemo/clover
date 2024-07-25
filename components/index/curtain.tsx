@@ -1,20 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/Home.module.css';
 import HeroGallery from '../index/heroGallery';
 
 const CurtainComponent = () => {
+        const [isCurtainVisible, setIsCurtainVisible] = useState(true);
+
   useEffect(() => {
     const handleScroll = () => {
       const mainElement = document.querySelector(`.${styles.main}`);
       const revealMainElement = document.querySelector(`.${styles.revealMain}`);
 
-      if (mainElement && revealMainElement) {
-        if (window.scrollY > window.innerHeight - 10) {
+      if (isCurtainVisible) {
+        if (window.scrollY > window.innerHeight - 1) {
           mainElement.classList.add(styles.active);
           revealMainElement.classList.add(styles.activetwo);
+          setIsCurtainVisible(false);
         } else {
-          mainElement.classList.remove(styles.active);
-          revealMainElement.classList.remove(styles.activetwo);
+          // mainElement.classList.remove(styles.active);
+          // revealMainElement.classList.remove(styles.activetwo);
         }
       }
     };
@@ -24,17 +27,22 @@ const CurtainComponent = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isCurtainVisible]);
 
   return (
-    <div style={{height: '100vh'}}>
-      <div className={styles.curtain}>
-        curtain
-      </div>
-      <div className={styles.revealMain}></div>
-      <div className={styles.main}>
+    <div>
+      {isCurtainVisible && (
+        <div className={styles.curtain}>
+          curtain
+        </div>
+      )}
+      
+      <div className={styles.revealMain}/>
+
+      <div className={ isCurtainVisible ? styles.main : styles.main}>
         <HeroGallery/>
       </div>
+
     </div>
   );
 };
