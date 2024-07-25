@@ -1,5 +1,6 @@
-html, body {
-  background-color: #ebe1c6; /* Change this to your desired background color */
-  padding-bottom: env(safe-area-inset-bottom);
-  overflow: auto
+body {
+  margin:0;
+  background:#e3e3e3; /* Change this to your desired background color */
+  /* padding-bottom: env(safe-area-inset-bottom);
+  overflow: auto */
 }

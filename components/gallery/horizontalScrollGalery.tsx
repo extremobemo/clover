@@ -6,9 +6,6 @@ import Footer from '../common/footer'
 import { useRouter } from 'next/router';
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
-import { auto, scale } from '@cloudinary/url-gen/actions/resize';
-import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import { quality } from '@cloudinary/url-gen/actions/delivery';
 import { useEffect } from 'react';
 
 import PageTransition from "../common/PageTransition";
@@ -16,9 +13,6 @@ const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
 import {
   motion,
-  useViewportScroll,
-  useTransform,
-  useSpring
 } from "framer-motion"
 
 const SmoothScroll = () => {
@@ -39,7 +33,7 @@ const SmoothScroll = () => {
       .then(response => response.json())
       .then(data => {
         const cloudinaryImages = data.map((photo: any) =>
-          cld.image(photo.public_id).format('auto').quality('auto').resize(auto().gravity(autoGravity()).width(500))
+          cld.image(photo.public_id)
         );
         setPhotos(cloudinaryImages);
       })
@@ -67,15 +61,6 @@ const SmoothScroll = () => {
 
     return () => resizeObserver.disconnect()
   }, [onResize])
-
-  // const { scrollYProgress } = useViewportScroll()
-  // const transform = useTransform(
-  //   scrollYProgress,
-  //   [0, 1],
-  //   [0, -scrollRange + viewportW]
-  // )
-  // const physics = { damping: 15, mass: 0.27, stiffness: 55 }
-  // const spring = useSpring(transform, physics)
 
   return (
     <>
