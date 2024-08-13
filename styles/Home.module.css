@@ -1,0 +1,176 @@
+
+.fullscreenImage {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  background-color: white;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.greenBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(60px + env(safe-area-inset-bottom));
+  background-color: green;
+  z-index: 10;
+  transform: translateY(100%);
+}
+
+.greenBarVisible {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.image-container {
+  .animate{
+    transition: all 0.5s ease;
+    }
+  will-change: transform;
+}
+
+.button {
+  display: flex;
+  height: 2.5rem;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  white-space: nowrap;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: black;
+  text-decoration-line: none;  
+  font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .button {
+    gap: 0.5rem;
+  }
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 10;
+  color: black;
+}
+
+.topview.slideup {
+  transform: translateY(-100%);
+}
+
+.menu {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  min-width: 200px;
+  min-height: 180px;
+  flex-direction: column;
+  overscroll-behavior: contain;
+  border-width: 2px;
+  border-style: solid;
+  border-color: hsl(0, 0%, 0%);
+  background-color: white;
+  padding: 0.5rem;
+  color: black;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  outline: none !important;
+  max-height: max-content;
+  overflow: visible;
+  font-weight: bold;
+}
+
+.menuitem {
+  display: flex;
+  cursor: default;
+  scroll-margin: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  outline: none !important;
+}
+
+.scrollcontainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  will-change: transform;
+  overflow-x: scroll;
+}
+
+.thumbnailscontainer {
+  position: relative;
+  height: 100vh;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 80px;
+
+  .thumbnails {
+    position: relative;
+    display: flex;
+  }
+  
+  .thumbnail {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: 40px;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  width: 40vw;
+  margin: 0px;
+}
