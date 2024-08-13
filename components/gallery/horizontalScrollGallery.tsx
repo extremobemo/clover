@@ -47,10 +47,8 @@ const HorizontalGallery = () => {
     <>
       <div className={styles.scrollcontainer}>
         <PageTransition>
-          <motion.section
-            className={styles.thumbnailscontainer}
-          >
-
+          <motion.section className={styles.thumbnailscontainer}>
+            
             <div className={styles.thumbnails}>
               <div className={styles.textContainer}
               style={{maxWidth: '40%'}}>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, ForwardedRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion} from 'framer-motion';
 import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
 import PageTransition from "../components/common/PageTransition";
@@ -9,14 +9,12 @@ import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
 import { indexScrollHandler } from '../hooks/indexScrollHandler';
 
-interface GalleryPageProps { }
-
 interface Photo {
   image: CloudinaryImage;
   folder: string;
 }
 
-const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
+const HeroPage: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [scrollY, setScrollY] = useState(0);
   const [imageOffScreen, setImageOffScreen] = useState(false);
@@ -71,7 +69,7 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
             </div>
         </div>
       )}
-      
+
       {showGreenBar && (<GreenBar text="CLOVER." />)}
 
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, overflowY: 'scroll', overscrollBehavior: 'contain', height: `-webkit-fill-available`, WebkitOverflowScrolling: 'touch'}}>
@@ -96,6 +94,6 @@ const GalleryPage: React.FC<GalleryPageProps> = React.forwardRef((props, ref: Fo
       </div>
     </div>
   );
-});
+};
 
-export default GalleryPage;
+export default HeroPage;

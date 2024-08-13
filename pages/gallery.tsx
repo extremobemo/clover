@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import HorizontalGallery from "../components/gallery/horizontalScrollGalery";
+import HorizontalGallery from "../components/gallery/horizontalScrollGallery";
 
 export default function Gallery({ Component, pageProps }) {
 	
@@ -7,6 +7,6 @@ export default function Gallery({ Component, pageProps }) {
 	const pageKey = router.asPath
 
 	return (
-			<HorizontalGallery/>
+		<HorizontalGallery/>
 	)
 }
