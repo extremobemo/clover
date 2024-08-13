@@ -1,5 +1,3 @@
-// hooks/useScrollHandler.ts
-
 import { useEffect } from 'react';
 
 export const indexScrollHandler = (
