@@ -41,9 +41,9 @@ export default function Footer() {
       <Menu
         label={
           <div style={{ position: 'relative', width: '100px', height: '100px' }}>
-          <Image src={'/logofooter.png'} alt="Clover Footer" layout="fill"
+          <Image src={'/logofooter.png'} alt="Clover Footer" layout="contain"
                   objectFit="contain"
-                  style={{ width: '100%', height: '100%' }} />
+                  style={{ width: '80%', height: '100%' }} />
           </div>
         }
         open={open1}
