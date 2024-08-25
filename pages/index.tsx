@@ -125,6 +125,7 @@ const HeroPage: React.FC = () => {
         </div>
             )}
 
+      {showGreenBar && (<GreenBar text="CLOVER." />)}
 
       {/* The rest of the content should remain locked and not scroll */}
       <div style={{ position: 'relative', top: 0, bottom: 0, height: 5000 }}>
