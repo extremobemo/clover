@@ -7,7 +7,6 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* Other head elements */}
-          <meta name="theme-color" content="#168816" />
         </Head>
         <body>
           <Main />

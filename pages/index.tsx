@@ -99,7 +99,7 @@ const HeroPage: React.FC = () => {
       }}>
 
         <PageTransition>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', width: '100vw', justifyContent: 'center'}}>
             {columns.map((column, columnIndex) =>
               <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {column.map((photo, index) => (
