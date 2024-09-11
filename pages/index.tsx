@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
 import PageTransition from "../components/common/PageTransition";
-import { AdvancedImage  } from '@cloudinary/react';
+import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
@@ -59,22 +59,25 @@ const HeroPage: React.FC = () => {
   return (
     <div>
       {!imageOffScreen && (
-        <div style={{ position: 'relative', height: '200vh' }}>
-            <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-              <video className= {styles.fullscreenImage}
-                src="/bts.mp4"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute'}}
-                autoPlay loop muted
-              />
-            </div>
+        <div className='relative' style={{ height: '200vh' }}>
+          <div className='w-screen h-screen relative'>
+            <video
+              className={styles.fullscreenImage}
+              src="/bts.mp4"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }}
+              autoPlay
+              loop
+              muted
+            />
+          </div>
         </div>
       )}
 
       {showGreenBar && (<GreenBar text="CLOVER." />)}
 
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, overflowY: 'scroll', overscrollBehavior: 'contain', height: `-webkit-fill-available`, WebkitOverflowScrolling: 'touch'}}>
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, overflowY: 'scroll', overscrollBehavior: 'contain', height: `-webkit-fill-available`, WebkitOverflowScrolling: 'touch' }}>
         <PageTransition>
-          <div style={{ display: 'flex', justifyContent: 'center'}}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             {columns.map((column, columnIndex) =>
               <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {column.map((photo, index) => (
