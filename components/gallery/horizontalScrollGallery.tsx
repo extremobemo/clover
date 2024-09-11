@@ -48,10 +48,10 @@ const HorizontalGallery = () => {
       <div className={styles.scrollcontainer}>
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
-            
+
             <div className={styles.thumbnails}>
               <div className={styles.textContainer}
-              style={{maxWidth: '40%'}}>
+                style={{ maxWidth: '40%' }}>
                 <h1>WE THE BEST MUSIC</h1>
                 <p>GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE!</p>
               </div>
@@ -59,18 +59,17 @@ const HorizontalGallery = () => {
               {photos.map((photo, index) => (
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
                   <div className={styles.thumbnail} key={index}>
-                    <AdvancedImage cldImg={photo} style={{ height: '70vh' }}/>
+                    <AdvancedImage cldImg={photo} style={{ height: '70vh' }} />
                   </div>
                 </motion.div>
               ))}
 
-              {/* Render empty placeholders based on how many photos you expect */}
               {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
                 <div className={styles.thumbnail} key={`placeholder-${index}`} />
               ))}
             </div>
           </motion.section>
-         
+
         </PageTransition>
       </div>
       <Footer />
