@@ -15,9 +15,11 @@ export const indexScrollHandler = (
       const scrollPosition = window.scrollY;
       setScrollY(scrollPosition);
       const threshold = window.innerHeight;
-      if (scrollPosition > threshold) {
+      if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
         sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
+        window.scrollTo(0, 0); // Reset scroll position
+        window.scrollTo(0, 1); // Scroll down to reset safari nav bar
         setTimeout(() => {
           setShowGreenBar(true);
         }, 100);

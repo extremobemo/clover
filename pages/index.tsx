@@ -19,8 +19,7 @@ const HeroPage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [imageOffScreen, setImageOffScreen] = useState(false);
   const router = useRouter();
-  const [showGreenBar, setShowGreenBar] = useState(false); // State to track green bar visibility
-
+  const [showGreenBar, setShowGreenBar] = useState(false);
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
   indexScrollHandler(setImageOffScreen, setShowGreenBar, setScrollY);
@@ -57,10 +56,24 @@ const HeroPage: React.FC = () => {
   const columns = [leftColumn, rightColumn]
 
   return (
-    <div>
+    <div style={{overflowY: 'auto', height: '600vh'}}>
+
       {!imageOffScreen && (
-        <div className='relative' style={{ height: '200vh' }}>
-          <div className='w-screen h-screen relative'>
+        <div id="curtain" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '100vh',
+          zIndex: 10,
+          overflow: 'hidden',
+          backgroundColor: 'clear'
+        }}>
+          <div style={{
+          height: '100vh',
+          width: '100%',
+          transform: `translateY(-${scrollY}px)`,
+        }}>
             <video
               className={styles.fullscreenImage}
               src="/bts.mp4"
@@ -75,7 +88,16 @@ const HeroPage: React.FC = () => {
 
       {showGreenBar && (<GreenBar text="CLOVER." />)}
 
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, overflowY: 'scroll', overscrollBehavior: 'contain', height: `-webkit-fill-available`, WebkitOverflowScrolling: 'touch' }}>
+     <div style={{
+        position: imageOffScreen ? 'absolute' : 'fixed',
+        zIndex: 1,
+        height: '600vh',
+        display: 'flex',
+        justifyContent: 'center',
+        transition: 'top 0.3s ease-out',
+        overflowY : 'hidden'
+      }}>
+
         <PageTransition>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             {columns.map((column, columnIndex) =>
@@ -94,6 +116,7 @@ const HeroPage: React.FC = () => {
             )}
           </div>
         </PageTransition>
+
       </div>
     </div>
   );
