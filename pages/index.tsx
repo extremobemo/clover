@@ -8,6 +8,8 @@ import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
 import { indexScrollHandler } from '../hooks/indexScrollHandler';
+import Link from 'next/link';
+
 
 interface Photo {
   image: CloudinaryImage;
@@ -23,10 +25,6 @@ const HeroPage: React.FC = () => {
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
   indexScrollHandler(setImageOffScreen, setShowGreenBar, setScrollY);
-
-  const handleClick = (folderName: string) => {
-    router.push(`/gallery?public_id=${folderName}`);
-  };
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -75,13 +73,14 @@ const HeroPage: React.FC = () => {
           transform: `translateY(-${scrollY}px)`,
           willChange: 'transform'
         }}>
-            <div
+            <video
               className={styles.fullscreenImage}
-              // src="/bts.mp4"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', background: 'green'}}
-              // autoPlay
-              // loop
-              // muted
+              src="/bts.mp4"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }}
+              autoPlay
+              loop
+              muted
+              playsInline
             />
           </div>
         </div>
@@ -107,9 +106,11 @@ const HeroPage: React.FC = () => {
                   <div key={index}
                     style={{ marginBottom: '4px', marginRight: '4px', marginLeft: '4px' }} >
                     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+                    <Link href={`/gallery?public_id=${photo.folder}`} passHref>
                       <AdvancedImage cldImg={photo.image} className="advanced-image"
-                        style={{ width: '100%', borderRadius: '4px' }} transition={{ duration: 0.3 }}
-                        onClick={() => handleClick(photo.folder)} />
+                        style={{ width: '100%', borderRadius: '4px' }} transition={{ duration: 0.3 }} />
+                    </Link>
+
                     </motion.div>
                   </div>
                 ))}
