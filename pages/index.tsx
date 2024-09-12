@@ -73,9 +73,9 @@ const HeroPage: React.FC = () => {
           height: '100vh',
           width: '100%',
           transform: `translateY(-${scrollY}px)`,
+          willChange: 'transform'
         }}>
             <div
-            
               className={styles.fullscreenImage}
               // src="/bts.mp4"
               style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', background: 'green'}}
