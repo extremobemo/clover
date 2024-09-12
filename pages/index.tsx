@@ -7,7 +7,6 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
-import { indexScrollHandler } from '../hooks/indexScrollHandler';
 import Link from 'next/link';
 
 interface Photo {
@@ -23,7 +22,7 @@ const HeroPage: React.FC = () => {
   const [showGreenBar, setShowGreenBar] = useState(false);
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
-  indexScrollHandler(setImageOffScreen, setShowGreenBar, setScrollY);
+  // indexScrollHandler(setImageOffScreen, setShowGreenBar, setScrollY);
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -48,12 +47,49 @@ const HeroPage: React.FC = () => {
     fetchPhotos();
   }, []);
 
+  useEffect(() => {
+    const curtain = document.getElementById('curtain');
+
+    const savedImageOffScreen = sessionStorage.getItem('imageOffScreen');
+    if (savedImageOffScreen) {
+      setImageOffScreen(JSON.parse(savedImageOffScreen));
+      setShowGreenBar(true)
+    }
+  
+    const handleScroll = () => {
+      const scrollPosition = curtain.scrollTop;
+      setScrollY(scrollPosition);
+      const threshold = window.innerHeight - 1;
+      console.log(scrollPosition)
+      if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
+        setImageOffScreen(true);
+        sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
+        // window.scrollTo(0, 0); // Reset scroll position
+        // window.scrollTo(0, 1); // Scroll down to reset safari nav bar
+        setTimeout(() => {
+          setShowGreenBar(true);
+        }, 100);
+      }
+    };
+  
+    if (curtain) {
+      curtain.addEventListener('scroll', handleScroll);
+    }
+  
+    return () => {
+      if (curtain) {
+        curtain.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [setImageOffScreen, setShowGreenBar]);
+
+
   const leftColumn = photos.filter((_, index) => index % 2 === 0);
   const rightColumn = photos.filter((_, index) => index % 2 !== 0);
   const columns = [leftColumn, rightColumn]
 
   return (
-    <div style={{overflowY: 'auto', height: '600vh'}}>
+    <div style={{overflowY: 'hidden', height: '100vh'}}>
 
       {!imageOffScreen && (
         <div id="curtain" style={{
@@ -63,19 +99,19 @@ const HeroPage: React.FC = () => {
           right: 0,
           height: '100vh',
           zIndex: 10,
-          overflow: 'hidden',
+          overflow: 'auto',
           backgroundColor: 'clear'
         }}>
           <div style={{
-          height: '100vh',
-          width: '100%',
-          transform: `translateY(-${scrollY}px) translateZ(0)`,
-          willChange: 'transform'
-        }}>
+            height: '200dvh',
+            width: '100dvw',
+            //transform: `translateY(-${scrollY}px) translateZ(0)`,
+            willChange: 'transform'
+          }}>
             <video
               className={styles.fullscreenImage}
               src="/bts.mp4"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }}
+              // style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }}
               autoPlay
               loop
               muted
@@ -88,6 +124,7 @@ const HeroPage: React.FC = () => {
       {showGreenBar && (<GreenBar text="CLOVER." />)}
 
      <div style={{
+      // position: 'absolute',
         position: imageOffScreen ? 'absolute' : 'fixed',
         zIndex: 1,
         height: '600vh',

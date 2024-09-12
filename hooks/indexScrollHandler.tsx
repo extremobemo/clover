@@ -15,6 +15,7 @@ export const indexScrollHandler = (
       const scrollPosition = window.scrollY;
       setScrollY(scrollPosition);
       const threshold = window.innerHeight;
+      console.log(scrollPosition)
       if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
         sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
