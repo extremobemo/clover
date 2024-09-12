@@ -74,13 +74,14 @@ const HeroPage: React.FC = () => {
           width: '100%',
           transform: `translateY(-${scrollY}px)`,
         }}>
-            <video
+            <div
+            
               className={styles.fullscreenImage}
-              src="/bts.mp4"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }}
-              autoPlay
-              loop
-              muted
+              // src="/bts.mp4"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', background: 'green'}}
+              // autoPlay
+              // loop
+              // muted
             />
           </div>
         </div>
@@ -101,13 +102,13 @@ const HeroPage: React.FC = () => {
         <PageTransition>
           <div style={{ display: 'flex', width: '100vw', justifyContent: 'center'}}>
             {columns.map((column, columnIndex) =>
-              <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '40vw' }}>
                 {column.map((photo, index) => (
                   <div key={index}
-                    style={{ marginBottom: '40px', marginRight: '20px', marginLeft: '20px' }} >
-                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                    style={{ marginBottom: '4px', marginRight: '4px', marginLeft: '4px' }} >
+                    <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
                       <AdvancedImage cldImg={photo.image} className="advanced-image"
-                        style={{ width: '100%' }} transition={{ duration: 0.3 }}
+                        style={{ width: '100%', borderRadius: '4px' }} transition={{ duration: 0.3 }}
                         onClick={() => handleClick(photo.folder)} />
                     </motion.div>
                   </div>

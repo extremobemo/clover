@@ -138,11 +138,12 @@
 }
 
 .scrollcontainer {
-  position: fixed;
+  position: relative;
   left: 0;
   right: 0;
   will-change: transform;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .thumbnailscontainer {
@@ -152,7 +153,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 80px;
+  padding: 0px 0px;
+  overflow-y: 'hidden';
 
   .thumbnails {
     position: relative;
