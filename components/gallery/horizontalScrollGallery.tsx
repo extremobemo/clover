@@ -45,21 +45,22 @@ const HorizontalGallery = () => {
 
   return (
     <>
-      <div className={styles.scrollcontainer}>
+      <div style={{height: '98vh', overflowY: 'hidden'}}>
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
 
             <div className={styles.thumbnails}>
-              <div className={styles.textContainer}
-                style={{ maxWidth: '40%' }}>
+              <div className={styles.textContainer}>
                 <h1>WE THE BEST MUSIC</h1>
-                <p>GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE! GATORADE!</p>
+                <p>GATORADE! GATORADE! GATORADE! 
+                  GATORADE! GATORADE! GATORADE! GATORADE! 
+                  GATORADE! GATORADE! GATORADE! GATORADE! GATORADE!</p>
               </div>
 
               {photos.map((photo, index) => (
-                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} style={{placeContent: 'center'}}>
                   <div className={styles.thumbnail} key={index}>
-                    <AdvancedImage cldImg={photo} style={{ height: '70vh' }} />
+                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh' }} />
                   </div>
                 </motion.div>
               ))}
