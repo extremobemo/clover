@@ -59,7 +59,7 @@ const HeroPage: React.FC = () => {
     const handleScroll = () => {
       const scrollPosition = curtain.scrollTop;
       setScrollY(scrollPosition);
-      const threshold = window.innerHeight - 1;
+      const threshold = document.documentElement.clientHeight - 1;
       console.log(scrollPosition)
       if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
