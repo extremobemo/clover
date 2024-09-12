@@ -70,7 +70,7 @@ const HeroPage: React.FC = () => {
           <div style={{
           height: '100vh',
           width: '100%',
-          transform: `translateY(-${scrollY}px)`,
+          transform: `translateY(-${scrollY}px) translateZ(0)`,
           willChange: 'transform'
         }}>
             <video
