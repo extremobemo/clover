@@ -15,14 +15,12 @@ interface Photo {
 }
 
 const HeroPage: React.FC = () => {
-  const [photos, setPhotos] = useState<Photo[]>([]);
-  const [scrollY, setScrollY] = useState(0);
-  const [imageOffScreen, setImageOffScreen] = useState(false);
-  const router = useRouter();
-  const [showGreenBar, setShowGreenBar] = useState(false);
-  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
-  // indexScrollHandler(setImageOffScreen, setShowGreenBar, setScrollY);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [imageOffScreen, setImageOffScreen] = useState(false);
+  const [showGreenBar, setShowGreenBar] = useState(false);
+
+  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -58,14 +56,11 @@ const HeroPage: React.FC = () => {
   
     const handleScroll = () => {
       const scrollPosition = curtain.scrollTop;
-      setScrollY(scrollPosition);
+      // setScrollY(scrollPosition);
       const threshold = document.documentElement.clientHeight - 1;
       console.log(scrollPosition)
       if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
-        sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
-        // window.scrollTo(0, 0); // Reset scroll position
-        // window.scrollTo(0, 1); // Scroll down to reset safari nav bar
         setTimeout(() => {
           setShowGreenBar(true);
         }, 100);
@@ -89,7 +84,7 @@ const HeroPage: React.FC = () => {
   const columns = [leftColumn, rightColumn]
 
   return (
-    <div style={{overflowY: 'hidden', height: '100vh'}}>
+    <div style={{ overflowY: 'hidden', height: '100dvh' }}>
 
       {!imageOffScreen && (
         <div id="curtain" style={{
@@ -97,7 +92,7 @@ const HeroPage: React.FC = () => {
           top: 0,
           left: 0,
           right: 0,
-          height: '100vh',
+          height: '100dvh',
           zIndex: 10,
           overflow: 'auto',
           backgroundColor: 'clear'
@@ -105,13 +100,11 @@ const HeroPage: React.FC = () => {
           <div style={{
             height: '200dvh',
             width: '100dvw',
-            //transform: `translateY(-${scrollY}px) translateZ(0)`,
-            willChange: 'transform'
           }}>
             <video
               className={styles.fullscreenImage}
               src="/bts.mp4"
-              // style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }}
+              style={{ width: '100%', height: '50%' }}
               autoPlay
               loop
               muted
@@ -124,13 +117,11 @@ const HeroPage: React.FC = () => {
       {showGreenBar && (<GreenBar text="CLOVER." />)}
 
      <div style={{
-      // position: 'absolute',
-        position: imageOffScreen ? 'absolute' : 'fixed',
+       position: 'absolute',
         zIndex: 1,
-        height: '600vh',
+        height: '600dvh',
         display: 'flex',
         justifyContent: 'center',
-        transition: 'top 0.3s ease-out',
         overflowY : 'hidden'
       }}>
 
@@ -142,10 +133,10 @@ const HeroPage: React.FC = () => {
                   <div key={index}
                     style={{ marginBottom: '4px', marginRight: '4px', marginLeft: '4px' }} >
                     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-                      <Link href={`/gallery?public_id=${photo.folder}`} passHref>
+                      {/* <Link href={`/gallery?public_id=${photo.folder}`} passHref> */}
                         <AdvancedImage cldImg={photo.image} className="advanced-image"
                           style={{ width: '100%', borderRadius: '4px' }} transition={{ duration: 0.3 }} />
-                      </Link>
+                      {/* </Link> */}
                     </motion.div>
                   </div>
                 ))}
