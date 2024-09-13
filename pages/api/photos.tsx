@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Read folder names from the folders.txt file asynchronously
     const filePath = path.resolve('./public/content.txt');
     const fileContent = await fs.readFile(filePath, 'utf-8');
-    const folderNames = fileContent.split('\n').filter(Boolean);
+    const folderNames = fileContent.split(/\r?\n/).filter(Boolean);
 
     // Construct image URLs based on naming convention
     const results: ImageData[] = folderNames.map((folderName) => {
