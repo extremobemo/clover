@@ -60,7 +60,7 @@ const HorizontalGallery = ( {public_id}) => {
               {photos.map((photo, index) => (
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} style={{placeContent: 'center'}}>
                   <div className={styles.thumbnail} key={index}>
-                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh' }} />
+                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh', maxWidth: '70vw' }} />
                   </div>
                 </motion.div>
               ))}
