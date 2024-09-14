@@ -23,24 +23,24 @@ const HeroPage: React.FC = () => {
   const [showGreenBar, setShowGreenBar] = useState(false);
 
   const [showGallery, setShowGallery] = useState(false);
+  const [public_id, setPublicId] = useState<string | null>(null);
 
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
   
 
   // open or close gallery overlay and handle disabling or enabling background scroll
-  const handleModal = (isOpening: boolean) => {
+  const handleModal = (isOpening: boolean, newPublicId: string) => {
     setShowGallery(isOpening);
+    setPublicId(newPublicId);
 
     if (isOpening){
       document.documentElement.style.overflowY = 'hidden';
-  
-    }
+      }
     else
       {
       document.documentElement.style.overflowY = 'auto';
-
-    }
+      }
   }
 
   // Fetch Hero Photos
@@ -164,10 +164,16 @@ const HeroPage: React.FC = () => {
                   <div key={index}
                     style={{ marginBottom: '4px', marginRight: '4px', marginLeft: '4px' }} >
                     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-                      <a onClick={ () => handleModal(true) }>
-                        <AdvancedImage cldImg={photo.image} className="advanced-image"
-                          style={{ width: '100%', borderRadius: '4px' }} transition={{ duration: 0.3 }} />
-                      </a>
+                        <AdvancedImage
+                          onClick={ () => handleModal(true, photo.folder) }
+                          cldImg={photo.image}
+                          className="advanced-image"
+                          style={{ width: '100%', borderRadius: '4px'}}
+                          transition={{
+                          duration:
+                          0.3
+                          }}
+                        />
                     </motion.div>
                   </div>
                 ))}
@@ -178,9 +184,7 @@ const HeroPage: React.FC = () => {
     
       </div>
       {showGallery && 
-          <Modal onClose={ () => handleModal(false)} title={"fortnite"}>
-            poo
-            </Modal>
+          <Modal onClose={ () => handleModal(false, null)} public_id={public_id} />
           }
     </div>
   );

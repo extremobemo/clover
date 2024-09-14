@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import { Position } from "@cloudinary/url-gen/qualifiers";
 
-const Modal = ({ onClose, children, title }) => {
+const Modal = ({ onClose, public_id }) => {
     const handleCloseClick = (e) => {
+        // reset public id on close
+        public_id = null;
         e.preventDefault();
         onClose();
     };
@@ -19,7 +21,7 @@ const Modal = ({ onClose, children, title }) => {
                         x
                     </a>
                     <div className="modal-body" >
-                        <HorizontalGallery public_id={"nebraska-9"}/>
+                        <HorizontalGallery public_id={public_id} />
                     </div>
                 </div>
             </div>
