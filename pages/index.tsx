@@ -7,7 +7,10 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
+import HorizontalGallery from '../components/gallery/horizontalScrollGallery';
 import Link from 'next/link';
+import Modal from '../components/gallery/ModalGallery';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 interface Photo {
   image: CloudinaryImage;
@@ -20,7 +23,26 @@ const HeroPage: React.FC = () => {
   const [imageOffScreen, setImageOffScreen] = useState(false);
   const [showGreenBar, setShowGreenBar] = useState(false);
 
+  const [showGallery, setShowGallery] = useState(false);
+
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
+
+  
+
+  // open or close gallery overlay and handle disabling or enabling background scroll
+  const handleModal = (isOpening: boolean) => {
+    setShowGallery(isOpening);
+
+    if (isOpening){
+      document.documentElement.style.overflowY = 'hidden';
+  
+    }
+    else
+      {
+      document.documentElement.style.overflowY = 'auto';
+
+    }
+  }
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -84,7 +106,7 @@ const HeroPage: React.FC = () => {
   const columns = [leftColumn, rightColumn]
 
   return (
-    <div style={{ overflowY: 'hidden', height: '100dvh' }}>
+    <div id="outermost_div" style={{ overflowY: 'hidden', height: '100dvh' }}>
 
       {!imageOffScreen && (
         <div id="curtain" style={{
@@ -97,7 +119,7 @@ const HeroPage: React.FC = () => {
           overflow: 'auto',
           backgroundColor: 'clear'
         }}>
-          <div style={{
+          <div id="video_div" style={{
             height: '200dvh',
             width: '100dvw',
           }}>
@@ -116,7 +138,7 @@ const HeroPage: React.FC = () => {
 
       {showGreenBar && (<GreenBar text="CLOVER." />)}
 
-     <div style={{
+     <div id="content_div" style={{
        position: 'absolute',
         zIndex: 1,
         height: '600dvh',
@@ -133,10 +155,10 @@ const HeroPage: React.FC = () => {
                   <div key={index}
                     style={{ marginBottom: '4px', marginRight: '4px', marginLeft: '4px' }} >
                     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-                      {/* <Link href={`/gallery?public_id=${photo.folder}`} passHref> */}
+                      <a onClick={ () => handleModal(true) }>
                         <AdvancedImage cldImg={photo.image} className="advanced-image"
                           style={{ width: '100%', borderRadius: '4px' }} transition={{ duration: 0.3 }} />
-                      {/* </Link> */}
+                      </a>
                     </motion.div>
                   </div>
                 ))}
@@ -144,8 +166,13 @@ const HeroPage: React.FC = () => {
             )}
           </div>
         </PageTransition>
-
+    
       </div>
+      {showGallery && 
+          <Modal onClose={ () => handleModal(false)} title={"fortnite"}>
+            poo
+            </Modal>
+          }
     </div>
   );
 };

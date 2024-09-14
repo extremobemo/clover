@@ -7,7 +7,8 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
+import ReactDom from 'react-dom';
 
 import PageTransition from "../common/PageTransition";
 const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
@@ -16,9 +17,7 @@ import {
   motion,
 } from "framer-motion"
 
-const HorizontalGallery = () => {
-  const router = useRouter();
-  const { public_id } = router.query;
+const HorizontalGallery = ( {public_id}) => {
 
   var expectedPhotos = 3;
   if (public_id) {
@@ -29,6 +28,7 @@ const HorizontalGallery = () => {
   const [photos, setPhotos] = useState<CloudinaryImage[]>([]);
 
   useEffect(() => {
+
     if (typeof public_id !== 'string') return;
     const folder = public_id;
     console.log(folder)
@@ -43,9 +43,9 @@ const HorizontalGallery = () => {
       .catch(error => console.error('Error:', error));
   }, [public_id, cld]);
 
-  return (
+  return  (
     <>
-      <div style={{height: '98vh', overflowY: 'hidden'}}>
+      <div style={{ overflowY: 'hidden', overflowX: 'auto'}}>
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
 
@@ -76,6 +76,7 @@ const HorizontalGallery = () => {
       <Footer />
     </>
   );
+
 
 }
 
