@@ -10,7 +10,6 @@ import GreenBar from '../components/common/bar';
 import HorizontalGallery from '../components/gallery/horizontalScrollGallery';
 import Link from 'next/link';
 import Modal from '../components/gallery/ModalGallery';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 interface Photo {
   image: CloudinaryImage;
@@ -106,7 +105,16 @@ const HeroPage: React.FC = () => {
   const columns = [leftColumn, rightColumn]
 
   return (
-    <div id="outermost_div" style={{ overflowY: 'hidden', height: '100dvh' }}>
+    <div
+      id="outermost_div"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        overflowY: 'auto',
+        height: '100dvh',
+        overflowX: 'hidden'
+      }}
+    >
 
       {!imageOffScreen && (
         <div id="curtain" style={{
@@ -136,19 +144,20 @@ const HeroPage: React.FC = () => {
         </div>
       )}
 
-      {showGreenBar && (<GreenBar text="CLOVER." />)}
+      {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
 
      <div id="content_div" style={{
-       position: 'absolute',
+        display: 'flex',
+        position: 'absolute',
         zIndex: 1,
         height: '600dvh',
-        display: 'flex',
         justifyContent: 'center',
-        overflowY : 'hidden'
+        overflowY : 'hidden',
+        overflowX : 'hidden',
       }}>
 
         <PageTransition>
-          <div style={{ display: 'flex', width: '100vw', justifyContent: 'center'}}>
+          <div style={{ display: 'flex', width: '100%', justifyContent: 'center'}}>
             {columns.map((column, columnIndex) =>
               <div key={columnIndex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '40vw' }}>
                 {column.map((photo, index) => (

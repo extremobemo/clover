@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
+import { Position } from "@cloudinary/url-gen/qualifiers";
 
 const Modal = ({ onClose, children, title }) => {
     const handleCloseClick = (e) => {
@@ -14,11 +15,9 @@ const Modal = ({ onClose, children, title }) => {
             and use the ref */}
             <div className="modal-wrapper">
                 <div className="modal">
-                    <div className="modal-header">
-                        <a href="#" onClick={handleCloseClick}>
-                            x
-                        </a>
-                    </div>
+                    <a style={{position: "absolute", top: 10, right: 10, fontSize: 32, width: 32, height: 32}} href="#" onClick={handleCloseClick}>
+                        x
+                    </a>
                     <div className="modal-body" >
                         <HorizontalGallery public_id={"nebraska-9"}/>
                     </div>
