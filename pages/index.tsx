@@ -8,7 +8,7 @@ import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
 import Link from 'next/link';
-
+import CloverEffect from '../components/letters';
 interface Photo {
   image: CloudinaryImage;
   folder: string;
@@ -85,7 +85,7 @@ const HeroPage: React.FC = () => {
 
   return (
     <div style={{ overflowY: 'hidden', height: '100dvh' }}>
-
+     
       {!imageOffScreen && (
         <div id="curtain" style={{
           position: 'fixed',
@@ -95,8 +95,13 @@ const HeroPage: React.FC = () => {
           height: '100dvh',
           zIndex: 10,
           overflow: 'auto',
-          backgroundColor: 'clear'
+          backgroundColor: 'clear',
+          display: 'flex',
+          justifyContent: 'center'
         }}>
+
+          <CloverEffect />
+
           <div style={{
             height: '200dvh',
             width: '100dvw',
