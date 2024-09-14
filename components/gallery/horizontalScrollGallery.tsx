@@ -43,9 +43,27 @@ const HorizontalGallery = ( {public_id}) => {
       .catch(error => console.error('Error:', error));
   }, [public_id, cld]);
 
+  useEffect(() => {
+    const handleScroll = (e) => {
+        // Check if scrolling vertically
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+            const scrollContainer = document.getElementById("scroll-container");
+            if (scrollContainer) {
+                scrollContainer.scrollLeft += e.deltaY;
+            }
+        }
+    };
+
+    window.addEventListener("wheel", handleScroll);
+
+    return () => {
+        window.removeEventListener("wheel", handleScroll);
+    };
+}, []);
+
   return  (
     <>
-      <div style={{ overflowY: 'hidden', overflowX: 'auto'}}>
+      <div style={{ overflowY: 'hidden', overflowX: 'scroll'}} id="scroll-container">
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
 

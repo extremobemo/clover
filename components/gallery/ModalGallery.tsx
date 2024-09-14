@@ -15,13 +15,13 @@ const Modal = ({ onClose, public_id }) => {
         <div className="modal-overlay">
             {/* Wrap the whole Modal inside the newly created StyledModalWrapper
             and use the ref */}
-            <div className="modal-wrapper">
-                <div className="modal">
+            <div className="modal-wrapper" >
+                <div className="modal" >
                     <a style={{position: "absolute", top: 10, right: 10, fontSize: 32, width: 32, height: 32}} href="#" onClick={handleCloseClick}>
                         x
                     </a>
                     <div className="modal-body" >
-                        <HorizontalGallery public_id={public_id} />
+                        <HorizontalGallery public_id={public_id}  />
                     </div>
                 </div>
             </div>

@@ -38,6 +38,7 @@ body {
 
 .modal-body {
   height: auto;
+  /* Allows child to scroll */
   overflow-x: auto;
 }
 
