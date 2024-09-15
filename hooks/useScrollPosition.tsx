@@ -94,6 +94,7 @@ export const useScrollPosition = (prop: string) => {
     // set the element initial values
     setElement(scrollContainer);
 
+    // TODO: handle more events
     window.addEventListener('wheel', () => {
       if (scrollContainer) {
         setElement(scrollContainer);

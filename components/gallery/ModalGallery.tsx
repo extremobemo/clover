@@ -12,13 +12,13 @@ const Modal = ({ onClose, public_id }) => {
         onClose();
     };
 
-    const { maxScroll, position } = useScrollPosition("scroll-container2");
+    // const { maxScroll, position } = useScrollPosition("scroll-container2");
 
-    useEffect(() => {
-        console.log("maxScroll", maxScroll);
-        console.log("position", position);
-        // Do something when maxScroll changes
-    }, [maxScroll, position]);
+    // useEffect(() => {
+    //     console.log("maxScroll", maxScroll);
+    //     console.log("position", position);
+    //     // Do something when maxScroll changes
+    // }, [maxScroll, position]);
 
     const modalContent = (
         <div className="modal-overlay">
