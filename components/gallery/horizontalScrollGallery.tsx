@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import styles from "../../styles/Home.module.css"
 import Footer from '../common/footer'
 
@@ -16,6 +16,7 @@ const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 import {
   motion,
 } from "framer-motion"
+import { useScrollPosition } from "../../hooks/useScrollPosition";
 
 const HorizontalGallery = ( {public_id}) => {
 
@@ -42,6 +43,16 @@ const HorizontalGallery = ( {public_id}) => {
       })
       .catch(error => console.error('Error:', error));
   }, [public_id, cld]);
+
+
+  // const scrollContainerRef = useRef(null);
+  const { maxScroll, position } = useScrollPosition("scroll-container");
+
+  useEffect(() => {
+    console.log("maxScroll", maxScroll);
+    console.log("position", position);
+    // Do something when maxScroll changes
+  }, [maxScroll, position]);
 
   useEffect(() => {
     const handleScroll = (e) => {
