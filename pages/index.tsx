@@ -9,6 +9,7 @@ import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
 import HorizontalGallery from '../components/gallery/horizontalScrollGallery';
 import Link from 'next/link';
+import CloverEffect from '../components/letters';
 import Modal from '../components/gallery/ModalGallery';
 
 interface Photo {
@@ -125,8 +126,13 @@ const HeroPage: React.FC = () => {
           height: '100dvh',
           zIndex: 10,
           overflow: 'auto',
-          backgroundColor: 'clear'
+          backgroundColor: 'clear',
+          display: 'flex',
+          justifyContent: 'center'
         }}>
+
+          <CloverEffect />
+          
           <div id="video_div" style={{
             height: '200dvh',
             width: '100dvw',
