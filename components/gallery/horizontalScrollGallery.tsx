@@ -7,7 +7,8 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
+import ReactDom from 'react-dom';
 
 import PageTransition from "../common/PageTransition";
 const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
@@ -16,9 +17,7 @@ import {
   motion,
 } from "framer-motion"
 
-const HorizontalGallery = () => {
-  const router = useRouter();
-  const { public_id } = router.query;
+const HorizontalGallery = ( {public_id}) => {
 
   var expectedPhotos = 3;
   if (public_id) {
@@ -29,6 +28,7 @@ const HorizontalGallery = () => {
   const [photos, setPhotos] = useState<CloudinaryImage[]>([]);
 
   useEffect(() => {
+
     if (typeof public_id !== 'string') return;
     const folder = public_id;
     console.log(folder)
@@ -43,9 +43,27 @@ const HorizontalGallery = () => {
       .catch(error => console.error('Error:', error));
   }, [public_id, cld]);
 
-  return (
+  useEffect(() => {
+    const handleScroll = (e) => {
+        // Check if scrolling vertically
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+            const scrollContainer = document.getElementById("scroll-container");
+            if (scrollContainer) {
+                scrollContainer.scrollLeft += e.deltaY;
+            }
+        }
+    };
+
+    window.addEventListener("wheel", handleScroll);
+
+    return () => {
+        window.removeEventListener("wheel", handleScroll);
+    };
+}, []);
+
+  return  (
     <>
-      <div style={{height: '98vh', overflowY: 'hidden'}}>
+      <div style={{ overflowY: 'hidden', overflowX: 'scroll'}} id="scroll-container">
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
 
@@ -60,7 +78,7 @@ const HorizontalGallery = () => {
               {photos.map((photo, index) => (
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} style={{placeContent: 'center'}}>
                   <div className={styles.thumbnail} key={index}>
-                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh' }} />
+                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh', maxWidth: '70vw' }} />
                   </div>
                 </motion.div>
               ))}
@@ -76,6 +94,7 @@ const HorizontalGallery = () => {
       <Footer />
     </>
   );
+
 
 }
 
