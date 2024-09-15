@@ -13,12 +13,13 @@ type ElementItems = {
 export const useScrollPosition = (prop: string) => {
   // useState so we can react to size changes
   const [maxScroll, setMaxScroll] = useState(0);
+  const [maxSize, setMaxSize] = useState(0);
   const [position, setPosition] = useState(0);
   const elementRef = useRef<ElementItems>(null);
 
   // convert to our ref to track changes ... I think
   const setElement = (element: HTMLElement) => {
-    console.log("element set")
+    // console.log("element set")
     if (element?.scrollHeight) {
       elementRef.current = {
         ...elementRef.current,
@@ -61,19 +62,20 @@ export const useScrollPosition = (prop: string) => {
 
   // update maxScroll and position
   const handleElementUpdates = () => {
-    // console.log("element", elementRef.current);
     if (elementRef.current === null) return;
     // scrolling horizontally
     if (elementRef.current?.horizontalScroll && !elementRef.current?.verticalScroll) {
       const maxScrollWidth = elementRef.current?.maxScrollWidth - elementRef.current?.width;
       setMaxScroll(maxScrollWidth || 0);
       setPosition(elementRef.current?.horizontalScroll || 0);
+      setMaxSize(elementRef.current?.width || 0);
     } 
     // scrolling vertically
     else if (elementRef.current?.verticalScroll && !elementRef.current?.horizontalScroll) {
       const maxScrollHeight = elementRef.current?.maxScrollHeight - elementRef.current?.height;
       setMaxScroll(maxScrollHeight || 0);
       setPosition(elementRef.current?.verticalScroll || 0);
+      setMaxSize(elementRef.current?.height || 0);
     }
   }
 
@@ -114,5 +116,5 @@ export const useScrollPosition = (prop: string) => {
 
   }, []);
 
-  return { maxScroll, position }
+  return { maxScroll, position, maxSize }
 }

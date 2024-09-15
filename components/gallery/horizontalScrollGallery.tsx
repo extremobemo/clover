@@ -17,6 +17,7 @@ import {
   motion,
 } from "framer-motion"
 import { useScrollPosition } from "../../hooks/useScrollPosition";
+import FooterTwo from "../common/FooterTwo";
 
 const HorizontalGallery = ( {public_id}) => {
 
@@ -46,13 +47,13 @@ const HorizontalGallery = ( {public_id}) => {
 
 
   // const scrollContainerRef = useRef(null);
-  const { maxScroll, position } = useScrollPosition("scroll-container");
+  // const { maxScroll, position } = useScrollPosition("scroll-container");
 
-  useEffect(() => {
-    console.log("maxScroll", maxScroll);
-    console.log("position", position);
-    // Do something when maxScroll changes
-  }, [maxScroll, position]);
+  // useEffect(() => {
+  //   console.log("maxScroll", maxScroll);
+  //   console.log("position", position);
+  //   // Do something when maxScroll changes
+  // }, [maxScroll, position]);
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -102,6 +103,7 @@ const HorizontalGallery = ( {public_id}) => {
 
         </PageTransition>
       </div>
+      <FooterTwo id={"scroll-container"} />
       <Footer />
     </>
   );
