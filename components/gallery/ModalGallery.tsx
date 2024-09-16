@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import { Position } from "@cloudinary/url-gen/qualifiers";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
 
 const Modal = ({ onClose, public_id }) => {
     const handleCloseClick = (e) => {

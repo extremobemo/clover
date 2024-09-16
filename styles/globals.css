@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Add FooterTwo css to global tree - might want to not do this and import directly into needed page/component? */
+@import url('./FooterTwo.css');
 html,
 body {
   /* Change this to your desired background color */

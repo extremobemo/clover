@@ -11,6 +11,7 @@ import HorizontalGallery from '../components/gallery/horizontalScrollGallery';
 import Link from 'next/link';
 import CloverEffect from '../components/letters';
 import Modal from '../components/gallery/ModalGallery';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 interface Photo {
   image: CloudinaryImage;
@@ -99,7 +100,6 @@ const HeroPage: React.FC = () => {
       }
     };
   }, [setImageOffScreen, setShowGreenBar]);
-
 
   const leftColumn = photos.filter((_, index) => index % 2 === 0);
   const rightColumn = photos.filter((_, index) => index % 2 !== 0);

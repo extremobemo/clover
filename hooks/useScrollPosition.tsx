@@ -1,0 +1,110 @@
+import { use, useEffect, useRef, useState } from "react";
+
+type ElementItems = {
+  maxScrollHeight: number;
+  maxScrollWidth: number; // will be the max scroll width
+  height: number;
+  width: number;
+  horizontalScroll: number;
+  verticalScroll: number;
+} | null;
+
+// give the html element of the scroll container
+export const useScrollPosition = (prop: string) => {
+  // useState so we can react to size changes
+  const [maxScroll, setMaxScroll] = useState(0);
+  const [maxSize, setMaxSize] = useState(0);
+  const [position, setPosition] = useState(0);
+  const elementRef = useRef<ElementItems>(null);
+
+  // convert to our ref to track changes ... I think
+  const setElement = (element: HTMLElement) => {
+    // console.log("element set")
+    if (element?.scrollHeight) {
+      elementRef.current = {
+        ...elementRef.current,
+        maxScrollWidth: element.scrollHeight,
+      }
+    }
+    if (element?.scrollWidth) {
+      elementRef.current = {
+        ...elementRef.current,
+        maxScrollWidth: element.scrollWidth,
+      }
+    }
+    if (element?.clientHeight) {
+      elementRef.current = {
+        ...elementRef.current,
+        height: element.clientHeight,
+      }
+    }
+    if (element?.clientWidth) {
+      elementRef.current = {
+        ...elementRef.current,
+        width: element.clientWidth
+      }
+    }
+    // if scrolling horizontally
+    if (element?.scrollLeft) {
+      elementRef.current = {
+        ...elementRef.current,
+        horizontalScroll: element.scrollLeft,
+      }
+    }
+    // if scrolling vertically
+    if (element?.scrollTop) {
+      elementRef.current = {
+        ...elementRef.current,
+        verticalScroll: element.scrollTop,
+      }
+    }
+  }
+
+  // update maxScroll and position
+  const handleElementUpdates = () => {
+    if (elementRef.current === null) return;
+    // scrolling horizontally
+    if (elementRef.current?.horizontalScroll && !elementRef.current?.verticalScroll) {
+      const maxScrollWidth = elementRef.current?.maxScrollWidth - elementRef.current?.width;
+      setMaxScroll(maxScrollWidth || 0);
+      setPosition(elementRef.current?.horizontalScroll || 0);
+      setMaxSize(elementRef.current?.width || 0);
+    } 
+    // scrolling vertically
+    else if (elementRef.current?.verticalScroll && !elementRef.current?.horizontalScroll) {
+      const maxScrollHeight = elementRef.current?.maxScrollHeight - elementRef.current?.height;
+      setMaxScroll(maxScrollHeight || 0);
+      setPosition(elementRef.current?.verticalScroll || 0);
+      setMaxSize(elementRef.current?.height || 0);
+    }
+  }
+
+  useEffect(() => {
+    const scrollContainer = document.getElementById(prop);
+    // do not proceed if you can't find the element
+    if (!scrollContainer) { return;} 
+    // set the element initial values
+    setElement(scrollContainer);
+
+    // TODO: handle more events
+    scrollContainer.addEventListener('scroll', () => {
+      if (scrollContainer) {
+        setElement(scrollContainer);
+        handleElementUpdates();
+      }
+    });
+
+    // TODO handle scroll event
+    return () => {
+      scrollContainer.removeEventListener('scroll', () => {
+        if (scrollContainer) {
+          setElement(scrollContainer);
+          handleElementUpdates();
+        }
+      });
+    }
+
+  }, []);
+
+  return { maxScroll, position, maxSize }
+}
