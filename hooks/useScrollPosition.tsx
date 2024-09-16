@@ -79,16 +79,6 @@ export const useScrollPosition = (prop: string) => {
     }
   }
 
-  /* 
-  I wanted to be able to update our exposed values whenever we update elementRef by listening to the changes to the ref to avoid having to call in
-  each eventListener. I thought useEffect would allow me to do this but it doesn't seem to work for some reason. Anybody know why? 
-  TODO: Fix or remove commented out code
-  */
- // useEffect(() => {
- //   handleElementUpdates();
- // }, [elementRef.current]);
-
-
   useEffect(() => {
     const scrollContainer = document.getElementById(prop);
     // do not proceed if you can't find the element
