@@ -97,7 +97,7 @@ export const useScrollPosition = (prop: string) => {
     setElement(scrollContainer);
 
     // TODO: handle more events
-    window.addEventListener('wheel', () => {
+    scrollContainer.addEventListener('scroll', () => {
       if (scrollContainer) {
         setElement(scrollContainer);
         handleElementUpdates();
@@ -106,7 +106,7 @@ export const useScrollPosition = (prop: string) => {
 
     // TODO handle scroll event
     return () => {
-      window.removeEventListener('wheel', () => {
+      scrollContainer.removeEventListener('scroll', () => {
         if (scrollContainer) {
           setElement(scrollContainer);
           handleElementUpdates();
