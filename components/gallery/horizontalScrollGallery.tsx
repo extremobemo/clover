@@ -17,7 +17,10 @@ import {
   motion,
 } from "framer-motion"
 
-const HorizontalGallery = ( {public_id}) => {
+const HorizontalGallery = () => {
+
+  const router = useRouter();
+  const { public_id } = router.query;
 
   var expectedPhotos = 3;
   if (public_id) {
