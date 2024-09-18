@@ -66,7 +66,7 @@ const HorizontalGallery = () => {
 
   return  (
     <>
-      <div style={{ overflowY: 'hidden', overflowX: 'scroll'}} id="scroll-container">
+      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height:'100dvh', alignContent: 'center'}} id="scroll-container">
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
 
