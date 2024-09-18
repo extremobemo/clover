@@ -156,7 +156,7 @@ const HeroPage: React.FC = () => {
       )}
 
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
-
+  {!showGallery && 
      <div id="content_div" style={{
         display: 'flex',
         position: 'absolute',
@@ -194,10 +194,12 @@ const HeroPage: React.FC = () => {
         </PageTransition>
     
       </div>
+}
       {showGallery && 
-          <Modal onClose={ () => handleModal(false, null)} public_id={public_id} />
-          }
+        <Modal onClose={ () => handleModal(false, null)} public_id={public_id} />
+      }
     </div>
+        
   );
 };
 
