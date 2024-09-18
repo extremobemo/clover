@@ -46,6 +46,7 @@ const HeroPage: React.FC = () => {
 
   // Fetch Hero Photos
   useEffect(() => {
+
     const fetchPhotos = async () => {
       try {
         const response = await fetch('/api/photos');
@@ -83,6 +84,8 @@ const HeroPage: React.FC = () => {
       console.log(scrollPosition)
       if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
+        document.documentElement.style.overflowY = 'auto';
+
         setTimeout(() => {
           setShowGreenBar(true);
         }, 100);
@@ -91,6 +94,8 @@ const HeroPage: React.FC = () => {
   
     if (curtain) {
       curtain.addEventListener('scroll', handleScroll);
+    } else {
+
     }
   
     return () => {
@@ -111,7 +116,7 @@ const HeroPage: React.FC = () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        overflowY: 'auto',
+        overflowY: 'hidden',
         height: '100dvh',
         overflowX: 'hidden'
       }}

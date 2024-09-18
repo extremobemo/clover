@@ -1,12 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 html,
 body {
   /* Change this to your desired background color */
-  padding-bottom: env(safe-area-inset-bottom);
-  overflow: auto;
+  /* padding-bottom: env(safe-area-inset-bottom); */
+  overflow: hidden;
+  overscroll-behavior: none;
+
 }
 
 .modal-wrapper {
