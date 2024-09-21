@@ -35,10 +35,14 @@ const HeroPage: React.FC = () => {
 
     if (isOpening) {  
       router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
+      //ensure that showGallery is open at this point, weirdly sometimes it's not
+      setShowGallery(true);
       setScrollPosition(window.scrollY);
       document.documentElement.style.overflowY = 'hidden';
     } else {
       router.push('/', undefined, { shallow: true });
+      //ensure that showGallery is false at this point, weirdly sometimes it's not
+      setShowGallery(false);
       document.documentElement.style.overflowY = 'auto';
       window.scrollTo(0, scrollPosition);
     }
