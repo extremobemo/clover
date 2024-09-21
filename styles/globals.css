@@ -1,12 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body {
   /* Change this to your desired background color */
   padding-bottom: env(safe-area-inset-bottom);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .modal-wrapper {
@@ -20,7 +16,6 @@ body {
   background: white;
   height: 100%;
   width: 100%;
-  padding: 15px;
 }
 
 .modal-overlay {
@@ -40,6 +35,7 @@ body {
   height: auto;
   /* Allows child to scroll */
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .modal-header {
