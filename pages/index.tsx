@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import PageTransition from "../components/common/PageTransition";
 import { AdvancedImage } from '@cloudinary/react';
@@ -16,6 +17,7 @@ interface Photo {
 }
 
 const HeroPage: React.FC = () => {
+  let router = useRouter();
 
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [imageOffScreen, setImageOffScreen] = useState(false);
@@ -28,25 +30,43 @@ const HeroPage: React.FC = () => {
 
   // open or close gallery overlay and handle disabling or enabling background scroll
   const handleModal = (isOpening: boolean, newPublicId: string) => {
-    setShowGallery(isOpening);
-    setPublicId(newPublicId);
+    console.log(`handle modal: isOpening = ${isOpening}, newPublicId = ${newPublicId}`)
+
 
     if (isOpening) {  
+      router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
       setScrollPosition(window.scrollY);
       document.documentElement.style.overflowY = 'hidden';
     } else {
+      router.push('/', undefined, { shallow: true });
       document.documentElement.style.overflowY = 'auto';
       window.scrollTo(0, scrollPosition);
     }
   }
 
  // Restore scroll position when the modal is closed
-    useEffect(() => {
-      if (!showGallery) {
-        document.documentElement.style.overflowY = 'auto'; 
-        window.scrollTo(0, scrollPosition);
-      }
-    }, [showGallery, scrollPosition]);
+  useEffect(() => {
+    if (!showGallery) {
+      document.documentElement.style.overflowY = 'auto'; 
+      window.scrollTo(0, scrollPosition);
+    }
+  }, [showGallery, scrollPosition]);
+
+
+  //set showGallery and gallery publicID based on url param
+  useEffect(() => {
+    //TODO: will need to scrub the url param to handle invalid args
+    console.log(`Set showGallery useEffect: url param = ${router.query.gallery} `)
+    if (router.query.gallery) {
+      console.log(`setting showGallery -> true`)
+      setShowGallery(true);
+      setPublicId(router.query.gallery as string);
+    } else {
+      console.log(`setting showGallery -> false`)
+      setShowGallery(false);
+      setPublicId(null);
+    }
+  }, [router.query.gallery]);
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -67,7 +87,7 @@ const HeroPage: React.FC = () => {
         console.error('Error fetching photos:', error);
       }
     };
-
+   
     fetchPhotos();
   }, []);
 

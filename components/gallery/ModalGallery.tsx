@@ -6,6 +6,7 @@ import { Position } from "@cloudinary/url-gen/qualifiers";
 const Modal = ({ onClose, public_id }) => {
     const handleCloseClick = (e) => {
         // reset public id on close
+        console.log("handling close click")
         public_id = null;
         e.preventDefault();
         onClose();
