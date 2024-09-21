@@ -136,3 +136,42 @@
   width: 40vw;
   margin: 0px;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
+  gap: 32px; /* Adjust for spacing between grid items */
+  align-items: start; /* Prevents vertical stretching */
+  height: 100vh;
+}
+
+.griditem {
+  display: flex;
+  align-items: center;
+  justify-self: center; /* Default alignment */
+}
+
+.griditemfull {
+  grid-column: span 2; /* Full width */
+}
+
+.griditemleft {
+  justify-self: end; /* Right align items in the left column */
+}
+
+.griditemright {
+  justify-self: start; /* Left align items in the right column */
+}
+
+.motiondiv {
+  height: 18vh; /* Default for mobile */
+  overflow: hidden; /* Prevent content overflow */
+}
+
+/* Media query for desktop (min-width: 768px) */
+@media (min-width: 768px) {
+  .motiondiv {
+    height: 33vh; /* Larger height for desktop */
+  }
+}
+

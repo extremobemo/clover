@@ -5,7 +5,7 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import GreenBar from '../components/common/bar';
-
+import styles from '../styles/Home.module.css'; // Import CSS module
 import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
@@ -36,7 +36,6 @@ const HeroPage: React.FC = () => {
       document.documentElement.style.overflowY = 'hidden';
     } else {
       document.documentElement.style.overflowY = 'auto';
-      window.scrollTo(0, scrollPosition);
     }
   }
 
@@ -73,7 +72,7 @@ const HeroPage: React.FC = () => {
 
   const leftColumn = photos.filter((_, index) => index % 2 === 0);
   const rightColumn = photos.filter((_, index) => index % 2 !== 0);
-  const columns = [leftColumn, rightColumn]
+  const columns = photos // [leftColumn, rightColumn]
 
   return (
     <div id="outermost_div"
@@ -87,7 +86,7 @@ const HeroPage: React.FC = () => {
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
       
       <div id="content_div" style={{ display: 'flex', position: 'absolute',
-        zIndex: 1, height: '600vh', justifyContent: 'center',
+        zIndex: 1, height: showGallery ? '100vh' : '600vh', width: '100vw', justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
         {!showGallery && 

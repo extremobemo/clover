@@ -2,7 +2,6 @@
 
 .galleryContainer {
   display: flex;
-  width: 100dvw;
   justify-content: center;
 }
 
