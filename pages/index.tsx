@@ -28,26 +28,6 @@ const HeroPage: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
-  // open or close gallery overlay and handle disabling or enabling background scroll
-  const handleModal = (isOpening: boolean, newPublicId: string) => {
-    console.log(`handle modal: isOpening = ${isOpening}, newPublicId = ${newPublicId}`)
-
-
-    if (isOpening) {  
-      router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
-      //ensure that showGallery is open at this point, weirdly sometimes it's not
-      setShowGallery(true);
-      setScrollPosition(window.scrollY);
-      document.documentElement.style.overflowY = 'hidden';
-    } else {
-      router.push('/', undefined, { shallow: true });
-      //ensure that showGallery is false at this point, weirdly sometimes it's not
-      setShowGallery(false);
-      document.documentElement.style.overflowY = 'auto';
-      window.scrollTo(0, scrollPosition);
-    }
-  }
-
  // Restore scroll position when the modal is closed
   useEffect(() => {
     if (!showGallery) {
@@ -60,13 +40,10 @@ const HeroPage: React.FC = () => {
   //set showGallery and gallery publicID based on url param
   useEffect(() => {
     //TODO: will need to scrub the url param to handle invalid args
-    console.log(`Set showGallery useEffect: url param = ${router.query.gallery} `)
     if (router.query.gallery) {
-      console.log(`setting showGallery -> true`)
       setShowGallery(true);
       setPublicId(router.query.gallery as string);
     } else {
-      console.log(`setting showGallery -> false`)
       setShowGallery(false);
       setPublicId(null);
     }
@@ -94,6 +71,22 @@ const HeroPage: React.FC = () => {
    
     fetchPhotos();
   }, []);
+
+  // open or close gallery overlay and handle disabling or enabling background scroll
+  const handleModal = (isOpening: boolean, newPublicId: string) => {
+    if (isOpening) {  
+      router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
+      setShowGallery(true);
+      setScrollPosition(window.scrollY);
+      document.documentElement.style.overflowY = 'hidden';
+    } else {
+      router.push('/', undefined, { shallow: true });
+      setShowGallery(false);
+      setPublicId(null)
+      document.documentElement.style.overflowY = 'auto';
+      window.scrollTo(0, scrollPosition);
+    }
+  }
 
   const leftColumn = photos.filter((_, index) => index % 2 === 0);
   const rightColumn = photos.filter((_, index) => index % 2 !== 0);
