@@ -10,6 +10,7 @@ import GreenBar from '../components/common/bar';
 import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
+import { HeroImageData } from '../types/types';
 
 interface Photo {
   image: CloudinaryImage;
@@ -17,13 +18,13 @@ interface Photo {
 }
 
 const HeroPage: React.FC = () => {
-  let router = useRouter();
+  const router = useRouter();
 
   const [photos, setPhotos] = useState<Photo[]>([]);
-  const [imageOffScreen, setImageOffScreen] = useState(false);
-  const [showGreenBar, setShowGreenBar] = useState(false);
+  const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
+  const [showGreenBar, setShowGreenBar] = useState<boolean>(false);
 
-  const [showGallery, setShowGallery] = useState(false);
+  const [showGallery, setShowGallery] = useState<boolean>(false);
   const [public_id, setPublicId] = useState<string | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
@@ -40,9 +41,10 @@ const HeroPage: React.FC = () => {
   //set showGallery and gallery publicID based on url param
   useEffect(() => {
     //TODO: will need to scrub the url param to handle invalid args
-    if (router.query.gallery) {
+    const gallery = router.query.gallery;
+    if (typeof gallery === 'string') {
       setShowGallery(true);
-      setPublicId(router.query.gallery as string);
+      setPublicId(gallery);
     } else {
       setShowGallery(false);
       setPublicId(null);
@@ -56,8 +58,8 @@ const HeroPage: React.FC = () => {
         const response = await fetch('/api/photos');
         const data = await response.json();
 
-        const cloudinaryPhotos = data.map((photo: any) => {
-          const cloudImage = cld.image(photo.public_id).resize(auto().width(500));
+        const cloudinaryPhotos : Photo[] = data.map((photo: HeroImageData) => {
+          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().width(500));
           return {
             image: cloudImage,
             folder: photo.folder,
@@ -73,7 +75,7 @@ const HeroPage: React.FC = () => {
   }, []);
 
   // open or close gallery overlay and handle disabling or enabling background scroll
-  const handleModal = (isOpening: boolean, newPublicId: string) => {
+  const handleModal = (isOpening: boolean, newPublicId: string | null) => {
     if (isOpening) {  
       router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
       setShowGallery(true);
@@ -88,9 +90,9 @@ const HeroPage: React.FC = () => {
     }
   }
 
-  const leftColumn = photos.filter((_, index) => index % 2 === 0);
-  const rightColumn = photos.filter((_, index) => index % 2 !== 0);
-  const columns = [leftColumn, rightColumn]
+  const leftColumn : Photo[] = photos.filter((_, index) => index % 2 === 0);
+  const rightColumn : Photo[] = photos.filter((_, index) => index % 2 !== 0);
+  const columns : Photo[][] = [leftColumn, rightColumn]
 
   return (
     <div id="outermost_div"

@@ -2,7 +2,13 @@ import CloverEffect from '../components/letters';
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Curtain.module.css';
 
-const Curtain = ({ imageOffScreen, setImageOffScreen, setShowGreenBar }) => {
+interface CurtainProps  {
+  imageOffScreen : boolean,
+  setImageOffScreen : (value: boolean) => void, 
+  setShowGreenBar : (value: boolean) => void,
+};
+
+const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, setShowGreenBar }) => {
   
   useEffect(() => {
     const curtain = document.getElementById('curtain');
@@ -15,10 +21,10 @@ const Curtain = ({ imageOffScreen, setImageOffScreen, setShowGreenBar }) => {
     }
   
     const handleScroll = () => {
-      const scrollPosition = curtain.scrollTop;
+      const scrollPosition = curtain?.scrollTop;
       const threshold = document.documentElement.clientHeight - 1;
       console.log(scrollPosition)
-      if (scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
+      if (scrollPosition && scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
         sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
         setTimeout(() => {
