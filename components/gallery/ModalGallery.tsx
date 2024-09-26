@@ -6,6 +6,7 @@ import { Position } from "@cloudinary/url-gen/qualifiers";
 const Modal = ({ onClose, public_id }) => {
     const handleCloseClick = (e) => {
         // reset public id on close
+        console.log("handling close click")
         public_id = null;
         e.preventDefault();
         onClose();
@@ -17,7 +18,7 @@ const Modal = ({ onClose, public_id }) => {
             and use the ref */}
             <div className="modal-wrapper" >
                 <div className="modal" >
-                    <a style={{position: "absolute", top: 10, right: 10, fontSize: 32, width: 32, height: 32}} href="#" onClick={handleCloseClick}>
+                    <a style={{position: "absolute", top: 10, right: 10, fontSize: 32, width: 32, height: 32, zIndex: 25}} href="#" onClick={handleCloseClick}>
                         x
                     </a>
                     <div className="modal-body" >
