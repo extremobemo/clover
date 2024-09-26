@@ -48,7 +48,7 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
   }, [public_id, cld]);
 
   useEffect(() => {
-    const handleScroll = (e) => {
+    const handleScroll = (e : WheelEvent) => {
         // Check if scrolling vertically
         if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
             const scrollContainer = document.getElementById("scroll-container");
