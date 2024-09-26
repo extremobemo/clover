@@ -17,7 +17,11 @@ import {
   motion,
 } from "framer-motion"
 
-const HorizontalGallery = ( {public_id}) => {
+interface HorizontalGalleryProps {
+  public_id : string | null
+}
+
+const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
 
   var expectedPhotos = 3;
   if (public_id) {
