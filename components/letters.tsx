@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const randomInRange = (min, max) => Math.random() * (max - min) + min;
+const randomInRange = (min : number, max : number) => Math.random() * (max - min) + min;
 const letterWidth = 50
 
 const CloverEffect = () => {
@@ -49,7 +49,7 @@ const CloverEffect = () => {
   }, []);
   
 
-  const getPositionStyle = (index) => {
+  const getPositionStyle = (index : number) => {
 
     const movementFactor = scrollY * 0.04;
   
@@ -106,7 +106,6 @@ const CloverEffect = () => {
           className="letter"
           style={{
             position: 'absolute',
-            transition: 'transform, opacity',
             ...getPositionStyle(index),
           }}
         >

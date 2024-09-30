@@ -3,8 +3,13 @@ import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import { Position } from "@cloudinary/url-gen/qualifiers";
 
-const Modal = ({ onClose, public_id }) => {
-    const handleCloseClick = (e) => {
+interface ModalProps {
+    onClose : Function,
+    public_id : string | null,
+}
+
+const Modal : React.FC<ModalProps> = ({ onClose, public_id }) => {
+    const handleCloseClick = (e : React.MouseEvent<HTMLAnchorElement>) => {
         // reset public id on close
         console.log("handling close click")
         public_id = null;
@@ -29,10 +34,12 @@ const Modal = ({ onClose, public_id }) => {
         </div>
     );
 
-    return ReactDOM.createPortal(
+    return   document.getElementById("modal-root")
+    ? ReactDOM.createPortal(
         modalContent,
-        document.getElementById("modal-root")
-    );
+        document.getElementById("modal-root") as Element // This cast is safe now
+      )
+    : null 
 };
 
 export default Modal

@@ -1,10 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
-
-interface ImageData {
-  public_id: string;
-  url: string;
-}
+import { ProjectImageData } from '../../types/types';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -16,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     // Extract the folder name from the query parameters
-    const { folder } = req.query;
+    const   { folder } = req.query;
 
     if (!folder || typeof folder !== 'string') {
       return res.status(400).json({ error: 'Invalid folder name' });
@@ -28,10 +24,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).json({ error: 'Invalid folder name format' });
     }
 
-    const subjectName = match[1];
-    const imageCount = parseInt(match[2], 10);
+    const subjectName : string = match[1];
+    const imageCount : number = parseInt(match[2], 10);
 
-    const results: ImageData[] = [];
+    const results: ProjectImageData[] = [];
 
 
     // Generate URLs for all images in the folder

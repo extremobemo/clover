@@ -17,7 +17,11 @@ import {
   motion,
 } from "framer-motion"
 
-const HorizontalGallery = ( {public_id}) => {
+interface HorizontalGalleryProps {
+  public_id : string | null
+}
+
+const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
 
   var expectedPhotos = 3;
   if (public_id) {
@@ -44,7 +48,7 @@ const HorizontalGallery = ( {public_id}) => {
   }, [public_id, cld]);
 
   useEffect(() => {
-    const handleScroll = (e) => {
+    const handleScroll = (e : WheelEvent) => {
         // Check if scrolling vertically
         if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
             const scrollContainer = document.getElementById("scroll-container");

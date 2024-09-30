@@ -2,13 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs/promises'; // Use fs/promises for async file operations
 import path from 'path';
-
-// Define a type for the response data
-interface ImageData {
-  public_id: string;
-  url: string;
-  folder: string;
-}
+import { ProjectImageData } from '../../types/types';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -25,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const folderNames = fileContent.split(/\r?\n/).filter(Boolean);
 
     // Construct image URLs based on naming convention
-    const results: ImageData[] = folderNames.map((folderName) => {
+    const results: ProjectImageData[] = folderNames.map((folderName) => {
       // Extract the subject name and image number
       const match = folderName.match(/^([^-]+)-(\d+)$/);
 
