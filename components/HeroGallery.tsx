@@ -9,6 +9,10 @@ interface HeroGalleryProps {
   handleModal : (isOpening : boolean, folder: string | null) => void;
 }
 
+const preventRightClick = (e : React.MouseEvent) => {
+  e.preventDefault();
+}
+
 const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
   return (
     <div className={styles.galleryContainer}>
@@ -19,6 +23,7 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
               <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
                 <AdvancedImage
                   onClick={() => handleModal(true, photo.folder)}
+                  onContextMenu= {preventRightClick}
                   cldImg={photo.image}
                   className="advanced-image"
                   style={{ width: '100%', borderRadius: '4px' }}
