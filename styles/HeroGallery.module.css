@@ -2,6 +2,7 @@
 
 .galleryContainer {
   display: flex;
+  gap: 8px;
   width: 100dvw;
   justify-content: center;
 }
@@ -10,11 +11,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
   max-width: 40vw;
 }
 
 .photoContainer {
-  margin-bottom: 4px;
-  margin-right: 4px;
-  margin-left: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.imageWrapper {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.advancedImage {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
 }

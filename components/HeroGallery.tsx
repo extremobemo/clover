@@ -19,20 +19,27 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
       {columns.map((column, columnIndex) => (
         <div key={columnIndex} className={styles.column}>
           {column.map((photo, index) => (
-            <div key={index} className={styles.photoContainer}>
-              <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-                <AdvancedImage
-                  onClick={() => handleModal(true, photo.folder)}
-                  onContextMenu= {preventRightClick}
-                  cldImg={photo.image}
-                  className="advanced-image"
-                  style={{ width: '100%', borderRadius: '4px' }}
-                  transition={{
-                    duration: 0.3
-                  }}
-                />
-              </motion.div>
-            </div>
+            <motion.div
+              key={index}
+              className={styles.photoContainer}
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}>
+
+                <motion.div whileHover={{ scale: 1.08 }} /* zoom in effect */
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  className={styles.imageWrapper}>
+
+                  <AdvancedImage
+                    onClick={() => handleModal(true, photo.folder)}
+                    onContextMenu={preventRightClick}
+                    cldImg={photo.image}
+                    className={styles.advancedImage}
+                    style={{ width: '100%' }}
+                  />
+
+                </motion.div>
+
+            </motion.div>
           ))}
         </div>
       ))}
