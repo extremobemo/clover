@@ -65,6 +65,10 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     };
 }, []);
 
+const preventRightClick = (e : React.MouseEvent) => {
+  e.preventDefault();
+}
+
   return  (
     <>
       <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container">
@@ -75,7 +79,7 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
               {photos.map((photo, index) => (
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} style={{placeContent: 'center'}}>
                   <div className={styles.thumbnail} key={index}>
-                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh', maxWidth: '70vw' }} />
+                    <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh', maxWidth: '70vw' }} onContextMenu={preventRightClick} />
                   </div>
                 </motion.div>
               ))}
