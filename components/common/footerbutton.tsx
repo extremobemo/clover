@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css';
-import { Menu, MenuItem } from "../common/Menu";
+import { Menu, MenuItem } from "./Menu";
 import Link from 'next/link';
 import { useState } from "react";
 import type { MotionProps, Variants } from "framer-motion";

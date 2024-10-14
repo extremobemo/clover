@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styles from "../../styles/Home.module.css"
-import Footer from '../common/footer'
+import Footer from '../common/footerbutton'
 
 import { useRouter } from 'next/router';
 import { AdvancedImage } from '@cloudinary/react';
