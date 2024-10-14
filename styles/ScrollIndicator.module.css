@@ -1,0 +1,102 @@
+@font-face {
+  font-family: "KAMAR";
+  src: url("/fonts/KAMAR.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.progressbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100dvw;
+  height: 30px;
+  background: black;
+  transform-origin: 0%;
+  z-index: 5;
+  clip-path: "text";
+}
+
+.scrollIndicatorContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100dvw;
+  height: 30px;
+  z-index: 4;
+  background-color: white;
+  overflow: hidden; /* Hide overflow to keep the text masked */
+  font-family: "KAMAR", sans-serif;
+}
+
+.textOverlayContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100dvw;
+  height: 30px;
+  z-index: 10; /* Ensure the text is above the progress bar */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.bottomLeftOverlay,
+.bottomCenterOverlay,
+.bottomRightOverlay {
+  line-height: 30px;
+  position: absolute;
+  bottom: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: 16px;
+  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 30px;
+  z-index: 8;
+}
+
+.bottomLeftBase,
+.bottomCenterBase,
+.bottomRightBase {
+  line-height: 30px;
+  position: fixed;
+  bottom: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: 16px;
+  color: #000000;
+  overflow: hidden; /* Ensure text is clipped precisely */
+  white-space: nowrap; /* Prevent text wrapping */
+  height: 30px;
+  z-index: 7;
+}
+
+/* Specific positioning for each element */
+.bottomLeftOverlay {
+  left: 0;
+}
+
+.bottomCenterOverlay {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottomRightOverlay {
+  right: 0;
+}
+
+.bottomLeftBase {
+  left: 0;
+}
+
+.bottomCenterBase {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottomRightBase {
+  right: 0;
+}

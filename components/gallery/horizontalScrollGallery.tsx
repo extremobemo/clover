@@ -1,17 +1,20 @@
 import React, { useState } from "react"
 import styles from "../../styles/HorizontalGallery.module.css"
-import Footer from '../common/footer'
 import GalleryDescription from './GalleryDescription'
 
-import { useRouter } from 'next/router';
+import Footer from "../common/footerbutton";
+
+import ScrollIndicator from "../common/ScrollIndicator";
+import PageTransition from "../common/PageTransition";
+
+import { useScroll } from "framer-motion";
+import { useRef } from "react";
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { useEffect} from 'react';
-import ReactDom from 'react-dom';
 
-import PageTransition from "../common/PageTransition";
 const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
 import {
@@ -76,13 +79,19 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     };
 }, []);
 
-const preventRightClick = (e : React.MouseEvent) => {
-  e.preventDefault();
-}
+  const preventRightClick = (e : React.MouseEvent) => {
+    e.preventDefault();
+  }
+
+  const carouselRef = useRef(null); // Create a ref for the scrollable element
+  const { scrollXProgress } = useScroll({
+    container: carouselRef
+  });
 
   return  (
     <>
-      <div className={styles.scrollContainer} id="scroll-container">
+    <ScrollIndicator scrollXProgress={scrollXProgress}/>
+      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container" ref={carouselRef}>
         <PageTransition>
           {/* adding this motion.section seemed to help with glitchy loading */}
           <motion.section className={styles.thumbnailscontainer}

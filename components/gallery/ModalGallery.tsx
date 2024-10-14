@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
-import { Position } from "@cloudinary/url-gen/qualifiers";
 
 interface ModalProps {
     onClose : Function,
