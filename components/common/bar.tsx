@@ -1,7 +1,7 @@
 // components/GreenBar.tsx
 import React from 'react';
 import styles from '../../styles/Home.module.css';
-import Footer from './footer'
+import Footer from './footerbutton'
 
 interface BarProps {
   text: string;
