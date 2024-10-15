@@ -22,6 +22,7 @@ interface HorizontalGalleryProps {
 }
 
 const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   var expectedPhotos = 3;
   if (public_id) {
@@ -43,6 +44,9 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
           cld.image(photo.public_id).format('auto').quality('auto').resize(auto().gravity(autoGravity()).width(500))
         );
         setPhotos(cloudinaryImages);
+        setTimeout(() => {
+          setImagesLoaded(true);
+        }, 300)
       })
       .catch(error => console.error('Error:', error));
   }, [public_id, cld]);
@@ -72,7 +76,7 @@ const preventRightClick = (e : React.MouseEvent) => {
   return  (
     <>
       <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container">
-        <PageTransition>
+        {imagesLoaded && (<PageTransition>
           {/* adding this motion.section seemed to help with glitchy loading */}
           <motion.section className={styles.thumbnailscontainer}
           initial="hidden"  
@@ -108,7 +112,7 @@ const preventRightClick = (e : React.MouseEvent) => {
             </div>
           </motion.section>
 
-        </PageTransition>
+        </PageTransition>)}
       </div>
       <Footer />
     </>
