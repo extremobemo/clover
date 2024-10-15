@@ -75,7 +75,7 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
                     onContextMenu={preventRightClick}
                     cldImg={photo.image}
                     className={styles.advancedImage}
-                    // style={{ width: '100%' }}
+                    style={{ width: '100%' }}
                   />
             </motion.div>
           ))}

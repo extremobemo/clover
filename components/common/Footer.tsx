@@ -5,15 +5,15 @@ const Footer: React.FC = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.section}>
-        <p>Section 1</p>
+        <p>CLOVER</p>
       </div>
       <div className={styles.divider}></div>
       <div className={styles.section}>
-        <p>Section 2</p>
+        <p>PRODUCTIONS</p>
       </div>
       <div className={styles.divider}></div>
       <div className={styles.section}>
-        <p>Section 3</p>
+        <p>MENU</p>
       </div>
     </div>
   );
