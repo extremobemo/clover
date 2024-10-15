@@ -39,7 +39,7 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
 
   return (
     <div>
-      <button onClick={filterPhotos}>
+      <button onClick={filterPhotos} style={{position: 'fixed'}}>
         {isFiltered ? 'Show All Photos' : 'Filter Every 3rd Photo'}
       </button>
       <div
@@ -77,7 +77,9 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
                     className={styles.advancedImage}
                     style={{ width: '100%' }}
                   />
+                   
             </motion.div>
+
           ))}
         </AnimatePresence>
       </div>
