@@ -1,14 +1,20 @@
 import React from 'react';
-import styles from '../../styles/Footer.module.css'; // Import CSS module
+import styles from '../../styles/Footer.module.css'; // Adjust according to your structure
 
 const Footer: React.FC = () => {
   return (
     <div className={styles.footer}>
-      <div className={styles.footersection}>Section 1</div>
-      <div className={styles.footerdivider}></div>
-      <div className={styles.footersection}>Section 2</div>
-      <div className={styles.footerdivider}></div>
-      <div className={styles.footersection}>Section 3</div>
+      <div className={styles.section}>
+        <p>Section 1</p>
+      </div>
+      <div className={styles.divider}></div>
+      <div className={styles.section}>
+        <p>Section 2</p>
+      </div>
+      <div className={styles.divider}></div>
+      <div className={styles.section}>
+        <p>Section 3</p>
+      </div>
     </div>
   );
 };
