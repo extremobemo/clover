@@ -22,7 +22,7 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
     if (!isFiltered) {
       // Take out every 3rd photo in each column
       const newFilteredColumns = columns.map(column => 
-        column.filter((_, index) => (index + 1) % 2 !== 0)
+        column.filter((_, index) => (index) % 2 !== 0)
       );
       setFilteredColumns(newFilteredColumns);
     } else {
@@ -39,55 +39,48 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
 
   return (
     <div>
-       <button onClick={filterPhotos}>
+      <button onClick={filterPhotos}>
         {isFiltered ? 'Show All Photos' : 'Filter Every 3rd Photo'}
       </button>
-    <div className={styles.galleryContainer}>
-    <AnimatePresence>
-      {filteredColumns.map((column, columnIndex) => (
-        <div key={columnIndex} className={styles.column}>
-          {column.map((photo, index) => (
+      <div
+        className={styles.galleryContainer}
+        style={{
+          maxWidth: "1000px",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '1rem', // Space between items
+        }}
+      >
+        <AnimatePresence mode='popLayout'>
+          {filteredColumns.flat().map((photo) => (
             <motion.div
               key={photo.folder}
-              className={styles.photoContainer}
-              layout // Enables Framer Motion layout animations
-              initial={{ opacity: 0, }}
-              animate={{ opacity: 1, }}
-              exit={{ opacity: 0,}}
-              whileHover={{ scale: 1.01 }}
-              transition={{ 
-                duration: 1, 
-                delay: (index + columnIndex) * 0.1,
-                ease: 'easeInOut',
-                layout: {duration: 1} 
+              // className={styles.photoContainer}
+              layout='position'
+              initial={{ opacity: 0 }} // Fade in from above
+              animate={{opacity: 1}}
+              exit={{ opacity: 0}}
+              transition={{ duration: 0.7 }}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center', // Center vertically
+                alignItems: 'center', // Center horizontally
+                height: '100%', // Ensure the container takes full height
+                padding: '1rem', // Equal space around each photo
               }}
-              >
-
-                <motion.div whileHover={{ scale: 1.08 }} /* zoom in effect */
-                 transition={{ 
-                  duration: 0.9, 
-                  ease: 'easeOut',
-                  layout: {duration: 0.5} 
-                }}
-                  className={styles.imageWrapper}>
-
-                  <AdvancedImage
+            >
+               <AdvancedImage
                     onClick={() => handleModal(true, photo.folder)}
                     onContextMenu={preventRightClick}
                     cldImg={photo.image}
                     className={styles.advancedImage}
-                    style={{ width: '100%' }}
+                    // style={{ width: '100%' }}
                   />
-
-                </motion.div>
-
             </motion.div>
           ))}
-        </div>
-      ))}
-      </AnimatePresence>
-    </div>
-    
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
