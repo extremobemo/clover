@@ -55,12 +55,50 @@
   }
 }
 
+/* Define Footer Height var to mor easily track this */
+@property --footerHeight {
+  syntax: '<length>';
+  initial-value: 100px;
+  inherits: false;
+}
+
+.horizontalGalleryScrollContainer {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  height: 100dvh;
+  /* FF and IE */
+  scrollbar-width: none; 
+}
+
+/* Safari and Chrome hide scrollbar */
+.horizontalGalleryScrollContainer::--webkit-scrollbar{
+  display: none;
+}
+
 .footer {
   position: fixed;
   bottom: 10px;
   right: 20px;
   z-index: 10;
   color: black;
+}
+
+.footerOverlay {
+  display: flex;
+  bottom: 0px;
+  z-index: 9;
+  color: white;
+  height: calc(var(--footerHeight, 100px) + 25px);
+  border: 1px solid black;
+  margin: 0px 20px;
+  /* border-radius: 8px; */
+}
+
+.footerOverlayFill{
+  /* width: 80%; */
+  z-index: 9;
+  background-color: grey;
+  /* border-radius: 8px; */
 }
 
 .menu {
@@ -93,6 +131,12 @@
   border-radius: 0.25rem;
   padding: 0.5rem;
   outline: none !important;
+}
+
+.menuLabel {
+  position: relative;
+  width: 100px;
+  height: var(--footerHeight, 100px)
 }
 
 .scrollcontainer {

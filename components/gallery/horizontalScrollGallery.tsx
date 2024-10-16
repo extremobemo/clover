@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { SyntheticEvent, useCallback, useRef, useState } from "react"
 import styles from "../../styles/Home.module.css"
 import Footer from '../common/footer'
 
@@ -58,6 +58,7 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
         }
     };
 
+    // TODO: Make this work with the scroll event not the wheel event
     window.addEventListener("wheel", handleScroll);
 
     return () => {
@@ -65,13 +66,45 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     };
 }, []);
 
-const preventRightClick = (e : React.MouseEvent) => {
-  e.preventDefault();
-}
+  const preventRightClick = (e : React.MouseEvent) => {
+    e.preventDefault();
+  }
+
+  const [width, setWidth] = useState(0);
+  const [maxScroll, setMaxcroll] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [fillPercentage, setFillPercentage] = useState(0);
+
+
+  useEffect(() => {
+    if (maxScroll && scrollPosition){
+      const fillPercentage = (scrollPosition / (maxScroll - width)) * 100;
+      if (fillPercentage < 0.5) {
+        setFillPercentage(0);
+        return;
+      }
+      setFillPercentage(fillPercentage);
+      // console.log("Fill Percentage", fillPercentage);
+    }
+  }, [maxScroll, scrollPosition]);
+
+  // TODO: handle corner case where scrolling fast doesn't update the fill percentage
+  const scrollContainerEvent = (e: SyntheticEvent) => {
+    if (e.currentTarget.scrollWidth > 0) {
+      setMaxcroll(e.currentTarget.scrollWidth);
+    }
+    if (e.currentTarget.scrollLeft > 0) {
+      setScrollPosition(e.currentTarget.scrollLeft);
+    }
+    if (e.currentTarget.clientWidth > 0) {
+      setWidth(e.currentTarget.clientWidth);
+    }
+  }
+
 
   return  (
     <>
-      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container">
+      <div className={styles.horizontalGalleryScrollContainer} onScroll={(e) => scrollContainerEvent(e)}>
         <PageTransition>
           <motion.section className={styles.thumbnailscontainer}>
 
@@ -91,6 +124,9 @@ const preventRightClick = (e : React.MouseEvent) => {
           </motion.section>
 
         </PageTransition>
+      </div>
+      <div className={styles.footerOverlay}>
+        <div className={styles.footerOverlayFill} style={{ width: `${fillPercentage}%` }} />
       </div>
       <Footer />
     </>

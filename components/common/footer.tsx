@@ -1,7 +1,7 @@
 import styles from '../../styles/Home.module.css';
 import { Menu, MenuItem } from "../common/Menu";
 import Link from 'next/link';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { MotionProps, Variants } from "framer-motion";
 import Image from 'next/image';
 
@@ -40,7 +40,7 @@ export default function Footer() {
     <div className={styles.footer}>
       <Menu
         label={
-          <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+          <div className={styles.menuLabel}>
           <Image src={'/logofooter.png'} alt="Clover Footer" layout="fill"
                   objectFit="contain"
                   style={{ width: '100%', height: '100%' }} />
