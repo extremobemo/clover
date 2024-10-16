@@ -106,11 +106,29 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     <>
       <div className={styles.horizontalGalleryScrollContainer} onScroll={(e) => scrollContainerEvent(e)}>
         <PageTransition>
-          <motion.section className={styles.thumbnailscontainer}>
+          {/* adding this motion.section seemed to help with glitchy loading */}
+          <motion.section className={styles.thumbnailscontainer}
+          initial="hidden"  
+          animate="show"
+          variants={{
+            hidden: {opacity : 0},
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: .3  //delay between children loading
+              }
+            }
+          }}>
 
             <div className={styles.thumbnails}>
               {photos.map((photo, index) => (
-                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} style={{placeContent: 'center'}}>
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
+                  animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
+                  transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
+                  // whileHover={{ scale: 1.1 }}  
+                  style={{placeContent: 'center'}}>
                   <div className={styles.thumbnail} key={index}>
                     <AdvancedImage cldImg={photo} style={{ maxHeight: '70vh', maxWidth: '70vw' }} onContextMenu={preventRightClick} />
                   </div>
