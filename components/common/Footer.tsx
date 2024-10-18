@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from '../../styles/Footer.module.css'; // Adjust according to your structure
-
+import ScrollIndicator from './ScrollIndicator';
 const Footer: React.FC = () => {
   return (
+
     <div className={styles.footer}>
       <div className={styles.section}>
         <p>Section 1</p>
@@ -16,6 +17,8 @@ const Footer: React.FC = () => {
         <p>Section 3</p>
       </div>
     </div>
+  
+
   );
 };
 

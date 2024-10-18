@@ -99,6 +99,7 @@
   position: relative;
   left: 0;
   right: 0;
+  height: 100dvh;
   will-change: transform;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -106,7 +107,7 @@
 /* Scroll container for horizontal gallery */
 .thumbnailscontainer {
   /* position: relative; */
-  height: 99dvh;
+  height: 100dvh;
   /* z-index: 40; */
   width: max-content;
   display: flex;

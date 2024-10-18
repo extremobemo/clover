@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef} from "react";
 import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import { Position } from "@cloudinary/url-gen/qualifiers";
-
+import ScrollIndicator from "../common/ScrollIndicatorX";
+import { motion, useScroll } from "framer-motion";
 interface ModalProps {
     onClose : Function,
     public_id : string | null,

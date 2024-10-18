@@ -9,9 +9,16 @@ import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { useEffect} from 'react';
 import ReactDom from 'react-dom';
+import ScrollIndicator from "../common/ScrollIndicator";
 
 import PageTransition from "../common/PageTransition";
 const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
+
+
+import { useScroll } from "framer-motion";
+import { useRef } from "react";
+import style from "../../styles/ScrollIndicator.module.css";
+
 
 import {
   motion,
@@ -69,12 +76,25 @@ const preventRightClick = (e : React.MouseEvent) => {
   e.preventDefault();
 }
 
+const carouselRef = useRef(null); // Create a ref for the scrollable element
+
+  // Use useScroll with the carouselRef as the container
+  const { scrollXProgress } = useScroll({
+    container: carouselRef // Pass the ref here to track this specific element
+  });
+
   return  (
     <>
-      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container">
+
+<motion.div
+        className={style.progressbar}
+        style={{ scaleX: scrollXProgress }} // Scale the progress bar based on scrollXProgress
+      />
+      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container" ref={carouselRef}>
         <PageTransition>
+
           {/* adding this motion.section seemed to help with glitchy loading */}
-          <motion.section className={styles.thumbnailscontainer}
+          <motion.section className={styles.thumbnailscontainer} 
           initial="hidden"  
           animate="show"
           variants={{

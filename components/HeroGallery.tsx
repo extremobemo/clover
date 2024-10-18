@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AdvancedImage } from '@cloudinary/react';
 import { Photo } from '../types/types';
-
+import ScrollIndicator from './common/ScrollIndicator';
 interface HeroGalleryProps {
   columns: Photo[][],
   handleModal: (isOpening: boolean, folder: string | null) => void;
@@ -111,7 +111,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
         <button onClick={togglePhotosByIndex} style={{ zIndex: 9999999, position: 'fixed', marginBottom: '20px' }}>
           {visiblePhotos.size < photoRows.flat().length ? 'Add Back Photos' : 'Remove Random Photos'}
         </button>
-
+        <ScrollIndicator/>
         {photoRows.map((row, rowIndex) => (
           <AnimatePresence>
             {row.some(photo => visiblePhotos.has(photo.folder)) && (
