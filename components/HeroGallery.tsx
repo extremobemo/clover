@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { motion } from 'framer-motion';
 import { AdvancedImage } from '@cloudinary/react'; // Adjust according to how you're using Cloudinary
 import styles from '../styles/HeroGallery.module.css'; // Import CSS module
@@ -14,33 +14,90 @@ const preventRightClick = (e : React.MouseEvent) => {
 }
 
 const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
+
+    //todo: divide photos into new 2d array "rows"
+    const [photoRows, setPhotoRows] = useState<Photo[][]>([]);
+
+    //Sorta aids way to add photo arrays of alternating length (between 1 and 2) to the 2d photo array representing each row
+    useEffect(() => {
+        const allPhotos : Photo[] = columns.flat();
+        
+        let double = false;
+
+        let newPhotoRows = [];
+
+        while (allPhotos.length > 0) {
+            let row = [];
+            if (double)
+            {
+                const firstPhoto = allPhotos.shift();
+                const secondPhoto = allPhotos.shift();
+                if (firstPhoto) 
+                    row.push(firstPhoto);
+                if (secondPhoto) 
+                    row.push(secondPhoto);
+            }
+            else{
+                const singlePhoto = allPhotos.shift();
+                if (singlePhoto) 
+                    row.push(singlePhoto);
+            }
+    
+            newPhotoRows.push(row);
+            double = !double;
+
+        }
+        console.log("New Photo rows")
+        console.log(newPhotoRows);
+        setPhotoRows(newPhotoRows);
+
+    }, [columns]);
+
+
+
   return (
-    <div className={styles.galleryContainer}>
-      {columns.map((column, columnIndex) => (
-        <div key={columnIndex} className={styles.column}>
-          {column.map((photo, index) => (
-            <motion.div
-              key={index}
-              className={styles.photoContainer}
-              whileHover={{ scale: 1.01 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}>
-
-                <motion.div whileHover={{ scale: 1.08 }} /* zoom in effect */
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  className={styles.imageWrapper}>
-
-                  <AdvancedImage
+    <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '80dvw',
+      }}>
+      {photoRows.map((row, rowIndex) => (
+        <div key={rowIndex} style={
+            {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            marginTop: '4px',
+            marginBottom:'4px',
+            }
+        }>
+            {row.map((photo, photoIndex) => (
+                <motion.div style={
+                        {
+                        maxWidth: '50%',
+                        marginLeft: '16px',
+                        marginRight: '16px',
+                        }
+                    }
+                   >
+                    <AdvancedImage
                     onClick={() => handleModal(true, photo.folder)}
                     onContextMenu={preventRightClick}
                     cldImg={photo.image}
-                    className={styles.advancedImage}
-                    style={{ width: '100%' }}
-                  />
-
+                
+                    style={
+                        { 
+                           objectFit: 'cover',
+                           width: '100%',
+                        }
+                    }
+                    />
                 </motion.div>
-
-            </motion.div>
-          ))}
+            ))}
+            
         </div>
       ))}
     </div>

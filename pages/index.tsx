@@ -9,7 +9,7 @@ import GreenBar from '../components/common/bar';
 
 import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
-import HeroGallery from '../components/NewHeroGallery';
+import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
 
 interface Photo {
@@ -106,7 +106,7 @@ const HeroPage: React.FC = () => {
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
       
       <div id="content_div" style={{ display: 'flex', position: 'absolute',
-        zIndex: 1, height: '600vh', justifyContent: 'center',
+        zIndex: 1, justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
         {!showGallery && 
