@@ -9,7 +9,7 @@ import GreenBar from '../components/common/bar';
 
 import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
-import HeroGallery from '../components/HeroGallery';
+import HeroGallery from '../components/NewHeroGallery';
 import { HeroImageData } from '../types/types';
 
 interface Photo {
