@@ -15,6 +15,10 @@ import { HeroImageData } from '../types/types';
 interface Photo {
   image: CloudinaryImage;
   folder: string;
+ 
+    width: number,
+   
+
 }
 
 const HeroPage: React.FC = () => {
@@ -57,22 +61,53 @@ const HeroPage: React.FC = () => {
       try {
         const response = await fetch('/api/photos');
         const data = await response.json();
-
-        const cloudinaryPhotos : Photo[] = data.map((photo: HeroImageData) => {
-          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().width(500));
-          return {
-            image: cloudImage,
-            folder: photo.folder,
-          };
-        });
+  
+        const cloudinaryPhotos: Photo[] = await Promise.all(
+          data.map(async (photo: HeroImageData) => {
+            const cloudImage: CloudinaryImage = cld.image(photo.public_id).resize(auto().height(500));
+  
+            // Create an Image object to fetch the image and get dimensions
+            const img = new Image();
+            img.src = cloudImage.toURL(); // Generate the URL
+  
+            // Return a Promise that resolves when the image is loaded
+            return new Promise((resolve) => {
+              img.onload = () => {
+                const originalWidth = img.width; // Get the original width
+                const originalHeight = img.height; // Get the original height
+                console.log("OG WIDTH: " + originalWidth)
+                console.log("OG WIDTH: " + originalWidth)
+                // Calculate the new width based on the aspect ratio
+                const newWidth = originalWidth
+                console.log(newWidth)
+                resolve({
+                  image: cloudImage,
+                  folder: photo.folder,
+                  width: newWidth, // Include calculated width in the returned object
+                });
+              };
+              img.onerror = () => {
+                console.error(`Failed to load image for public ID: ${photo.public_id}`);
+                resolve({
+                  image: cloudImage,
+                  folder: photo.folder,
+                  width: 0, // Default to 0 if there's an error loading the image
+                });
+              };
+            });
+          })
+        );
+  
         setPhotos(cloudinaryPhotos);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     };
-   
+  
     fetchPhotos();
   }, []);
+  
+  
 
   // open or close gallery overlay and handle disabling or enabling background scroll
   const handleModal = (isOpening: boolean, newPublicId: string | null) => {
@@ -106,7 +141,7 @@ const HeroPage: React.FC = () => {
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
       
       <div id="content_div" style={{ display: 'flex', position: 'absolute',
-        zIndex: 1, height: '600vh', justifyContent: 'center',
+        zIndex: 1, justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
         {!showGallery && 

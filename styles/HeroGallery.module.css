@@ -1,5 +1,14 @@
 /* PhotoGallery.module.css */
 
+.newGalleryContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
 .galleryContainer {
   display: flex;
   gap: 8px;
@@ -15,7 +24,21 @@
   max-width: 40vw;
 }
 
+.galleryRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
 .photoContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.newPhotoContainer {
+  max-width: 100%; /* Limit each photo to 50% of the row’s width */
   position: relative;
   overflow: hidden;
 }
@@ -28,5 +51,11 @@
 .advancedImage {
   width: 100%;
   height: auto;
-  transition: transform 0.5s ease;
+}
+
+.newAdvancedImage {
+  width: 100%;
+  height: auto;
+  /* transition: transform 0.5s ease; */
+  /* object-fit: cover; Ensures the image maintains its aspect ratio */
 }
