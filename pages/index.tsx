@@ -59,7 +59,7 @@ const HeroPage: React.FC = () => {
         const data = await response.json();
 
         const cloudinaryPhotos : Photo[] = data.map((photo: HeroImageData) => {
-          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().width(500));
+          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().height(500));
           return {
             image: cloudImage,
             folder: photo.folder,
