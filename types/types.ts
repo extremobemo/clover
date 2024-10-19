@@ -4,6 +4,7 @@ export interface HeroImageData {
     public_id: string;
     url: string;
     folder: string;
+    width: number;
   }
 
 export interface ProjectImageData {
@@ -14,4 +15,7 @@ export interface ProjectImageData {
 export interface Photo {
     image: CloudinaryImage;
     folder: string;
+   
+      width: number,
+     
   }
