@@ -56,7 +56,7 @@ const HeroPage: React.FC = () => {
         const data = await response.json();
 
         const cloudinaryPhotos = data.map((photo: any) => {
-          const cloudImage = cld.image(photo.public_id).resize(auto().width(500));
+          const cloudImage = cld.image(photo.public_id).resize(auto().height(500));
           return {
             image: cloudImage,
             folder: photo.folder,
@@ -87,7 +87,7 @@ const HeroPage: React.FC = () => {
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
       
       <div id="content_div" style={{ display: 'flex', position: 'absolute',
-        zIndex: 1, height: '600vh', justifyContent: 'center',
+        zIndex: 1, justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
         {!showGallery && 

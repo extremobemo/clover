@@ -138,28 +138,30 @@
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
-  gap: 64px; /* Adjust for spacing between grid items */
-  align-items: start; /* Prevents vertical stretching */
-  max-height: 100vh
+  display: flex; /* Use flexbox for the grid container */
+  flex-wrap: wrap; /* Allow items to wrap into multiple rows */
+  justify-content: center; /* Center the items in the viewport */
+  gap: 8px; /* No gap between items */
+  width: 100%; /* Full width */
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .griditem {
-  display: flex;
-  align-items: center;
-  justify-self: center; /* Default alignment */
+  display: flex; /* Use flexbox for grid items */
+  justify-content: center; /* Center the image within the grid item */
+  align-items: flex-start; /* Align items at the start of the row */
+  padding: 0; /* No padding */
+  margin: 0; /* No margin */
 }
 
 .griditemfull {
-  grid-column: span 2; /* Full width */
+  flex-basis: 100%; /* Full-width item spans entire row */
 }
 
-.griditemleft {
-  justify-self: end; /* Right align items in the left column */
+.photoContainer {
+  overflow: hidden; /* Hide overflow */
 }
 
-.griditemright {
-  justify-self: start; /* Left align items in the right column */
-}
+
+
 
