@@ -71,7 +71,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
       const updatedVisiblePhotos = new Set(visiblePhotos); // Clone the current set
 
       // We will randomly remove some photos (for demonstration, we can choose 3 photos)
-      const indicesToRemove = [0, 3, 5, 6]; // You can adjust these indices as needed
+      const indicesToRemove = [0, 2, 4, 5, 6]; // You can adjust these indices as needed
 
       indicesToRemove.forEach(index => {
         const photo = flatPhotos[index];
@@ -90,7 +90,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
   };
 
   return (
-    
+    <AnimatePresence>
       <motion.div
         style={{
           display: 'flex',
@@ -100,26 +100,28 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
           width: '80dvw',
         }}
         key="MAIN_FLEX"
-        layout='position'
+        layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 5.5 }}
+        transition={{ duration: .5,
+          staggerChildren: 1
+         }}
       >
-        <button onClick={togglePhotosByIndex} style={{ position: 'fixed', marginBottom: '20px' }}>
+        <button onClick={togglePhotosByIndex} style={{ zIndex: 9999999, position: 'fixed', marginBottom: '20px' }}>
           {visiblePhotos.size < photoRows.flat().length ? 'Add Back Photos' : 'Remove Random Photos'}
         </button>
 
         {photoRows.map((row, rowIndex) => (
           <AnimatePresence>
-            {row.length > 0 && (
+            {row.some(photo => visiblePhotos.has(photo.folder)) && (
               <motion.div
                 key={`row-${rowIndex}`}
-                layout="position"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ scale: 0, height: 0 }}
-                transition={{ duration: 5.5 }}
+                layout
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1, height: '25vh' }}
+                exit={{ height: 0 }}
+                transition={{ duration: .5 }}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -133,17 +135,30 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
                   <motion.div
                     style={{
                       objectFit: 'cover',
+                      marginLeft: '0px',
+                      marginRight: '0px',
+                    }}
+                    key={photo.folder}
+                    layout
+                    exit={{ opacity: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: .5 }}
+                  >
+                    {visiblePhotos.has(photo.folder) && ( // Check if the photo is in the visible set
+                    <motion.div
+                    style={{
+                      objectFit: 'cover',
                       marginLeft: '8px',
                       marginRight: '8px',
                     }}
-                    key={photo.folder}
-                    layout="position"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    transition={{ duration: 5.5 }}
+                      key={photo.folder + rowIndex}
+                      layout
+                      exit={{ scale: 0, opacity: 0 }}
+                      initial={{height: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1, height: '100%' }}
+                      transition={{ duration: .5 }}
                   >
-                    {visiblePhotos.has(photo.folder) && ( // Check if the photo is in the visible set
                       <AdvancedImage
                         onClick={() => handleModal(true, photo.folder)}
                         onContextMenu={preventRightClick}
@@ -151,11 +166,12 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
                         style={{
                           objectFit: 'cover',
                           width: '100%',
-                          height: '100%',
+                          height: '25dvh',
                           marginLeft: '8px',
                           marginRight: '8px',
                         }}
                       />
+                      </motion.div>
                     )}
                   </motion.div>
                 ))}
@@ -164,6 +180,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
           </AnimatePresence>
         ))}
       </motion.div>
+      </AnimatePresence>
   );
 };
 
