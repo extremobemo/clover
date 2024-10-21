@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   width: 100dvw;
-  height: 55px;
-  background: black;
+  height: 30px;
+  background: #39993A;
   transform-origin: 0%;
   z-index: 99999;
 }
