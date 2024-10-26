@@ -50,14 +50,13 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
     <div id="curtain" className={styles.curtain}>
       <CloverEffect />
       <div id="video_div" className={styles.videoDiv}>
-        <video
-            className={styles.fullscreenImage}
-            src="/bts.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+      <img
+        className={styles.fullscreenImage}
+        src="/bts.jpg"
+        alt="BTS" // Provide an alt text for accessibility
+        style={{ width: '100%', height: '100dvh' }} // Adjust the styles as needed
+      />
+
         </div>
     </div>
   );
