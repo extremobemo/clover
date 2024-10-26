@@ -1,0 +1,44 @@
+.scrollContainer {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  height: 100dvh;
+}
+
+/* Scroll container for horizontal gallery */
+.thumbnailscontainer {
+  /* position: relative; */
+  height: 99dvh;
+  /* z-index: 40; */
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 20dvw;
+  overflow-y: hidden;
+
+  .thumbnails {
+    position: relative;
+    display: flex;
+  }
+
+  .thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+  }
+
+  .thumbnailPlaceholder {
+    height: 80dvh;
+    width: 80dvw;
+  }
+
+  .galleryPhoto {
+    max-height: 60vh;
+  }
+
+  .anotherContainer {
+    display: "flex";
+    flex-direction: column;
+  }
+}
