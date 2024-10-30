@@ -5,8 +5,6 @@ import PageTransition from "../components/common/PageTransition";
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
-import GreenBar from '../components/common/bar';
-
 import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
