@@ -40,7 +40,7 @@ export default function Footer() {
     <div className={styles.footer}>
       <Menu
         label={
-          <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+          <div style={{ position: 'relative', width: '100px', height: '100px', opacity: 0 }}> 
           CLOVER
           </div>
         }

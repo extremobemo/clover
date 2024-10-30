@@ -4,6 +4,7 @@ import { AdvancedImage } from '@cloudinary/react'; // Adjust according to how yo
 import styles from '../styles/HeroGallery.module.css'; // Import CSS module
 import { Photo } from '../types/types';
 import ScrollIndicator from './common/ScrollIndicator';
+import { useModal } from '../context/ModalContext';
 
 interface HeroGalleryProps {
   columns: Photo[][],
@@ -15,6 +16,8 @@ const preventRightClick = (e : React.MouseEvent) => {
 }
 
 const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
+
+  const { openModal } = useModal();
   return (
     <div className={styles.galleryContainer}>
       {columns.map((column, columnIndex) => (

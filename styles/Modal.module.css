@@ -1,0 +1,38 @@
+.modalWrapper {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  background: white;
+  height: 100%;
+  width: 100%;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 42;
+}
+
+.modalBody {
+  height: auto;
+  /* Allows child to scroll */
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 25px;
+}

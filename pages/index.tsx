@@ -35,7 +35,7 @@ const HeroPage: React.FC = () => {
     }
   }, [showGallery, scrollPosition]);
 
-
+//TODO: here we still need this logic that gets args out of url and decides what modal to open, but a lot of the "opening" and "closing" code can go in the context
   //set showGallery and gallery publicID based on url param
   useEffect(() => {
     //TODO: will need to scrub the url param to handle invalid args
@@ -72,6 +72,9 @@ const HeroPage: React.FC = () => {
     fetchPhotos();
   }, []);
 
+
+  //TODO: this logic can probably all be in the context, maybe not the document stuff tho, idk, and the set scroll position stuff
+
   // open or close gallery overlay and handle disabling or enabling background scroll
   const handleModal = (isOpening: boolean, newPublicId: string | null) => {
     if (isOpening) {  
@@ -92,6 +95,8 @@ const HeroPage: React.FC = () => {
   const rightColumn : Photo[] = photos.filter((_, index) => index % 2 !== 0);
   const columns : Photo[][] = [leftColumn, rightColumn]
 
+  //TODO: utilize new context states to control visibility of this stuff
+
   return (
     <div id="outermost_div"
       style={{ display: 'flex', justifyContent: 'center',
@@ -107,11 +112,11 @@ const HeroPage: React.FC = () => {
         zIndex: 1, height: '600vh', justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
-        {!showGallery && 
-          <HeroGallery columns={columns} handleModal={handleModal} /> }
-        </div>
+         
+          <HeroGallery columns={columns} handleModal={handleModal} /> 
+      </div>
 
-      {showGallery && <Modal onClose={ () => handleModal(false, null)} public_id={public_id} /> }
+      {showGallery && <Modal state='gallery' onClose={ () => handleModal(false, null)} public_id={public_id} /> }
     </div>
   );
 };
