@@ -51,11 +51,11 @@ const HeroPage: React.FC = () => {
       openModal('gallery', gallery)
 
     } else if(typeof page ==='string'){
-
+      openModal(page, null);
     } else {
       closeModal();
     }
-  }, [router.query.gallery, router.isReady]);
+  }, [router.query.gallery, router.query.page, router.isReady]);
 
   // Fetch Hero Photos
   useEffect(() => {

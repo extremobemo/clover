@@ -34,7 +34,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         setShowModal(true);
 
         // TODO: change this to push arguments to url instead of page-like stuff
-        if (state === 'about') {
+        if (state === 'about' || state === 'coffee') {
             //router.push("/about", undefined, { shallow: true });
             router.push(`/?page=${state}`, undefined, {shallow: true});
         } else if (state === 'gallery' && id) {

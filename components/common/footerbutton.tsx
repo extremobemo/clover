@@ -1,9 +1,8 @@
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Footer.module.css';
 import { Menu, MenuItem } from "./Menu";
-import Link from 'next/link';
 import { useState } from "react";
 import type { MotionProps, Variants } from "framer-motion";
-import Image from 'next/image';
+import { useModal } from '../../context/ModalContext';
 
 const menu = {
   closed: {
@@ -35,12 +34,13 @@ const item = {
 export default function Footer() {
 
   const [open1, setOpen] = useState(false);
+  const { openModal } = useModal();
 
   return (
     <div className={styles.footer}>
       <Menu
         label={
-          <div style={{ position: 'relative', width: '100px', height: '100px', opacity: 0 }}> 
+          <div style={{ position: 'relative', width: '100px', height: '100px', opacity: 0, cursor: 'pointer' }}> 
           CLOVER
           </div>
         }
@@ -51,14 +51,10 @@ export default function Footer() {
         exit="closed"
         variants={menu}
       >
-        <MenuItem {...item} className={styles.menuitem} onClick={() => setOpen(false)}>
-          <Link href="/"> INDEX </Link>
-        </MenuItem>
 
         <MenuItem {...item} className={styles.menuitem}>SHOP</MenuItem>
-        <MenuItem {...item} className={styles.menuitem}>COFFEE</MenuItem>
-        <MenuItem {...item} className={styles.menuitem}>ABOUT</MenuItem>
-        <MenuItem {...item} className={styles.menuitem}>CONTACT</MenuItem>
+        <MenuItem {...item} className={styles.menuitem} onClick={() => {setOpen(false); openModal('coffee', null);}}>COFFEE</MenuItem>
+        <MenuItem {...item} className={styles.menuitem} onClick={() => {setOpen(false); openModal('about', null);}}>INFO/CONTACT</MenuItem>
       </Menu>
     </div>
   );

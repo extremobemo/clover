@@ -1,0 +1,21 @@
+.footer {
+    position: fixed;
+    bottom: 0px;
+    right: 35px;
+    z-index: 10;
+    color: black;
+    height: 30px;
+    font-family: "KAMAR", sans-serif;
+  }
+ß
+
+  .menuitem {
+    display: flex;
+    cursor: default;
+    scroll-margin: 0.5rem;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    outline: none !important;
+  }

@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import styles from "../../styles/Modal.module.css"
-import { useModal } from '../../context/ModalContext';
+import ScrollIndicator from "../common/ScrollIndicator";
 
 interface ModalProps {
     onClose : Function,
@@ -13,7 +13,7 @@ const Modal : React.FC<ModalProps> = ({ onClose, public_id, state }) => {
     const handleCloseClick = (e : React.MouseEvent<HTMLAnchorElement>) => {
         // reset public id on close
         console.log("handling close click")
-        public_id = null;
+        public_id = null; // I don't think we need this
         e.preventDefault();
         onClose();
     };
@@ -34,12 +34,16 @@ const Modal : React.FC<ModalProps> = ({ onClose, public_id, state }) => {
                         )}
                         {
                             (state === 'about') && (
-                                <div>About</div>
+                                <div>About
+                                <ScrollIndicator/>
+                                </div>
                             )
                         }
                            {
                             (state === 'coffee') && (
-                                <div>About</div>
+                                <div>Coffee
+                                    <ScrollIndicator/>
+                                </div>
                             )
                         }
                         

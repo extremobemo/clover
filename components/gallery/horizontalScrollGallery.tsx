@@ -140,7 +140,6 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
 
         </PageTransition>
       </div>
-      <Footer />
     </>
   );
 

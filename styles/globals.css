@@ -5,6 +5,13 @@ body {
   overflow: hidden;
 }
 
+@font-face {
+  font-family: "KAMAR";
+  src: url("/fonts/KAMAR.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 .modal-wrapper {
   width: 100dvw;
   height: 100dvh;
