@@ -17,7 +17,10 @@ const preventRightClick = (e : React.MouseEvent) => {
 
 const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
 
+
   const { openModal } = useModal();
+
+
   return (
     <div className={styles.galleryContainer}>
       {columns.map((column, columnIndex) => (
@@ -35,7 +38,7 @@ const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
                   className={styles.imageWrapper}>
 
                   <AdvancedImage
-                    onClick={() => handleModal(true, photo.folder)}
+                    onClick={() => openModal('gallery', photo.folder)}
                     onContextMenu={preventRightClick}
                     cldImg={photo.image}
                     className={styles.advancedImage}

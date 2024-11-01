@@ -9,6 +9,7 @@ import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
+import { useModal } from '../context/ModalContext';
 
 interface Photo {
   image: CloudinaryImage;
@@ -17,6 +18,7 @@ interface Photo {
 
 const HeroPage: React.FC = () => {
   const router = useRouter();
+  const { showModal, modalState, newPublicId, openModal, closeModal } = useModal();
 
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
@@ -39,15 +41,21 @@ const HeroPage: React.FC = () => {
   //set showGallery and gallery publicID based on url param
   useEffect(() => {
     //TODO: will need to scrub the url param to handle invalid args
+
+    if (!router.isReady) return; // Wait until the router is ready
+
     const gallery = router.query.gallery;
+    const page = router.query.page;
+    console.log(`Why isn't refresh working? ${gallery}`)
     if (typeof gallery === 'string') {
-      setShowGallery(true);
-      setPublicId(gallery);
+      openModal('gallery', gallery)
+
+    } else if(typeof page ==='string'){
+
     } else {
-      setShowGallery(false);
-      setPublicId(null);
+      closeModal();
     }
-  }, [router.query.gallery]);
+  }, [router.query.gallery, router.isReady]);
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -116,7 +124,7 @@ const HeroPage: React.FC = () => {
           <HeroGallery columns={columns} handleModal={handleModal} /> 
       </div>
 
-      {showGallery && <Modal state='gallery' onClose={ () => handleModal(false, null)} public_id={public_id} /> }
+      {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={newPublicId} /> }
     </div>
   );
 };

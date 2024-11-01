@@ -44,10 +44,9 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     );
 
   useEffect(() => {
-
     if (typeof public_id !== 'string') return;
     const folder = public_id;
-    console.log(folder)
+    console.log(`folder name: ${folder}`)
     fetch(`/api/projectphotos?folder=${folder}`)
       .then(response => response.json())
       .then(data => {
