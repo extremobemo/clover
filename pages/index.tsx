@@ -10,6 +10,7 @@ import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
 import { useModal } from '../context/ModalContext';
+import Footer from '../components/common/NewFooterButton';
 
 interface Photo {
   image: CloudinaryImage;
@@ -92,7 +93,9 @@ const HeroPage: React.FC = () => {
       </div>
 
       {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
+      <Footer/>
     </div>
+    
   );
 };
 
