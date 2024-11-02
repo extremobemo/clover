@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import styles from "../../styles/HorizontalGallery.module.css"
 import GalleryDescription from './GalleryDescription'
 
-import Footer from "../common/footerbutton";
-
 import ScrollIndicator from "../common/ScrollIndicator";
 import PageTransition from "../common/PageTransition";
 

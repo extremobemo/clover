@@ -2,7 +2,6 @@ import { motion, MotionValue } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/ScrollIndicator.module.css";
 import { useModal } from "../../context/ModalContext";
-import Footer from "./NewFooterButton";
 
 interface ScrollIndicatorProps {
   scrollXProgress?: MotionValue<number>;
