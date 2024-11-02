@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import styles from "../../styles/HorizontalGallery.module.css"
 import GalleryDescription from './GalleryDescription'
 
-import Footer from "../common/footerbutton";
-
 import ScrollIndicator from "../common/ScrollIndicator";
 import PageTransition from "../common/PageTransition";
 
@@ -44,10 +42,9 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     );
 
   useEffect(() => {
-
     if (typeof public_id !== 'string') return;
     const folder = public_id;
-    console.log(folder)
+    console.log(`folder name: ${folder}`)
     fetch(`/api/projectphotos?folder=${folder}`)
       .then(response => response.json())
       .then(data => {
@@ -141,7 +138,6 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
 
         </PageTransition>
       </div>
-      <Footer />
     </>
   );
 

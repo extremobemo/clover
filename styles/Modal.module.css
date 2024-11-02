@@ -1,18 +1,4 @@
-html,
-body {
-  /* Change this to your desired background color */
-  padding-bottom: env(safe-area-inset-bottom);
-  overflow: hidden;
-}
-
-@font-face {
-  font-family: "KAMAR";
-  src: url("/fonts/KAMAR.TTF") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-.modal-wrapper {
+.modalWrapper {
   width: 100dvw;
   height: 100dvh;
 }
@@ -25,7 +11,7 @@ body {
   width: 100%;
 }
 
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -38,14 +24,14 @@ body {
   z-index: 42;
 }
 
-.modal-body {
+.modalBody {
   height: auto;
   /* Allows child to scroll */
   overflow-x: auto;
   overflow-y: hidden;
 }
 
-.modal-header {
+.modalHeader {
   display: flex;
   justify-content: flex-end;
   font-size: 25px;

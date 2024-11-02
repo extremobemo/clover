@@ -9,7 +9,8 @@ import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
-
+import { useModal } from '../context/ModalContext';
+import FooterButtonMenu from '../components/common/FooterButtonMenu'
 interface Photo {
   image: CloudinaryImage;
   folder: string;
@@ -17,37 +18,32 @@ interface Photo {
 
 const HeroPage: React.FC = () => {
   const router = useRouter();
+  const { showModal, modalState, publicId, openModal, closeModal } = useModal();
 
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
   const [showGreenBar, setShowGreenBar] = useState<boolean>(false);
 
-  const [showGallery, setShowGallery] = useState<boolean>(false);
-  const [public_id, setPublicId] = useState<string | null>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
- // Restore scroll position when the modal is closed
-  useEffect(() => {
-    if (!showGallery) {
-      document.documentElement.style.overflowY = 'auto'; 
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [showGallery, scrollPosition]);
 
-
-  //set showGallery and gallery publicID based on url param
+  //when router is ready, grab arguments from router to determine which modal to display. This helps us with browser navigation stuff. 
   useEffect(() => {
     //TODO: will need to scrub the url param to handle invalid args
+
+    if (!router.isReady) return; // Wait until the router is ready
+
     const gallery = router.query.gallery;
+    const page = router.query.page;
     if (typeof gallery === 'string') {
-      setShowGallery(true);
-      setPublicId(gallery);
+      openModal('gallery', gallery)
+
+    } else if(typeof page ==='string'){
+      openModal(page, null);
     } else {
-      setShowGallery(false);
-      setPublicId(null);
+      closeModal();
     }
-  }, [router.query.gallery]);
+  }, [router.query.gallery, router.query.page, router.isReady]);
 
   // Fetch Hero Photos
   useEffect(() => {
@@ -72,22 +68,6 @@ const HeroPage: React.FC = () => {
     fetchPhotos();
   }, []);
 
-  // open or close gallery overlay and handle disabling or enabling background scroll
-  const handleModal = (isOpening: boolean, newPublicId: string | null) => {
-    if (isOpening) {  
-      router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
-      setShowGallery(true);
-      setScrollPosition(window.scrollY);
-      document.documentElement.style.overflowY = 'hidden';
-    } else {
-      router.push('/', undefined, { shallow: true });
-      setShowGallery(false);
-      setPublicId(null)
-      document.documentElement.style.overflowY = 'auto';
-      window.scrollTo(0, scrollPosition);
-    }
-  }
-
   const leftColumn : Photo[] = photos.filter((_, index) => index % 2 === 0);
   const rightColumn : Photo[] = photos.filter((_, index) => index % 2 !== 0);
   const columns : Photo[][] = [leftColumn, rightColumn]
@@ -107,12 +87,14 @@ const HeroPage: React.FC = () => {
         zIndex: 1, height: '600vh', justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
-        {!showGallery && 
-          <HeroGallery columns={columns} handleModal={handleModal} /> }
-        </div>
+          <HeroGallery columns={columns} /> 
 
-      {showGallery && <Modal onClose={ () => handleModal(false, null)} public_id={public_id} /> }
+      </div>
+
+      {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
+      <FooterButtonMenu/>
     </div>
+    
   );
 };
 

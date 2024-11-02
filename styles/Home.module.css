@@ -41,7 +41,7 @@
   border-style: none;
   background-color: rgba(255, 255, 255, 0);
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-right: 1.4rem;
   font-size: 1rem;
   line-height: 1.5rem;
   color: black;
@@ -55,40 +55,24 @@
   }
 }
 
-.footer {
-  position: fixed;
-  bottom: 0px;
-  right: 35px;
-  z-index: 10;
-  color: black;
-  height: 30px;
-}
+
 
 .menu {
   align-items: flex-end;
   position: relative;
   z-index: 50;
   display: flex;
-  min-width: 200px;
-  min-height: 180px;
+  min-width: 150px;
+  height: 100px;
   flex-direction: column;
   overscroll-behavior: contain;
-  background-color: clear;
+  background-color: white;
   padding: 0.5rem;
   color: black;
   outline: none !important;
   max-height: max-content;
   overflow: visible;
   font-weight: bold;
+  cursor: pointer;
 }
 
-.menuitem {
-  display: flex;
-  cursor: default;
-  scroll-margin: 0.5rem;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  outline: none !important;
-}

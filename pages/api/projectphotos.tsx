@@ -16,13 +16,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const   { folder } = req.query;
 
     if (!folder || typeof folder !== 'string') {
-      return res.status(400).json({ error: 'Invalid folder name' });
+      return res.status(400).json({ error: `Invalid folder name ${folder}` });
     }
 
     const match = folder.match(/^([^-]+)-(\d+)$/);
 
     if (!match || match.length !== 3) {
-      return res.status(400).json({ error: 'Invalid folder name format' });
+      return res.status(400).json({ error: `Invalid folder name format` });
     }
 
     const subjectName : string = match[1];

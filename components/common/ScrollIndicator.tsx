@@ -1,6 +1,7 @@
 import { motion, MotionValue } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/ScrollIndicator.module.css";
+import { useModal } from "../../context/ModalContext";
 
 interface ScrollIndicatorProps {
   scrollXProgress?: MotionValue<number>;
@@ -8,6 +9,7 @@ interface ScrollIndicatorProps {
 
 const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ scrollXProgress }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { closeModal } = useModal();
 
   const [clipPaths, setClipPaths] = useState({
     base: "inset(0 100% 0 0)",
@@ -58,6 +60,9 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ scrollXProgress }) =>
       <div className={styles.bottomLeftBase}>INDEX</div>
       <div className={styles.bottomCenterBase}>PRODUCTION</div>
       <div className={styles.bottomRightBase}>CLOVER</div>
+
+      {/* Invisible overlay button */}
+      <button className={styles.invisibleButton} onClick={() => {closeModal()}} />
     </div>
   );
 };
