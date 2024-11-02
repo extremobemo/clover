@@ -7,7 +7,7 @@ body {
 
 @font-face {
   font-family: "KAMAR";
-  src: url("/fonts/KAMAR.ttf") format("truetype");
+  src: url("/fonts/KAMAR.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
