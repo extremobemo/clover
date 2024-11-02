@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 interface ModalContextType {
     showModal: boolean;
     modalState: string;
-    newPublicId: string | null;
+    publicId: string | null;
     openModal: (state: string, id: string | null) => void;
     closeModal: () => void;
 }
@@ -24,7 +24,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState<boolean>(false);
     const [modalState, setModalState] = useState<string>('');
-    const [newPublicId, setPublicId] = useState<string | null>(null);
+    const [publicId, setPublicId] = useState<string | null>(null);
 
     // Function to open a modal with specific state and public_id
     const openModal = (state: string, id: string | null) => {
@@ -56,7 +56,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     };
 
     return (
-        <ModalContext.Provider value={{ showModal, modalState, newPublicId, openModal, closeModal }}>
+        <ModalContext.Provider value={{ showModal, modalState, publicId, openModal, closeModal }}>
             {children}
         </ModalContext.Provider>
     );

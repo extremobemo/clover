@@ -18,27 +18,16 @@ interface Photo {
 
 const HeroPage: React.FC = () => {
   const router = useRouter();
-  const { showModal, modalState, newPublicId, openModal, closeModal } = useModal();
+  const { showModal, modalState, publicId, openModal, closeModal } = useModal();
 
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
   const [showGreenBar, setShowGreenBar] = useState<boolean>(false);
 
-  const [showGallery, setShowGallery] = useState<boolean>(false);
-  const [public_id, setPublicId] = useState<string | null>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
- // Restore scroll position when the modal is closed
-  useEffect(() => {
-    if (!showGallery) {
-      document.documentElement.style.overflowY = 'auto'; 
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [showGallery, scrollPosition]);
 
-//TODO: here we still need this logic that gets args out of url and decides what modal to open, but a lot of the "opening" and "closing" code can go in the context
-  //set showGallery and gallery publicID based on url param
+  //when router is ready, grab arguments from router to determine which modal to display. This helps us with browser navigation stuff. 
   useEffect(() => {
     //TODO: will need to scrub the url param to handle invalid args
 
@@ -46,7 +35,6 @@ const HeroPage: React.FC = () => {
 
     const gallery = router.query.gallery;
     const page = router.query.page;
-    console.log(`Why isn't refresh working? ${gallery}`)
     if (typeof gallery === 'string') {
       openModal('gallery', gallery)
 
@@ -80,30 +68,9 @@ const HeroPage: React.FC = () => {
     fetchPhotos();
   }, []);
 
-
-  //TODO: this logic can probably all be in the context, maybe not the document stuff tho, idk, and the set scroll position stuff
-
-  // open or close gallery overlay and handle disabling or enabling background scroll
-  const handleModal = (isOpening: boolean, newPublicId: string | null) => {
-    if (isOpening) {  
-      router.push(`/?gallery=${newPublicId}`, undefined, {shallow: true});
-      setShowGallery(true);
-      setScrollPosition(window.scrollY);
-      document.documentElement.style.overflowY = 'hidden';
-    } else {
-      router.push('/', undefined, { shallow: true });
-      setShowGallery(false);
-      setPublicId(null)
-      document.documentElement.style.overflowY = 'auto';
-      window.scrollTo(0, scrollPosition);
-    }
-  }
-
   const leftColumn : Photo[] = photos.filter((_, index) => index % 2 === 0);
   const rightColumn : Photo[] = photos.filter((_, index) => index % 2 !== 0);
   const columns : Photo[][] = [leftColumn, rightColumn]
-
-  //TODO: utilize new context states to control visibility of this stuff
 
   return (
     <div id="outermost_div"
@@ -120,11 +87,11 @@ const HeroPage: React.FC = () => {
         zIndex: 1, height: '600vh', justifyContent: 'center',
         overflowY : 'hidden', overflowX : 'hidden' }}>
 
-         
-          <HeroGallery columns={columns} handleModal={handleModal} /> 
+          <HeroGallery columns={columns} /> 
+
       </div>
 
-      {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={newPublicId} /> }
+      {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
     </div>
   );
 };

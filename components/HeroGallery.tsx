@@ -8,14 +8,13 @@ import { useModal } from '../context/ModalContext';
 
 interface HeroGalleryProps {
   columns: Photo[][],
-  handleModal : (isOpening : boolean, folder: string | null) => void;
 }
 
 const preventRightClick = (e : React.MouseEvent) => {
   e.preventDefault();
 }
 
-const HeroGallery : React.FC<HeroGalleryProps> = ({ columns, handleModal }) => {
+const HeroGallery : React.FC<HeroGalleryProps> = ({ columns }) => {
 
 
   const { openModal } = useModal();
