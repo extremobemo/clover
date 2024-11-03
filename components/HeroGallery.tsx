@@ -71,7 +71,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos }) => {
       <ScrollIndicator/>
       {getColumnGroups().map((group, groupIndex) => (
         <React.Fragment key={`group-${groupIndex}`}>
-          <div style={{ display: 'flex', gap: '8px', height: '150vw' }}>
+          <div style={{ display: 'flex', gap: '8px',  height: window.innerWidth <= 768 ? '225vw' : '150vw', }}>
 
           {/* Left Column */}
           <div className={styles.leftColumnContainer}>

@@ -10,13 +10,6 @@ interface ModalProps {
 }
 
 const Modal : React.FC<ModalProps> = ({ onClose, public_id, state }) => {
-    const handleCloseClick = (e : React.MouseEvent<HTMLAnchorElement>) => {
-        // reset public id on close
-        console.log("handling close click")
-        public_id = null; // I don't think we need this
-        e.preventDefault();
-        onClose();
-    };
 
     const modalContent = (
         <div className={styles.modalOverlay}>
@@ -24,9 +17,6 @@ const Modal : React.FC<ModalProps> = ({ onClose, public_id, state }) => {
             and use the ref */}
             <div className={styles.modalWrapper} >
                 <div className={styles.modal} >
-                    <a style={{position: "absolute", top: 10, right: 10, fontSize: 32, width: 32, height: 32, zIndex: 25}} href="#" onClick={handleCloseClick}>
-                        x
-                    </a>
                     <div className={styles.modalBody} >
                         {
                             (state === 'gallery') && (

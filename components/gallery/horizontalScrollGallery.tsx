@@ -114,7 +114,7 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
                     // whileHover={{ scale: 1.1 }}  
                     style={{placeContent: 'center'}}>
                     <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} className={styles.galleryPhoto} onContextMenu={preventRightClick} />
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: window.innerWidth <= 768 ? '45dvh' : '60dvh'}} onContextMenu={preventRightClick} />
                     </div>
                   </motion.div>
                 ))}
