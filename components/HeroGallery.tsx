@@ -19,31 +19,31 @@ const heightData = [
   [
     // Group 1
     [3, 10, 3, 11, 12],   // Column 1
-    [10, 11, 6, 4, 4],    // Column 2
+    [10, 11, 6, 1, 0],    // Column 2
   ],
   [
      // Group 2
-    [10, 12, 10, 2, 7],   // Column 1
-    [7, 0, 8, 12, 5],     // Column 2
+    [13, 12, 10, 2, 7],   // Column 1
+    [10, 3, 12, 12, 8],     // Column 2
   ],
   [
      // Group 3
-    [5, 8, 10, 12, 9],    // Column 1
-    [0, 7, 10, 9, 10],    // Column 2
+    [6, 11, 16, 12, 13],    // Column 1
+    [0, 10, 8, 9, 10],    // Column 2
   ],
   [
      // Group 4
-    [8, 9, 10, 6, 6],    // Column 1
-    [8, 9, 8, 6, 6],     // Column 2
+    [8, 4, 0, 6, 0],    // Column 1
+    [11, 8, 8, 6, 12],     // Column 2
   ],
   [
      // Group 5
-    [9, 7, 8, 6, 6],     // Column 1
+    [9, 7, 8, 2, 1],     // Column 1
     [3, 5, 9, 10, 6],    // Column 2
   ],
   [
      // Group 6
-    [6, 8, 9, 8, 9],     // Column 1
+    [6, 8, 9, 5, 9],     // Column 1
     [7, 6, 9, 10, 6],    // Column 2
   ],
 ];
@@ -110,7 +110,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos }) => {
                   <AdvancedImage 
                     onClick={() => openModal('gallery', photo.folder)}
                     onContextMenu={preventRightClick} cldImg={photo.image} 
-                    style={{ width: 'auto', maxWidth: '70dvw', maxHeight: '30dvw', objectFit: 'cover' }}
+                    className={styles.widePhoto}
                   />
                 </div>
               ))}
