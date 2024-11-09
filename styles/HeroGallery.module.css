@@ -1,32 +1,63 @@
-/* PhotoGallery.module.css */
+/* HeroGallery.module.css */
 
-.galleryContainer {
-  display: flex;
-  gap: 8px;
-  width: 100dvw;
-  justify-content: center;
-}
-
-.column {
+.heroGalleryContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100vw;
+  margin-top: 100px;
+  margin-bottom: 60px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  
+  }
   gap: 4px;
-  max-width: 40vw;
 }
 
-.photoContainer {
-  position: relative;
-  overflow: hidden;
+.leftColumnContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
+  align-items: flex-end;
+  width: 30dvw;
 }
 
-.imageWrapper {
-  display: inline-block;
-  overflow: hidden;
+.leftColumnFlex {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 auto;
 }
 
-.advancedImage {
-  width: 100%;
-  height: auto;
-  transition: transform 0.5s ease;
+.rightColumnContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
+  align-items: flex-start;
+  width: 30dvw;
+}
+
+.rightColumnFlex {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+}
+
+.widePhotoContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+  max-height: max-content;
+  margin: 0 auto;
+}
+
+.widePhoto {
+  width: auto;
+  max-width: 80dvw; 
+  max-height: 30dvh;
+  @media (max-width: 768px) {
+    max-height: 50dvw;
+  
+  }
+  object-fit: cover;
 }

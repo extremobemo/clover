@@ -51,22 +51,25 @@ const HeroPage: React.FC = () => {
       try {
         const response = await fetch('/api/photos');
         const data = await response.json();
-
+  
         const cloudinaryPhotos : Photo[] = data.map((photo: HeroImageData) => {
-          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().width(500));
+          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().width(1000));
           return {
             image: cloudImage,
             folder: photo.folder,
           };
         });
+
         setPhotos(cloudinaryPhotos);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     };
-   
+
     fetchPhotos();
   }, []);
+  
+  
 
   const leftColumn : Photo[] = photos.filter((_, index) => index % 2 === 0);
   const rightColumn : Photo[] = photos.filter((_, index) => index % 2 !== 0);
@@ -83,11 +86,18 @@ const HeroPage: React.FC = () => {
 
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
       
-      <div id="content_div" style={{ display: 'flex', position: 'absolute',
-        zIndex: 1, height: '600vh', justifyContent: 'center',
-        overflowY : 'hidden', overflowX : 'hidden' }}>
+      <div id="content_div" style={{
+        display: 'flex',
+        position: 'absolute',
+        zIndex: 1,
+        justifyContent: 'center',
+        overflowY: 'hidden',
+        overflowX: 'hidden',
+        width: '100vw',
+        maxWidth: '100vw',
+      }}>
 
-          <HeroGallery columns={columns} /> 
+        <HeroGallery photos={photos} /> 
 
       </div>
 

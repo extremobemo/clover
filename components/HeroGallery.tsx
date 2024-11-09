@@ -1,54 +1,122 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { AdvancedImage } from '@cloudinary/react'; // Adjust according to how you're using Cloudinary
-import styles from '../styles/HeroGallery.module.css'; // Import CSS module
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AdvancedImage } from '@cloudinary/react';
 import { Photo } from '../types/types';
+
+import styles from '../styles/HeroGallery.module.css'
 import ScrollIndicator from './common/ScrollIndicator';
 import { useModal } from '../context/ModalContext';
 
 interface HeroGalleryProps {
-  columns: Photo[][],
+  photos: Photo[]
 }
 
-const preventRightClick = (e : React.MouseEvent) => {
+const preventRightClick = (e: React.MouseEvent) => {
   e.preventDefault();
 }
 
-const HeroGallery : React.FC<HeroGalleryProps> = ({ columns }) => {
+const heightData = [
+  [
+    // Group 1
+    [3, 10, 3, 11, 12],   // Column 1
+    [10, 11, 6, 1, 0],    // Column 2
+  ],
+  [
+     // Group 2
+    [13, 12, 10, 2, 7],   // Column 1
+    [10, 3, 12, 12, 8],     // Column 2
+  ],
+  [
+     // Group 3
+    [6, 11, 16, 12, 13],    // Column 1
+    [0, 10, 8, 9, 10],    // Column 2
+  ],
+  [
+     // Group 4
+    [8, 4, 0, 6, 0],    // Column 1
+    [11, 8, 8, 6, 12],     // Column 2
+  ],
+  [
+     // Group 5
+    [9, 7, 8, 2, 1],     // Column 1
+    [3, 5, 9, 10, 6],    // Column 2
+  ],
+  [
+     // Group 6
+    [6, 8, 9, 5, 9],     // Column 1
+    [7, 6, 9, 10, 6],    // Column 2
+  ],
+];
 
+const HeroGallery: React.FC<HeroGalleryProps> = ({ photos }) => {
+  
+ const { openModal } = useModal();
 
-  const { openModal } = useModal();
+ const getColumnGroups = () => {
+    const groups = [];
+    for (let i = 0; i < photos.length; i += 11) {
 
+      const leftColumn: Photo[] = photos.slice(i, i + 5);
+      const rightColumn: Photo[] = photos.slice(i + 5, i + 10) 
+      const widePhoto = photos[i + 10] ? [photos[i + 10]] : [];
+
+      groups.push({ leftColumn, rightColumn, widePhoto });
+    }
+    return groups;
+  };
+  
 
   return (
-    <div className={styles.galleryContainer}>
-      {columns.map((column, columnIndex) => (
-        <div key={columnIndex} className={styles.column}>
-           <ScrollIndicator/>
-          {column.map((photo, index) => (
-            <motion.div
-              key={index}
-              className={styles.photoContainer}
-              whileHover={{ scale: 1.01 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}>
+    <div className={styles.heroGalleryContainer}>
+      <ScrollIndicator/>
+      {getColumnGroups().map((group, groupIndex) => (
+        <React.Fragment key={`group-${groupIndex}`}>
+          <div style={{ display: 'flex', gap: '8px',  height: window.innerWidth <= 768 ? '225vw' : '150vw', }}>
 
-                <motion.div whileHover={{ scale: 1.08 }} /* zoom in effect */
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  className={styles.imageWrapper}>
+          {/* Left Column */}
+          <div className={styles.leftColumnContainer}>
+            {group.leftColumn.map((photo, index) => (
+              <div className={styles.leftColumnFlex}
+                style={{ height: `${heightData[groupIndex][0][index]}%` }}
+              >
+                <AdvancedImage
+                  onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
+                  cldImg={photo.image} style={{ objectFit: 'contain', objectPosition: 'right' }}
+                />
+              </div>
+            ))}
+          </div>
 
+          {/* Right Column */}
+            <div className={styles.rightColumnContainer}>
+              {group.rightColumn.map((photo, index) => (
+                <div className={styles.rightColumnFlex}
+                 style={{ height: `${heightData[groupIndex][1][index]}%` }}
+                >
                   <AdvancedImage
-                    onClick={() => openModal('gallery', photo.folder)}
-                    onContextMenu={preventRightClick}
-                    cldImg={photo.image}
-                    className={styles.advancedImage}
-                    style={{ width: '100%' }}
+                    onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
+                    cldImg={photo.image} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
                   />
-
-                </motion.div>
-
-            </motion.div>
-          ))}
+                </div>
+              ))}
+          </div>
         </div>
+
+        {/* Wide photo spanning both columns */}
+          {group.widePhoto.length > 0 && (
+            <div className={styles.widePhotoContainer}>
+              {group.widePhoto.map(photo => (
+                <div style={{ width: '100%', padding: '4px' }}>
+                  <AdvancedImage 
+                    onClick={() => openModal('gallery', photo.folder)}
+                    onContextMenu={preventRightClick} cldImg={photo.image} 
+                    className={styles.widePhoto}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </React.Fragment>
       ))}
     </div>
   );
