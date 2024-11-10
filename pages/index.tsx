@@ -13,7 +13,7 @@ import { useModal } from '../context/ModalContext';
 import FooterButtonMenu from '../components/common/FooterButtonMenu'
 import styles from '../styles/Index.module.css'
 import cloverProductions from './cloverProductions.json'
-import heightData from './heightData.js'
+import heightData from '../data/heightData'
 
 interface Photo {
   image: CloudinaryImage;
