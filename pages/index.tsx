@@ -11,16 +11,37 @@ import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
 import { useModal } from '../context/ModalContext';
 import FooterButtonMenu from '../components/common/FooterButtonMenu'
+import styles from '../styles/Index.module.css'
+import cloverProductions from './cloverProductions.json'
+import heightData from './heightData.js'
+
 interface Photo {
   image: CloudinaryImage;
   folder: string;
 }
 
+const FilteredSet  = new Set(
+[
+  ...cloverProductions  
+]);
+
+const allPhotosHeightData = heightData.allPhotosHeightData;
+
+const filteredPhotosHeightData = heightData.filteredPhotosHeightData;
+
+
 const HeroPage: React.FC = () => {
   const router = useRouter();
   const { showModal, modalState, publicId, openModal, closeModal } = useModal();
 
-  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
+  const [productionPhotos, setProductionPhotos] = useState<Photo[]>([]);
+  const [visiblePhotos, setVisiblePhotos] = useState<Photo[]>([]);
+
+  const [heightData, setHeightData] = useState<number[][][]>(allPhotosHeightData);
+
+  const [isFiltered, setIsFiltered] = useState<Boolean>(false);
+
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
   const [showGreenBar, setShowGreenBar] = useState<boolean>(false);
 
@@ -60,7 +81,15 @@ const HeroPage: React.FC = () => {
           };
         });
 
-        setPhotos(cloudinaryPhotos);
+        setAllPhotos(cloudinaryPhotos);
+       
+        let filteredPhotos = cloudinaryPhotos.filter(photo => FilteredSet.has(photo.folder));
+        setProductionPhotos(filteredPhotos);
+
+        //initialize photos to display as all photos
+        setVisiblePhotos(cloudinaryPhotos);
+
+        setHeightData(allPhotosHeightData);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
@@ -68,12 +97,21 @@ const HeroPage: React.FC = () => {
 
     fetchPhotos();
   }, []);
-  
-  
 
-  const leftColumn : Photo[] = photos.filter((_, index) => index % 2 === 0);
-  const rightColumn : Photo[] = photos.filter((_, index) => index % 2 !== 0);
-  const columns : Photo[][] = [leftColumn, rightColumn]
+  const toggleFilter = () =>
+  {
+    if(isFiltered){
+      setVisiblePhotos(allPhotos)
+      setHeightData(allPhotosHeightData)
+    }
+    else{
+      setVisiblePhotos(productionPhotos)
+      setHeightData(filteredPhotosHeightData)
+    }
+
+    setIsFiltered(!isFiltered);
+  }
+  
 
   return (
     <div id="outermost_div"
@@ -97,12 +135,13 @@ const HeroPage: React.FC = () => {
         maxWidth: '100vw',
       }}>
 
-        <HeroGallery photos={photos} /> 
+        <HeroGallery photos={visiblePhotos} heightData={heightData} /> 
 
       </div>
 
       {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
       <FooterButtonMenu/>
+      <button className={styles.invisibleFilterToggleButton} onClick={toggleFilter} disabled={showModal}/>
     </div>
     
   );
