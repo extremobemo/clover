@@ -2,6 +2,8 @@ import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import styles from "../../styles/Modal.module.css"
 import ScrollIndicator from "../common/ScrollIndicator";
+import Coffee from "./Coffee";
+import InfoContact from "./InfoContact"
 
 interface ModalProps {
     onClose : Function,
@@ -21,19 +23,21 @@ const Modal : React.FC<ModalProps> = ({ onClose, public_id, state }) => {
                         {
                             (state === 'gallery') && (
                                 <HorizontalGallery public_id={public_id}  />
-                        )}
+                            )}
                         {
                             (state === 'about') && (
-                                <div>About
-                                <ScrollIndicator/>
-                                </div>
+                               <>
+                                    <InfoContact/>
+                                    <ScrollIndicator/>
+                               </> 
                             )
                         }
                            {
                             (state === 'coffee') && (
-                                <div>Coffee
+                                <>
+                                    <Coffee/>
                                     <ScrollIndicator/>
-                                </div>
+                                </>
                             )
                         }
                         

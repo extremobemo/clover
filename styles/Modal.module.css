@@ -25,8 +25,11 @@
 }
 
 .modalBody {
+  display: flex;
+  justify-content: center;
   height: auto;
   /* Allows child to scroll */
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
