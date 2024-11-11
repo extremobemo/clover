@@ -1,5 +1,5 @@
 // ModalContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 // Define the shape of the context
@@ -54,6 +54,20 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         setPublicId(null);
         router.push("/", undefined, { shallow: true });
     };
+
+    useEffect(() => {
+        const handlePopState = () => {
+            if (showModal) {
+                closeModal();
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [showModal]);
 
     return (
         <ModalContext.Provider value={{ showModal, modalState, publicId, openModal, closeModal }}>
