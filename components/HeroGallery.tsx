@@ -8,70 +8,48 @@ import ScrollIndicator from './common/ScrollIndicator';
 import { useModal } from '../context/ModalContext';
 
 interface HeroGalleryProps {
-  photos: Photo[]
+  photos: Photo[],
+  heightData: number[][][],
 }
 
 const preventRightClick = (e: React.MouseEvent) => {
   e.preventDefault();
 }
 
-const heightData = [
-  [
-    // Group 1
-    [3, 10, 3, 11, 12],   // Column 1
-    [10, 11, 6, 1, 0],    // Column 2
-  ],
-  [
-     // Group 2
-    [13, 12, 10, 2, 7],   // Column 1
-    [10, 3, 12, 12, 8],     // Column 2
-  ],
-  [
-     // Group 3
-    [6, 11, 16, 12, 13],    // Column 1
-    [0, 10, 8, 9, 10],    // Column 2
-  ],
-  [
-     // Group 4
-    [8, 4, 0, 6, 0],    // Column 1
-    [11, 8, 8, 6, 12],     // Column 2
-  ],
-  [
-     // Group 5
-    [9, 7, 8, 2, 1],     // Column 1
-    [3, 5, 9, 10, 6],    // Column 2
-  ],
-  [
-     // Group 6
-    [6, 8, 9, 5, 9],     // Column 1
-    [7, 6, 9, 10, 6],    // Column 2
-  ],
-];
-
-const HeroGallery: React.FC<HeroGalleryProps> = ({ photos }) => {
+const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData }) => {
   
  const { openModal } = useModal();
 
  const getColumnGroups = () => {
-    const groups = [];
-    for (let i = 0; i < photos.length; i += 11) {
-
-      const leftColumn: Photo[] = photos.slice(i, i + 5);
-      const rightColumn: Photo[] = photos.slice(i + 5, i + 10) 
-      const widePhoto = photos[i + 10] ? [photos[i + 10]] : [];
-
-      groups.push({ leftColumn, rightColumn, widePhoto });
+  const groups = [];
+  for (let i = 0; i < photos.length; i += 11) { 
+    //for indices i thru i+10 alternate placing photos in first and second column.
+    //for index i+11, make the wide boy 
+    const leftColumn : Photo[] = [];
+    const rightColumn: Photo[] = [];
+    for(let j = i; j < i + 10; j++) {
+      if(j%2 == 0)
+        photos[j] ? leftColumn.push(photos[j]) : console.log("be careful spongebob");
+      else
+        photos[j] ? rightColumn.push(photos[j]) : console.log("spongebob be careful")
     }
-    return groups;
-  };
+
+    const widePhoto = photos[i + 10] ? [photos[i + 10]] : [];
+
+    groups.push({ leftColumn, rightColumn, widePhoto });
+  }
+  return groups;
+};
   
 
   return (
     <div className={styles.heroGalleryContainer}>
       <ScrollIndicator/>
       {getColumnGroups().map((group, groupIndex) => (
-        <React.Fragment key={`group-${groupIndex}`}>
-          <div style={{ display: 'flex', gap: '8px',  height: window.innerWidth <= 768 ? '225vw' : '150vw', }}>
+        <React.Fragment key={`group-${groupIndex}`}> 
+       {/* VARYING HEIGHT OF COLUMNS BASED ON NUMBER OF PHOTOS IN THE COLUMN
+        if there are 5 photos, height stays the same, */}
+          <div style={{ display: 'flex', gap: '8px',  height: window.innerWidth <= 768 ? `${group.leftColumn.length * 45}vw` : `${group.leftColumn.length * 30}vw`, }}> 
 
           {/* Left Column */}
           <div className={styles.leftColumnContainer}>
