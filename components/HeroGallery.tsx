@@ -19,7 +19,9 @@ const preventRightClick = (e: React.MouseEvent) => {
 const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData }) => {
   
  const { openModal } = useModal();
-
+ const [windowWidth, setWindowWidth] = useState<number | null>(null);
+ 
+ 
  const getColumnGroups = () => {
   const groups = [];
   for (let i = 0; i < photos.length; i += 11) { 
@@ -40,6 +42,22 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData }) => {
   }
   return groups;
 };
+
+useEffect(() => {
+  // Set window width only on the client
+  setWindowWidth(window.innerWidth);
+
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  window.addEventListener('resize', handleResize);
+
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+const calculateHeight = (columnLength: number) => {
+  // Fallback height if windowWidth is not yet available
+  const width = windowWidth || 1024; // Default width for SSR
+  return width <= 768 ? `${columnLength * 45}vw` : `${columnLength * 30}vw`;
+};
   
 
   return (
@@ -49,7 +67,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData }) => {
         <React.Fragment key={`group-${groupIndex}`}> 
        {/* VARYING HEIGHT OF COLUMNS BASED ON NUMBER OF PHOTOS IN THE COLUMN
         if there are 5 photos, height stays the same, */}
-          <div style={{ display: 'flex', gap: '8px',  height: window.innerWidth <= 768 ? `${group.leftColumn.length * 45}vw` : `${group.leftColumn.length * 30}vw`, }}> 
+          <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length), }}> 
 
           {/* Left Column */}
           <div className={styles.leftColumnContainer}>

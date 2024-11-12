@@ -85,9 +85,28 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     container: carouselRef
   });
 
+  const [loading, setLoading] = useState(true);
+  const loadedPhotos = useRef(0);
+
+  useEffect(() => {
+    // Reset loading state if photos array changes
+    loadedPhotos.current = 0;
+    setLoading(true);
+  }, [photos]);
+
+  const handlePhotoLoad = () => {
+    loadedPhotos.current += 1;
+    if (loadedPhotos.current >= photos.length) {
+      setLoading(false); // Only switch to false when all photos are loaded
+    }
+  };
+
   return  (
     <>
-    <ScrollIndicator scrollXProgress={scrollXProgress}/>
+     {/* Only show scroll indicator once loading is complete */}
+     {!loading && <ScrollIndicator scrollXProgress={scrollXProgress} />}
+
+     {loading && <ScrollIndicator/>}
       <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container" ref={carouselRef}>
         <PageTransition>
           {/* adding this motion.section seemed to help with glitchy loading */}
@@ -114,7 +133,7 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
                     // whileHover={{ scale: 1.1 }}  
                     style={{placeContent: 'center'}}>
                     <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} style={{ maxHeight: window.innerWidth <= 768 ? '45dvh' : '60dvh'}} onContextMenu={preventRightClick} />
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: window.innerWidth <= 768 ? '45dvh' : '60dvh'}} onContextMenu={preventRightClick} onLoad={handlePhotoLoad}/>
                     </div>
                   </motion.div>
                 ))}
