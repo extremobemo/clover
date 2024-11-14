@@ -13,36 +13,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       api_secret: process.env.CLOUDINARY_API_SECRET,
     });
 
-    // Read folder names from the folders.txt file asynchronously
-    const filePath = path.resolve('./public/content.txt');
+    // Read folder data from the content.json file asynchronously
+    const filePath = path.resolve('./public/content.json');
     const fileContent = await fs.readFile(filePath, 'utf-8');
-    const folderNames = fileContent.split(/\r?\n/).filter(Boolean);
+    const folderData = JSON.parse(fileContent); // Parse the JSON data
 
-    // Construct image URLs based on naming convention
-    const results: ProjectImageData[] = folderNames.map((folderName) => {
-      // Extract the subject name and image number
-      const match = folderName.match(/^([^-]+)-(\d+)$/);
-
-      if (!match || match.length !== 3) {
-        throw new Error(`Invalid folder name format: ${folderName}`);
-      }
-
-      const subjectName = match[1];
-      const imageName = `${subjectName}-0`;
-
-      console.log(folderName)
+    // Construct image URLs based on the JSON data
+    const results: ProjectImageData[] = folderData.map(({ public_id, folder }: { public_id: string; folder: string }) => {
       return {
-        public_id: imageName,
-        url: cloudinary.url(imageName, {
+        public_id,
+        url: cloudinary.url(public_id, {
           format: 'jpg',
           quality: '1',
         }),
-        folder: folderName,
+        folder,
       };
     });
+
     // Send the results array as JSON response
     res.status(200).json(results);
-
   } catch (error) {
     console.error('Error fetching images from Cloudinary folders:', error);
     res.status(500).json({ error: 'Failed to fetch images' });

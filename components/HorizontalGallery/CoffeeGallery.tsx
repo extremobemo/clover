@@ -94,13 +94,13 @@ const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
     container: carouselRef
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const loadedPhotos = useRef(0);
 
   useEffect(() => {
     // Reset loading state if photos array changes
     loadedPhotos.current = 0;
-    setLoading(true);
+    // setLoading(true);
   }, [photos]);
 
   const handlePhotoLoad = () => {
@@ -113,7 +113,7 @@ const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
   return (
     <>
       {/* Only show scroll indicator once loading is complete */}
-      {!loading && <ScrollIndicator scrollXProgress={scrollXProgress} />}
+      {true && <ScrollIndicator scrollXProgress={scrollXProgress} />}
 
       {loading && <ScrollIndicator />}
       <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh' }} id="scroll-container" ref={carouselRef}>
