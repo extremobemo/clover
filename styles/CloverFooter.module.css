@@ -1,0 +1,74 @@
+/* .footer {
+    position: fixed;
+    bottom: 0px;
+    right: 35px;
+    z-index: 10;
+    color: black;
+    height: 30px;
+    font-family: "KAMAR", sans-serif;
+  }
+ß
+
+  .menuitem {
+    display: flex;
+    cursor: default;
+    scroll-margin: 0.5rem;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    outline: none !important;
+  } */
+
+  .footerContainer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 100;
+  }
+
+  .indexFooterContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 100;
+  }
+  
+  .footerButton {
+    background: transparent;
+    border: none;
+    color: black;
+    font-family: "KAMAR", sans-serif;
+    cursor: pointer;
+    width: 120px;
+    height: 30px;
+    padding: 10px;
+    outline: none;
+  }
+  
+  .menu {
+    background: white;
+  
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 0px;
+    margin-right: 14px; /*keep menu item text in line with scroll indicator text :) */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .menuItem {
+    margin: 5px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-family: 'KAMAR', sans-serif;
+  }
+  
+  

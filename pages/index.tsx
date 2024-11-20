@@ -10,10 +10,11 @@ import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
 import { useModal } from '../context/ModalContext';
-import FooterButtonMenu from '../components/common/FooterButtonMenu'
+import CloverFooterButton from '../components/common/CloverFooterButton'
 import styles from '../styles/Index.module.css'
 import cloverProductions from './cloverProductions.json'
 import heightData from '../data/heightData'
+import IndexFooterButton from '../components/common/IndexFooterButton';
 
 interface Photo {
   image: CloudinaryImage;
@@ -140,7 +141,8 @@ const HeroPage: React.FC = () => {
       </div>
 
       {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
-      <FooterButtonMenu/>
+      <CloverFooterButton/>
+      <IndexFooterButton/>
       <button className={styles.invisibleFilterToggleButton} onClick={toggleFilter} disabled={showModal}/>
     </div>
     

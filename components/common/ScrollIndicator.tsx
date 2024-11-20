@@ -62,7 +62,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ scrollXProgress }) =>
       <div className={styles.bottomRightBase}>CLOVER</div>
 
       {/* Invisible overlay button */}
-      <button className={styles.invisibleButton} onClick={() => {closeModal()}} />
+      {/* <button className={styles.invisibleButton} onClick={() => {closeModal()}} /> */}
     </div>
   );
 };

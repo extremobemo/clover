@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
-import styles from '../../styles/Footer.module.css';
+import styles from '../../styles/CloverFooter.module.css';
 import { useModal } from '../../context/ModalContext';
 
 const menuVariants: Variants = {
@@ -8,11 +8,13 @@ const menuVariants: Variants = {
       opacity: 0,
       scale: 0.8,
       y: 20, // Start slightly below
+      x: 10,
     },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0, // Move to its final position
+      x: 0,
       transition: {
         type: "spring",
         stiffness: 300,
@@ -23,12 +25,13 @@ const menuVariants: Variants = {
       opacity: 0,
       scale: 0.8,
       y: 20,
+      x:10,
       transition: { duration: 0.2 },
     },
   };
 
 
-export default function Footer() {
+export default function CloverFooterButton() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const { openModal } = useModal();
   const menuRef = useRef<HTMLDivElement>(null); // Typed ref for the menu container
