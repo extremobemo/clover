@@ -8,7 +8,7 @@ const menuVariants: Variants = {
       opacity: 0,
       scale: 0.8,
       y: 20, // Start slightly below
-      x: -10,
+      x: -5,
     },
     visible: {
       opacity: 1,
@@ -25,7 +25,7 @@ const menuVariants: Variants = {
       opacity: 0,
       scale: 0.8,
       y: 20,
-      x: -10,
+      x: -5,
       transition: { duration: 0.2 },
     },
   };
