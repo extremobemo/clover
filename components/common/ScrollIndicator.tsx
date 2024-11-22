@@ -1,7 +1,7 @@
 import { motion, MotionValue } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/ScrollIndicator.module.css";
-import { useModal } from "../../context/ModalContext";
+import { useAppContext } from "../../context/AppContext";
 
 interface ScrollIndicatorProps {
   scrollXProgress?: MotionValue<number>;
@@ -9,7 +9,7 @@ interface ScrollIndicatorProps {
 
 const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ scrollXProgress }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { closeModal } = useModal();
+  const { closeModal } = useAppContext();
 
   const [clipPaths, setClipPaths] = useState({
     base: "inset(0 100% 0 0)",
@@ -53,16 +53,16 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ scrollXProgress }) =>
 
       <motion.div className={styles.textOverlayContainer} style={{ clipPath: clipPaths.base }}>
         <div className={styles.bottomLeftOverlay} style={{ clipPath: clipPaths.bar }}>INDEX</div>
-        <div className={styles.bottomCenterOverlay} style={{ clipPath: clipPaths.bar }}>PRODUCTION</div>
+        {/* <div className={styles.bottomCenterOverlay} style={{ clipPath: clipPaths.bar }}>PRODUCTION</div> */}
         <div className={styles.bottomRightOverlay} style={{ clipPath: clipPaths.bar }}>CLOVER</div>
       </motion.div>
 
       <div className={styles.bottomLeftBase}>INDEX</div>
-      <div className={styles.bottomCenterBase}>PRODUCTION</div>
+      {/* <div className={styles.bottomCenterBase}>PRODUCTION</div> */}
       <div className={styles.bottomRightBase}>CLOVER</div>
 
       {/* Invisible overlay button */}
-      <button className={styles.invisibleButton} onClick={() => {closeModal()}} />
+      {/* <button className={styles.invisibleButton} onClick={() => {closeModal()}} /> */}
     </div>
   );
 };

@@ -20,10 +20,11 @@
     outline: none !important;
   } */
 
+
   .footerContainer {
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -45,13 +46,13 @@
   .menu {
     background: white;
   
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    margin-right: 14px; /*keep menu item text in line with scroll indicator text :) */
+    padding-left: 25px;
+    padding-right: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px; /*keep menu item text in line with scroll indicator text :) */
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
   }
   
   .menuItem {
@@ -59,6 +60,14 @@
     cursor: pointer;
     transition: color 0.3s;
     font-family: 'KAMAR', sans-serif;
+  }
+
+  .selectedMenuItem {
+    margin: 5px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-family: 'KAMAR', sans-serif;
+    color: #39993A;
   }
   
   
