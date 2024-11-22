@@ -61,5 +61,13 @@
     transition: color 0.3s;
     font-family: 'KAMAR', sans-serif;
   }
+
+  .selectedMenuItem {
+    margin: 5px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-family: 'KAMAR', sans-serif;
+    color: #39993A;
+  }
   
   

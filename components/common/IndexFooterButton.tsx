@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import styles from '../../styles/IndexFooter.module.css';
-import { useModal } from '../../context/ModalContext';
+import { useAppContext } from '../../context/AppContext';
 
 const menuVariants: Variants = {
     hidden: {
@@ -33,7 +33,7 @@ const menuVariants: Variants = {
 
 export default function IndexFooterButton() {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { openModal } = useModal();
+  const { handleIndexMenuClick, heroFilterState } = useAppContext();
   const menuRef = useRef<HTMLDivElement>(null); // Typed ref for the menu container
 
   
@@ -71,10 +71,23 @@ export default function IndexFooterButton() {
           variants={menuVariants}>
             <div className={styles.menu}>
                 <motion.div 
-                    whileHover={{ scale: 1.1, x: 3 }}
-                 className={styles.menuItem}>PRODUCTION</motion.div>
-                <motion.div  whileHover={{ scale: 1.1, x: 3 }} className={styles.menuItem}>VIDEO</motion.div>
-                <motion.div whileHover={{ scale: 1.1, x: 3 }} className={styles.menuItem}>ALL</motion.div>
+                  whileHover={{ scale: 1.1, x: 3 }}
+                  className={heroFilterState === 'CLOVERPRODUCTION' ? styles.selectedMenuItem : styles.menuItem} 
+                  onClick={() => handleIndexMenuClick('CLOVERPRODUCTION')}>
+                    PRODUCTION
+                </motion.div>
+                <motion.div  
+                  whileHover={{ scale: 1.1, x: 3 }} 
+                  className={heroFilterState === 'VIDEO' ? styles.selectedMenuItem : styles.menuItem} 
+                  onClick={() => handleIndexMenuClick('VIDEO')}>
+                    VIDEO
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.1, x: 3 }} 
+                  className={heroFilterState === 'ALL' ? styles.selectedMenuItem : styles.menuItem} 
+                  onClick={() => handleIndexMenuClick('ALL')}>
+                    ALL
+                </motion.div>
             </div>
         </motion.div>
             

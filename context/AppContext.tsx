@@ -1,29 +1,32 @@
-// ModalContext.tsx
+// AppContext.tsx
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 // Define the shape of the context
-interface ModalContextType {
+interface AppContextType {
     showModal: boolean;
     modalState: string;
+    handleIndexMenuClick: (state : string) => void;
+    heroFilterState: string;
     publicId: string | null;
     openModal: (state: string, id: string | null) => void;
     closeModal: () => void;
 }
 
 // Create the context with a default value of undefined
-const ModalContext = createContext<ModalContextType | undefined>(undefined);
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // Props for the provider
-interface ModalProviderProps {
+interface ProviderProps {
     children: ReactNode;
 }
 
 // ModalProvider component
-export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+export const ContextProvider: React.FC<ProviderProps> = ({ children }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState<boolean>(false);
     const [modalState, setModalState] = useState<string>('');
+    const [heroFilterState, setHeroFilterState] = useState<string>('ALL');
     const [publicId, setPublicId] = useState<string | null>(null);
 
     // Function to open a modal with specific state and public_id
@@ -55,6 +58,11 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         router.push("/", undefined, { shallow: true });
     };
 
+    const handleIndexMenuClick = ( state : string) => {
+        setHeroFilterState(state);
+        closeModal();
+    }
+
     useEffect(() => {
         const handlePopState = () => {
             if (showModal) {
@@ -70,17 +78,17 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     }, [showModal]);
 
     return (
-        <ModalContext.Provider value={{ showModal, modalState, publicId, openModal, closeModal }}>
+        <AppContext.Provider value={{ showModal, modalState, handleIndexMenuClick, heroFilterState, publicId, openModal, closeModal }}>
             {children}
-        </ModalContext.Provider>
+        </AppContext.Provider>
     );
 };
 
 // Custom hook for easier access to modal context
-export const useModal = (): ModalContextType => {
-    const context = useContext(ModalContext);
+export const useAppContext = (): AppContextType => {
+    const context = useContext(AppContext);
     if (!context) {
-        throw new Error("useModal must be used within a ModalProvider");
+        throw new Error("useAppContext must be used within a AppContextProvider");
     }
     return context;
 };

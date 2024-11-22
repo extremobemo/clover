@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import styles from '../../styles/CloverFooter.module.css';
-import { useModal } from '../../context/ModalContext';
+import { useAppContext } from '../../context/AppContext';
 
 const menuVariants: Variants = {
     hidden: {
@@ -33,7 +33,7 @@ const menuVariants: Variants = {
 
 export default function CloverFooterButton() {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { openModal } = useModal();
+  const { openModal } = useAppContext();
   const menuRef = useRef<HTMLDivElement>(null); // Typed ref for the menu container
 
   
