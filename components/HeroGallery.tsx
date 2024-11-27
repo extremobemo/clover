@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AdvancedImage } from '@cloudinary/react';
+import { AdvancedImage, lazyload } from '@cloudinary/react';
 import { Photo } from '../types/types';
 
 import styles from '../styles/HeroGallery.module.css'
@@ -92,6 +92,7 @@ const calculateHeight = (columnLength: number) => {
                   <AdvancedImage
                     onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
                     cldImg={photo.image} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
+                    plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}
                   />
                 </div>
               ))}
@@ -104,6 +105,7 @@ const calculateHeight = (columnLength: number) => {
               {group.widePhoto.map(photo => (
                 <div style={{ width: '100%', padding: '4px' }}>
                   <AdvancedImage 
+                     plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}
                     onClick={() => openModal('gallery', photo.folder)}
                     onContextMenu={preventRightClick} cldImg={photo.image} 
                     className={styles.widePhoto}
