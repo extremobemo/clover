@@ -99,13 +99,15 @@ const CloverEffect = () => {
     const finalY = movementVector.y * movementFactor * 10;
 
     const maxScroll = windowHeight; 
-    const opacity = Math.max(.75 - (scrollY / maxScroll) || .75, .75);
+    const opacity = Math.max(1 - (scrollY / maxScroll) || 0, 0);
+    const scale = 1 + (scrollY * 0.001); // Adjust the factor for desired growth speed
     const rotation = offsets[index].rotation; 
 
     return {
-      transform: `translate(${initialX + finalX}px, ${initialY + finalY}px) rotate(${rotation}deg)`,
+      transform: `translate(${initialX}px, ${initialY}px) rotate(${rotation}deg) scale(${scale})`,
       opacity: opacity,
-      transition: 'transform, opacity',
+      scale: scale,
+      transition: 'transform, opacity, scale',
     };
   };
   
@@ -114,7 +116,7 @@ const CloverEffect = () => {
     <div style={{ height: 'auto' }}> 
       <div style={{
         position: 'fixed',
-        top: '45%',
+        top: '46%',
         left: '50%',
         transform: 'translate(-50%, 0%)',
         display: 'flex',
