@@ -1,13 +1,13 @@
 import { AppProps } from 'next/app'
 import '../styles/globals.css';
-import { ModalProvider } from '../context/ModalContext';
+import { ContextProvider } from '../context/AppContext';
 
 export default function App({ Component, pageProps }: AppProps) {
 	
 
 	return (
-		<ModalProvider>
+		<ContextProvider>
       		<Component {...pageProps} />
-    	</ModalProvider>
+    	</ContextProvider>
 	)
 }
