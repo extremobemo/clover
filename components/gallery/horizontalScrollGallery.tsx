@@ -8,6 +8,7 @@ import PageTransition from "../common/PageTransition";
 import { useScroll } from "framer-motion";
 import { useRef } from "react";
 import { AdvancedImage } from '@cloudinary/react';
+import { CldVideoPlayer, CloudinaryVideoPlayer } from "next-cloudinary";
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
@@ -31,6 +32,8 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     expectedPhotos = parseInt((public_id as string).split('-')[1], 10);
   }
 
+  const [videos, setVideos] = useState<string[]>([]);
+   
   const [photos, setPhotos] = useState<CloudinaryImage[]>([]);
   const [description, setDescription]=  useState(
     {
@@ -45,14 +48,15 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
     if (typeof public_id !== 'string') return;
     const folder = public_id;
     console.log(`folder name: ${folder}`)
-    fetch(`/api/projectphotos?folder=${folder}`)
+    fetch(`/api/projectAssets?folder=${folder}`)
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        const cloudinaryImages = data.images.map((photo: any) =>
-          cld.image(photo.public_id).format('auto').quality('auto').resize(auto().height(750))
+        const cloudinaryImages = data.imagePublicIds.map((public_id: any) =>
+          cld.image(public_id).format('auto').quality('auto').resize(auto().height(750))
         );
         setPhotos(cloudinaryImages);
+        setVideos(data.videoPublicIds);
         setDescription(data.description);
       })
       .catch(error => console.error('Error:', error));
@@ -124,6 +128,20 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
           }}>
             <div className={styles.anotherContainer}>
               <div className={styles.thumbnails}>
+              { videos.map((video, index) => 
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
+                    animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
+                    transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
+                    // whileHover={{ scale: 1.1 }}  
+                    style={{placeContent: 'center'}}>
+                    <div className={styles.video} style={{minWidth: '650px'}} key={index}>
+                      <CldVideoPlayer src={video} width="700"/>
+                    </div>
+                  </motion.div>
+                )}
+
                 {photos.map((photo, index) => (
                   <motion.div 
                     key={index}
