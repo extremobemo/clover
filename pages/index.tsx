@@ -9,18 +9,19 @@ import Modal from '../components/gallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery';
 import { HeroImageData } from '../types/types';
-import { useModal } from '../context/ModalContext';
-import FooterButtonMenu from '../components/common/FooterButtonMenu'
+import { useAppContext } from '../context/AppContext';
+import CloverFooterButton from '../components/common/CloverFooterButton'
 import styles from '../styles/Index.module.css'
 import cloverProductions from './cloverProductions.json'
 import heightData from '../data/heightData'
+import IndexFooterButton from '../components/common/IndexFooterButton';
 
 interface Photo {
   image: CloudinaryImage;
   folder: string;
 }
 
-const FilteredSet  = new Set(
+const CloverProductionsSet  = new Set(
 [
   ...cloverProductions  
 ]);
@@ -32,7 +33,7 @@ const filteredPhotosHeightData = heightData.filteredPhotosHeightData;
 
 const HeroPage: React.FC = () => {
   const router = useRouter();
-  const { showModal, modalState, publicId, openModal, closeModal } = useModal();
+  const { showModal, modalState, publicId, openModal, closeModal, heroFilterState } = useAppContext();
 
   const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
   const [productionPhotos, setProductionPhotos] = useState<Photo[]>([]);
@@ -83,8 +84,12 @@ const HeroPage: React.FC = () => {
 
         setAllPhotos(cloudinaryPhotos);
        
-        let filteredPhotos = cloudinaryPhotos.filter(photo => FilteredSet.has(photo.folder));
-        setProductionPhotos(filteredPhotos);
+        let productionPhotos = cloudinaryPhotos.filter(photo => CloverProductionsSet.has(photo.folder));
+        setProductionPhotos(productionPhotos);
+
+        //TODO: once we have videos, will need to create a set of folder names kinda like we've got for CloverProductions 
+        // and use that to create the video set
+
 
         //initialize photos to display as all photos
         setVisiblePhotos(cloudinaryPhotos);
@@ -97,6 +102,32 @@ const HeroPage: React.FC = () => {
 
     fetchPhotos();
   }, []);
+
+  //might need a use effect for the heroFilterState
+  useEffect(() => {
+    console.log(`heroFilterState updated: ${heroFilterState}`)
+
+    switch (heroFilterState) {
+      case 'ALL':
+        setVisiblePhotos(allPhotos);
+        setHeightData(allPhotosHeightData);
+        break;
+      case 'CLOVERPRODUCTION':
+        setVisiblePhotos(productionPhotos);
+        setHeightData(filteredPhotosHeightData);
+        break;
+      case 'VIDEO': //TODO: once we've created new set, utilize that.
+        setVisiblePhotos(productionPhotos);
+        setHeightData(filteredPhotosHeightData);
+        break;
+      default:
+        setVisiblePhotos(allPhotos);
+        setHeightData(allPhotosHeightData);
+        break;
+    }
+    
+  }, [heroFilterState])
+
 
   const toggleFilter = () =>
   {
@@ -140,8 +171,9 @@ const HeroPage: React.FC = () => {
       </div>
 
       {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
-      <FooterButtonMenu/>
-      <button className={styles.invisibleFilterToggleButton} onClick={toggleFilter} disabled={showModal}/>
+      <CloverFooterButton/>
+      <IndexFooterButton/>
+      {/* <button className={styles.invisibleFilterToggleButton} onClick={toggleFilter} disabled={showModal}/> */}
     </div>
     
   );

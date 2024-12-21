@@ -5,7 +5,7 @@ import { Photo } from '../types/types';
 
 import styles from '../styles/HeroGallery.module.css'
 import ScrollIndicator from './common/ScrollIndicator';
-import { useModal } from '../context/ModalContext';
+import { useAppContext } from '../context/AppContext';
 
 interface HeroGalleryProps {
   photos: Photo[],
@@ -18,7 +18,7 @@ const preventRightClick = (e: React.MouseEvent) => {
 
 const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData }) => {
   
- const { openModal } = useModal();
+ const { openModal } = useAppContext();
  const [windowWidth, setWindowWidth] = useState<number | null>(null);
  
  
