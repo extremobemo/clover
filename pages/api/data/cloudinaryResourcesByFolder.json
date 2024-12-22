@@ -1,10 +1,42 @@
 {
-  "EHNikeAirMax-1": {
+  "AmineNewBalance-19": {
     "photos": [
-      "EHNikeAirMax-0"
+      "AmineNewBalance-9",
+      "AmineNewBalance-8",
+      "AmineNewBalance-7",
+      "AmineNewBalance-6",
+      "AmineNewBalance-18",
+      "AmineNewBalance-17",
+      "AmineNewBalance-16",
+      "AmineNewBalance-15",
+      "AmineNewBalance-14",
+      "AmineNewBalance-13",
+      "AmineNewBalance-12",
+      "AmineNewBalance-11",
+      "AmineNewBalance-10",
+      "AmineNewBalance-4",
+      "AmineNewBalance-0",
+      "AmineNewBalance-2",
+      "AmineNewBalance-5",
+      "AmineNewBalance-3",
+      "AmineNewBalance-1"
     ],
     "videos": [
-      "EHNikeAirMax-1/ojtdijxsq64x8fm54e9s"
+      {
+        "publicId": "4by3test",
+        "width": 674,
+        "height": 506
+      }
+    ]
+  },
+  "EHNikeAirMax-1": {
+    "photos": ["EHNikeAirMax-0"],
+    "videos": [
+      {
+        "publicId": "EHNikeAirMax-1/ojtdijxsq64x8fm54e9s",
+        "width": 1920,
+        "height": 1080
+      }
     ]
   },
   "CloverCoffee": {
@@ -1463,30 +1495,6 @@
       "BeatsCampaign_-10",
       "BeatsCampaign_-1",
       "BeatsCampaign_-0"
-    ],
-    "videos": []
-  },
-  "AmineNewBalance-19": {
-    "photos": [
-      "AmineNewBalance-9",
-      "AmineNewBalance-8",
-      "AmineNewBalance-7",
-      "AmineNewBalance-6",
-      "AmineNewBalance-18",
-      "AmineNewBalance-17",
-      "AmineNewBalance-16",
-      "AmineNewBalance-15",
-      "AmineNewBalance-14",
-      "AmineNewBalance-13",
-      "AmineNewBalance-12",
-      "AmineNewBalance-11",
-      "AmineNewBalance-10",
-      "AmineNewBalance-4",
-      "AmineNewBalance-0",
-      "AmineNewBalance-2",
-      "AmineNewBalance-5",
-      "AmineNewBalance-3",
-      "AmineNewBalance-1"
     ],
     "videos": []
   },
