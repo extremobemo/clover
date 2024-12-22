@@ -48,4 +48,22 @@
     display: "flex";
     flex-direction: column;
   }
+
+}
+@media (max-width: 768px) {
+  .thumbnailscontainer {
+    padding-left: 30px; /* Reduced padding for mobile screens */
+  }
+}
+
+.coffeeTextContainer {
+  width: 300px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
+}
+
+@media (min-width: 500px) {
+  .coffeeTextContainer{
+    width: 550px;
+  }
 }

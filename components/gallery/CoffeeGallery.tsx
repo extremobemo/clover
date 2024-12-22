@@ -12,7 +12,7 @@ import { CldVideoPlayer, CloudinaryVideoPlayer } from "next-cloudinary";
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 
 const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
@@ -21,10 +21,10 @@ import {
 } from "framer-motion"
 
 interface CoffeeGalleryProps {
-  public_id : string | null
+  public_id: string | null
 }
 
-const CoffeeGallery : React.FC<CoffeeGalleryProps> = ( {public_id}) => {
+const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
 
   var expectedPhotos = 3;
   if (public_id) {
@@ -33,16 +33,16 @@ const CoffeeGallery : React.FC<CoffeeGalleryProps> = ( {public_id}) => {
   }
 
   const [videos, setVideos] = useState<string[]>([]);
-   
+
   const [photos, setPhotos] = useState<CloudinaryImage[]>([]);
-  const [description, setDescription]=  useState(
+  const [description, setDescription] = useState(
     {
-    title: '',
-    subject: '',
-    functions: '',
-    year: '',
+      title: '',
+      subject: '',
+      functions: '',
+      year: '',
     }
-    );
+  );
 
   useEffect(() => {
     if (typeof public_id !== 'string') return;
@@ -63,24 +63,24 @@ const CoffeeGallery : React.FC<CoffeeGalleryProps> = ( {public_id}) => {
   }, [public_id, cld]);
 
   useEffect(() => {
-    const handleScroll = (e : WheelEvent) => {
-        // Check if scrolling vertically
-        if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
-            const scrollContainer = document.getElementById("scroll-container");
-            if (scrollContainer) {
-                scrollContainer.scrollLeft += e.deltaY;
-            }
+    const handleScroll = (e: WheelEvent) => {
+      // Check if scrolling vertically
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+        const scrollContainer = document.getElementById("scroll-container");
+        if (scrollContainer) {
+          scrollContainer.scrollLeft += e.deltaY;
         }
+      }
     };
 
     window.addEventListener("wheel", handleScroll);
 
     return () => {
-        window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("wheel", handleScroll);
     };
-}, []);
+  }, []);
 
-  const preventRightClick = (e : React.MouseEvent) => {
+  const preventRightClick = (e: React.MouseEvent) => {
     e.preventDefault();
   }
 
@@ -105,99 +105,99 @@ const CoffeeGallery : React.FC<CoffeeGalleryProps> = ( {public_id}) => {
     }
   };
 
-  return  (
+  return (
     <>
-     {/* Only show scroll indicator once loading is complete */}
-     {!loading && <ScrollIndicator scrollXProgress={scrollXProgress} />}
+      {/* Only show scroll indicator once loading is complete */}
+      {!loading && <ScrollIndicator scrollXProgress={scrollXProgress} />}
 
-     {loading && <ScrollIndicator/>}
-      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh'}} id="scroll-container" ref={carouselRef}>
+      {loading && <ScrollIndicator />}
+      <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh' }} id="scroll-container" ref={carouselRef}>
         <PageTransition>
           {/* adding this motion.section seemed to help with glitchy loading */}
           <motion.section className={styles.thumbnailscontainer}
-          style={{paddingLeft: "30px"}}
-          initial="hidden"  
-          animate="show"
-          variants={{
-            hidden: {opacity : 0},
-            show: {
-              opacity: 1,
-              transition: {
-                staggerChildren: .3  //delay between children loading
+
+            initial="hidden"
+            animate="show"
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: .3  //delay between children loading
+                }
               }
-            }
-          }}>
+            }}>
             <div className={styles.anotherContainer}>
               <div className={styles.thumbnails}>
-              <div style={{
-            maxWidth: "300px"
-        }}>
-          <div style={{ 
-  display: 'flex', 
-  flexDirection: 'column', 
-  alignItems: 'center', 
-  justifyContent: 'center', 
-  height: '100vh', 
-  textAlign: 'center' 
-}}>
-            <p style={{ textAlign: 'center' }}>
-              CLOVER COFFEE IS A CREATIVE PROJECT LAUNCHED IN 2022 BY CLOVER. INSPIRED BY THEIR LOVE FOR NEW YORK CITY'S 
-              VIBRANT COFFEE CULTURE, CIAN AND HIS TEAM SET OUT TO CREATE A SPACE WHERE PEOPLE COULD GATHER, 
-              PLAY CHESS, AND ENJOY GREAT COFFEE IN A LAID-BACK, COMMUNITY-DRIVEN ENVIRONMENT. 
-              <br/> <br/>
-              TAKING AN OLD HALAL FOOD CART AND TRANSFORMING IT INTO A UNIQUE MOBILE COFFEE EXPERIENCE, CLOVER COFFEE 
-              IS A TESTAMENT TO THE AGENCY’S DIY ETHOS. DESIGNED AND BUILT IN-HOUSE, THIS SELF-FUNDED, 
-              SELF-SUSTAINED PROJECT HAS EVOLVED INTO AN ENTERPRISE IN ITS OWN RIGHT. 
-              <br/> <br/>
-              WHETHER IT'S PARKED ON A BUSTLING NEW YORK CITY STREET CORNER OR POPPING UP 
-              AT LOCAL EVENTS, CLOVER COFFEE BRINGS A FRESH, CREATIVE TWIST TO THE CITY’S 
-              COFFEE SCENE—ONE CUP AT A TIME.
-            </p>
-           </div>
-        </div>
-              { videos.map((video, index) => 
-                  <motion.div 
+
+                <div className={styles.coffeeTextContainer}
+                 style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '100vh',
+                  textAlign: 'center',
+                }}>
+                  <p style={{ textAlign: 'center' }}>
+                    <span style={{fontSize: "1.1em"}}>CLOVER COFFEE</span> <br/> is a creative project launched in 2022 by clover. inspired by their love for new york city's
+                    vibrant coffee culture, Cian and his team set out to create a space where people could gather,
+                    play chess, and enjoy great coffee in a laid-back, community-driven environment.
+                    <br /> <br />
+                    Taking an old halal food cart and transforming it into a unique mobile coffee experience, Clover Coffee
+                    is a testament to the agency’s DIY ethos. designed and built in-house, this self-funded,
+                    self-sustained project has evolved into an enterprise in its own right.
+                    <br /> <br />
+                    Whether it's parked on a bustling New York City street corner or popping up
+                    at local events, Clover Coffee brings a fresh, creative twist to the city’s
+                    coffee scene<br/>
+                    <span style={{fontSize: "1.1em"}}>— ONE CUP AT A TIME —</span>
+                  </p>
+                </div>
+
+                {videos.map((video, index) =>
+                  <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
                     animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
                     transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
                     // whileHover={{ scale: 1.1 }}  
-                    style={{placeContent: 'center'}}>
-                    <div className={styles.video} style={{minWidth: '650px'}} key={index}>
-                      <CldVideoPlayer src={video} width="700"/>
+                    style={{ placeContent: 'center' }}>
+                    <div className={styles.video} style={{ minWidth: '650px' }} key={index}>
+                      <CldVideoPlayer src={video} width="700" />
                     </div>
                   </motion.div>
                 )}
 
                 {photos.map((photo, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
                     animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
                     transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
                     // whileHover={{ scale: 1.1 }}  
-                    style={{placeContent: 'center'}}>
+                    style={{ placeContent: 'center' }}>
                     <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} style={{ maxHeight: window.innerWidth <= 768 ? '45dvh' : '60dvh'}} onContextMenu={preventRightClick} onLoad={handlePhotoLoad}/>
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: window.innerWidth <= 768 ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} />
                     </div>
                   </motion.div>
                 ))}
                 {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
-                  <div className={styles.thumbnailPlaceholder} key={`placeholder-${index}`}/>
+                  <div className={styles.thumbnailPlaceholder} key={`placeholder-${index}`} />
                 ))}
               </div>
-                <motion.div
-                  initial={{opacity:0}}
-                  animate={{opacity:1}}
-                  transition={{duration: 1}}>
-                  <GalleryDescription 
-                    title={description.title} 
-                    subject={description.subject} 
-                    functions={description.functions} 
-                    year={description.year}/>
-                </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}>
+                <GalleryDescription
+                  title={description.title}
+                  subject={description.subject}
+                  functions={description.functions}
+                  year={description.year} />
+              </motion.div>
             </div>
-           
+
           </motion.section>
 
         </PageTransition>
