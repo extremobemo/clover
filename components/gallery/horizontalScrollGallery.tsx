@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react"
 import styles from "../../styles/HorizontalGallery.module.css"
 import GalleryDescription from './GalleryDescription'
@@ -13,6 +14,7 @@ import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { useEffect} from 'react';
+import { scale } from "@cloudinary/url-gen/actions/resize";
 
 const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
@@ -83,7 +85,7 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
   const preventRightClick = (e : React.MouseEvent) => {
     e.preventDefault();
   }
-
+  const isMobile = window.innerWidth <= 768;
   const carouselRef = useRef(null); // Create a ref for the scrollable element
   const { scrollXProgress } = useScroll({
     container: carouselRef
@@ -91,6 +93,8 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
 
   const [loading, setLoading] = useState(true);
   const loadedPhotos = useRef(0);
+
+  const [aspectRatio, setAspectRatio] = useState(16 / 9); // Default to 16:9
 
   useEffect(() => {
     // Reset loading state if photos array changes
@@ -129,17 +133,37 @@ const HorizontalGallery : React.FC<HorizontalGalleryProps> = ( {public_id}) => {
             <div className={styles.anotherContainer}>
               <div className={styles.thumbnails}>
               { videos.map((video, index) => 
-                  <motion.div 
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
-                    animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
-                    transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
-                    // whileHover={{ scale: 1.1 }}  
-                    style={{placeContent: 'center'}}>
-                    <div className={styles.video} style={{minWidth: '650px'}} key={index}>
-                      <CldVideoPlayer src={video} width="700"/>
-                    </div>
-                  </motion.div>
+        <motion.div
+        key={index}
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        style={{
+          
+          placeContent: 'center',
+           overflow: 'hidden'
+        }}
+      >
+        <div  style={{
+    width: isMobile ? `calc(45dvh * ${16/9})` : `calc(60dvh * ${16/9})`,  // Maintain aspect ratio based on the width
+    maxWidth: 'calc(750px * 16/9)', // Constrain width based on max height (750px)
+    maxHeight: '750px',             // Ensure height does not exceed 750px
+    height: 'auto'                  // Allow height to adjust automatically
+  }}   className={styles.thumbnail} key={index}>
+          <CldVideoPlayer
+            src={video}
+            // onMetadataLoad={({ player }) => {
+            //   // Get the width and height of the video to calculate the aspect ratio
+            //   const videoElement = player?.videoElement;
+            //   if (videoElement) {
+            //     const ratio = videoElement.videoWidth / videoElement.videoHeight;
+            //     setAspectRatio(ratio); // Set the aspect ratio in state
+            //     console.log(ratio)
+            //     console.log(`[CldVideoPlayer] Video Width: ${videoElement.videoWidth}, Video Height: ${videoElement.videoHeight}`);
+            //   }}}
+          />
+        </div>
+      </motion.div>
                 )}
 
                 {photos.map((photo, index) => (
