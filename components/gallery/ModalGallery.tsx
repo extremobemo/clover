@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import HorizontalGallery from "./horizontalScrollGallery";
 import styles from "../../styles/Modal.module.css"
 import ScrollIndicator from "../common/ScrollIndicator";
-import Coffee from "./Coffee";
+import CoffeeGallery from "./CoffeeGallery";
 import InfoContact from "./InfoContact"
 
 interface ModalProps {
@@ -35,8 +35,7 @@ const Modal : React.FC<ModalProps> = ({ onClose, public_id, state }) => {
                            {
                             (state === 'coffee') && (
                                 <>
-                                    <Coffee/>
-                                    <ScrollIndicator/>
+                                    <CoffeeGallery public_id={'CloverCoffee'}/>
                                 </>
                             )
                         }
