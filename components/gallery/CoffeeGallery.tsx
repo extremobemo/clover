@@ -160,7 +160,22 @@ const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
                   </p>
                 </div>
 
-                {videos.map((video, index) =>
+            
+
+                {photos.map((photo, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
+                    animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
+                    transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
+                    // whileHover={{ scale: 1.1 }}  
+                    style={{ placeContent: 'center' }}>
+                    <div className={styles.thumbnail} key={index}>
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} />
+                    </div>
+                  </motion.div>
+                ))}
+                   {videos.map((video, index) =>
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -10 }}
@@ -191,20 +206,6 @@ const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
                     </div>
                   </motion.div>
                 )}
-
-                {photos.map((photo, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }} // start invisible, slide in from left
-                    animate={{ opacity: 1, x: 0 }} // final opacity to 1, slide into final x position
-                    transition={{ duration: 0.5, delay: index * 0.1 }} // duration: speed of opacity 0 -> 100, delay: speed of sequential image rendering
-                    // whileHover={{ scale: 1.1 }}  
-                    style={{ placeContent: 'center' }}>
-                    <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} />
-                    </div>
-                  </motion.div>
-                ))}
                 {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
                   <div className={styles.thumbnailPlaceholder} key={`placeholder-${index}`} />
                 ))}
