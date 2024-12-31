@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
 import { ProjectImageData } from '../../types/types';
 import galleryDescriptions from './data/galleryDescriptions.json';
-import cloudinaryResources from './data/cloudinaryResourcesByFolder.json' assert { type: 'json'};
+import cloudinaryResources from './data/cloudinaryResourcesByFolder.json' assert { type: 'json' };
 
 interface Resource {
   asset_folder: string;
@@ -11,9 +11,15 @@ interface Resource {
   [key: string]: any; // Allow additional properties that we might not care about
 }
 
+interface Video {
+  publicId: string;
+  width: number;
+  height: number;
+}
+
 interface Folder {
-  photos: string[];
-  videos: string[];
+  photos: string[]; // Array of photo public IDs
+  videos: Video[]; // Array of video objects with publicId, width, and height
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -26,35 +32,34 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     // Extract the folder name from the query parameters
-    const   { folder } = req.query;
+    const { folder } = req.query;
 
     if (!folder || typeof folder !== 'string') {
       return res.status(400).json({ error: `Invalid folder name ${folder}` });
     }
 
-     // Find the gallery description that matches the folder ID
     const description = galleryDescriptions.find((desc) => desc.id === folder);
 
     const typedCloudinaryResources: Record<string, Folder> = cloudinaryResources;
-    
+
     const assetFolder = typedCloudinaryResources[folder];
 
+    if (!assetFolder) {
+      return res.status(404).json({ error: 'Folder not found in resources.' });
+    }
 
-
-
-    //TODO handle bullshit 
-    let photoPublicIds : string[] = assetFolder.photos;
-    let videoPublicIds : string[] = assetFolder.videos;
-    let count = 0
+    let photoPublicIds: string[] = assetFolder.photos;
+    let videoData: Video[] = assetFolder.videos;
+    let count = 0;
 
     photoPublicIds.sort();
-    videoPublicIds.sort();
+    videoData.sort((a, b) => a.publicId.localeCompare(b.publicId));
 
     const responseData = {
-      imagePublicIds: photoPublicIds,
-      videoPublicIds: videoPublicIds,
+      imagePublicIds: photoPublicIds,  // Only the public IDs of the photos
+      videos: videoData,  // Array of video data objects with publicId, width, and height
       assetCount: count,
-      description: description || { title: '', subject: '', functions: '', year: '' }
+      description: description || { title: '', subject: '', functions: '', year: '' },
     };
 
     // Send the results array as JSON response
