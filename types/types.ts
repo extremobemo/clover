@@ -15,3 +15,9 @@ export interface Photo {
     image: CloudinaryImage;
     folder: string;
   }
+
+export interface Video {
+    publicId: string;
+    width: number;
+    height: number;
+  }

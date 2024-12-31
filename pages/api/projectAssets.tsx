@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
-import { ProjectImageData } from '../../types/types';
+import { Video } from '../../types/types';
 import galleryDescriptions from './data/galleryDescriptions.json';
 import cloudinaryResources from './data/cloudinaryResourcesByFolder.json' assert { type: 'json' };
 
@@ -9,12 +9,6 @@ interface Resource {
   public_id: string;
   resource_type: 'image' | 'video'; // Define possible resource types
   [key: string]: any; // Allow additional properties that we might not care about
-}
-
-interface Video {
-  publicId: string;
-  width: number;
-  height: number;
 }
 
 interface Folder {
