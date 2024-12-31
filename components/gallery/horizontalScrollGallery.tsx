@@ -5,6 +5,8 @@ import GalleryDescription from './GalleryDescription'
 import ScrollIndicator from "../common/ScrollIndicator";
 import PageTransition from "../common/PageTransition";
 
+import { Video } from "../../types/types";
+
 import { useScroll } from "framer-motion";
 import { useRef } from "react";
 import { AdvancedImage } from '@cloudinary/react';
@@ -21,12 +23,6 @@ import {
 
 interface HorizontalGalleryProps {
   public_id: string | null
-}
-
-interface Video {
-  publicId: string;
-  width: number;
-  height: number;
 }
 
 const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
