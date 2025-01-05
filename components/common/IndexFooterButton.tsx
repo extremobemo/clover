@@ -4,31 +4,31 @@ import styles from '../../styles/IndexFooter.module.css';
 import { useAppContext } from '../../context/AppContext';
 
 const menuVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      y: 20, // Start slightly below
-      x: -5,
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    y: 20, // Start slightly below
+    x: -5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0, // Move to its final position
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 25,
     },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0, // Move to its final position
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      y: 20,
-      x: -5,
-      transition: { duration: 0.2 },
-    },
-  };
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.8,
+    y: 20,
+    x: -5,
+    transition: { duration: 0.2 },
+  },
+};
 
 
 export default function IndexFooterButton() {
@@ -36,7 +36,7 @@ export default function IndexFooterButton() {
   const { handleIndexMenuClick, heroFilterState } = useAppContext();
   const menuRef = useRef<HTMLDivElement>(null); // Typed ref for the menu container
 
-  
+
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
@@ -59,43 +59,53 @@ export default function IndexFooterButton() {
     };
   }, [isMenuOpen]);
 
+
+  const handleMenuClickHelper = (option: string) => {
+    handleIndexMenuClick(option);
+
+    // Delay for a split second before hiding the menu
+    setTimeout(() => {
+      setMenuOpen(false);
+    }, 250);
+  }
+
   return (
     <div className={styles.footerContainer} ref={menuRef}>
-        <AnimatePresence>
+      <AnimatePresence>
         {isMenuOpen && (
-        <motion.div
-        className={styles.menu}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={menuVariants}>
+          <motion.div
+            className={styles.menu}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={menuVariants}>
             <div className={styles.menu}>
-                <motion.div 
-                  whileHover={{ scale: 1.1, x: 3 }}
-                  className={heroFilterState === 'CLOVERPRODUCTION' ? styles.selectedMenuItem : styles.menuItem} 
-                  onClick={() => handleIndexMenuClick('CLOVERPRODUCTION')}>
-                    PRODUCTION
-                </motion.div>
-                <motion.div  
-                  whileHover={{ scale: 1.1, x: 3 }} 
-                  className={heroFilterState === 'VIDEO' ? styles.selectedMenuItem : styles.menuItem} 
-                  onClick={() => handleIndexMenuClick('VIDEO')}>
-                    VIDEO
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.1, x: 3 }} 
-                  className={heroFilterState === 'ALL' ? styles.selectedMenuItem : styles.menuItem} 
-                  onClick={() => handleIndexMenuClick('ALL')}>
-                    ALL
-                </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, x: 3 }}
+                className={heroFilterState === 'CLOVERPRODUCTION' ? styles.selectedMenuItem : styles.menuItem}
+                onClick={() => handleMenuClickHelper('CLOVERPRODUCTION')}>
+                PRODUCTION
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, x: 3 }}
+                className={heroFilterState === 'VIDEO' ? styles.selectedMenuItem : styles.menuItem}
+                onClick={() => handleMenuClickHelper('VIDEO')}>
+                VIDEO
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, x: 3 }}
+                className={heroFilterState === 'ALL' ? styles.selectedMenuItem : styles.menuItem}
+                onClick={() => handleMenuClickHelper('ALL')}>
+                ALL
+              </motion.div>
             </div>
-        </motion.div>
-            
-      )}
-        </AnimatePresence>
-      
+          </motion.div>
+
+        )}
+      </AnimatePresence>
+
       <button className={styles.footerButton} onClick={toggleMenu}>
-      {/* keep this bih empty */}
+        {/* keep this bih empty */}
       </button>
     </div>
   );
