@@ -15,44 +15,45 @@
   align-items: center;
   padding: 0px 20dvw;
   overflow-y: hidden;
-
-  .thumbnails {
-    position: relative;
-    display: flex;
-  }
-
-  .thumbnail {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-  }
-
-  .video {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-  }
-
-  .thumbnailPlaceholder {
-    height: 80dvh;
-    width: 80dvw;
-  }
-
-  .galleryPhoto {
-    max-height: 60vh;
-  }
-
-  .anotherContainer {
-    display: "flex";
-    flex-direction: column;
-  }
-
 }
+
+.thumbnails {
+  position: relative;
+  display: flex;
+}
+
+.thumbnail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.thumbnailPlaceholder {
+  height: 80dvh;
+  width: 80dvw;
+}
+
+.galleryPhoto {
+  max-height: 60vh;
+}
+
+.anotherContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 768px) {
   .thumbnailscontainer {
-    padding-left: 30px; /* Reduced padding for mobile screens */
+    padding-left: 30px;
+    /* Reduced padding for mobile screens */
   }
 }
 
@@ -63,14 +64,14 @@
 }
 
 @media (min-width: 600px) {
-  .coffeeTextContainer{
+  .coffeeTextContainer {
     width: 550px;
     font-size: 1.2em;
   }
 }
 
 @media (min-width: 725px) {
-  .coffeeTextContainer{
+  .coffeeTextContainer {
     width: 550px;
     font-size: 1.3em;
   }
