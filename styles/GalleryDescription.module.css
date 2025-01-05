@@ -5,25 +5,28 @@
   max-width: 400px;
   margin-left: 20px;
   font-family: "Times New Roman", Times, serif;
+}
 
-  .title {
-    margin-top: 0;
-    margin-bottom: 0px;
-    font-size: 1.4em;
-    font-weight: normal;
-  }
-  .subject {
-    margin: 0;
-    font-size: 1em;
-    font-weight: normal;
-  }
-  .functions {
-    margin: 0;
-    font-size: 0.9em;
-    font-style: italic;
-  }
-  .year {
-    margin: 0;
-    font-size: 0.9em;
-  }
+.title {
+  margin-top: 0;
+  margin-bottom: 0px;
+  font-size: 1.4em;
+  font-weight: normal;
+}
+
+.subject {
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.functions {
+  margin: 0;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.year {
+  margin: 0;
+  font-size: 0.9em;
 }
