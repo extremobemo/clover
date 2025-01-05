@@ -21,53 +21,65 @@
   } */
 
 
-  .footerContainer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
-  }
-  
-  .footerButton {
-    background: transparent;
-    border: none;
-    color: black;
-    font-family: "KAMAR", sans-serif;
-    cursor: pointer;
-    width: 120px;
-    height: 30px;
-    padding: 10px;
-    outline: none;
-  }
-  
-  .menu {
-    background: white;
-  
-    padding-left: 25px;
-    padding-right: 5px;
-    margin-bottom: 0px;
-    margin-right: 10px; /*keep menu item text in line with scroll indicator text :) */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .menuItem {
-    margin: 5px 0;
-    cursor: pointer;
-    transition: color 0.3s;
-    font-family: 'KAMAR', sans-serif;
-  }
+.footerContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 100;
+}
 
-  .selectedMenuItem {
-    margin: 5px 0;
-    cursor: pointer;
-    transition: color 0.3s;
-    font-family: 'KAMAR', sans-serif;
-    color: #39993A;
+.footerButton {
+  background: transparent;
+  border: none;
+  color: black;
+  font-family: "KAMAR", sans-serif;
+  cursor: pointer;
+  width: 120px;
+  height: 30px;
+  padding: 10px;
+  outline: none;
+}
+
+.menu {
+  background: white;
+
+  padding-left: 25px;
+  padding-right: 5px;
+  margin-bottom: 0px;
+  /*keep menu item text in line with scroll indicator text :) */
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.menuItem {
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 1em;
+  transition: color 0.3s;
+  font-family: 'KAMAR', sans-serif;
+}
+
+.selectedMenuItem {
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 1em;
+  transition: color 0.3s;
+  font-family: 'KAMAR', sans-serif;
+  color: #39993A;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    padding-left: 10px;
   }
-  
-  
+  .menuItem,
+  .selectedMenuItem
+  {
+    font-size: .9em;
+  }
+}
