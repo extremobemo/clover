@@ -20,55 +20,65 @@
     outline: none !important;
   } */
 
-  .footerContainer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
+.footerContainer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 100;
+}
+
+.indexFooterContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 100;
+}
+
+.footerButton {
+  background: transparent;
+  border: none;
+  color: black;
+  font-family: "KAMAR", sans-serif;
+  cursor: pointer;
+  width: 120px;
+  height: 30px;
+  padding: 10px;
+  outline: none;
+}
+
+.menu {
+  background: white;
+
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  /*keep menu item text in line with scroll indicator text :) */
+  display: flex;
+  margin-right: 14px; 
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.menuItem {
+  margin: 5px 0;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-family: 'KAMAR', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    padding-right: 10px;
+    margin-right: 0;
   }
 
-  .indexFooterContainer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
-  }
-  
-  .footerButton {
-    background: transparent;
-    border: none;
-    color: black;
-    font-family: "KAMAR", sans-serif;
-    cursor: pointer;
-    width: 120px;
-    height: 30px;
-    padding: 10px;
-    outline: none;
-  }
-  
-  .menu {
-    background: white;
-  
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 0px;
-    margin-right: 14px; /*keep menu item text in line with scroll indicator text :) */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
   .menuItem {
-    margin: 5px 0;
-    cursor: pointer;
-    transition: color 0.3s;
-    font-family: 'KAMAR', sans-serif;
+    font-size: .9em;
   }
-  
-  
+}
