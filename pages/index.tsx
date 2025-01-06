@@ -5,9 +5,9 @@ import PageTransition from "../components/common/PageTransition";
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
-import Modal from '../components/gallery/ModalGallery';
+import Modal from '../components/HorizontalGallery/ModalGallery';
 import Curtain from '../components/Curtain';
-import HeroGallery from '../components/HeroGallery';
+import HeroGallery from '../components/HeroGallery/HeroGallery';
 import { HeroImageData } from '../types/types';
 import { useAppContext } from '../context/AppContext';
 import CloverFooterButton from '../components/common/CloverFooterButton'

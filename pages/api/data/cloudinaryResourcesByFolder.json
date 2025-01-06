@@ -1,4 +1,128 @@
 {
+  "HAGD_CLOVER": {
+    "photos": [
+      "HAGD_CLOVER_MISSING",
+      "HAVE_A_GREAT_DAY_0"
+    ],
+    "videos": [
+      {
+        "publicId": "HAVE_A_GREAT_DAT",
+        "width": 768,
+        "height": 960
+      }
+    ]
+  },
+  "EE_MIDNIGHT_MADNESS": {
+    "photos": [
+      "MIDNIGHT_MADNESS_MISSING"
+    ],
+    "videos": [
+      {
+        "publicId": "ee_midnight_madness_1440p",
+        "width": 1920,
+        "height": 1440
+      }
+    ]
+  },
+  "JALEN_GREEN_ADIDAS": {
+    "photos": [
+      "JALEN_GREEN_MISSING"
+    ],
+    "videos": [
+      {
+        "publicId": "JALEN_GREEN_2",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "publicId": "JALEN_GREEN_1",
+        "width": 1080,
+        "height": 1920
+      }
+    ]
+  },
+  "ADIDASXMIDWEST_KIDS": {
+    "photos": [
+      "ADIDAS_MISSING"
+    ],
+    "videos": [
+      {
+        "publicId": "ADIDASXMIDWEST_KIDS",
+        "width": 772,
+        "height": 540
+      }
+    ]
+  },
+  "CLIPSE_FLOGGNAW": {
+    "photos": [
+      "FLOGGNAW_MISSING",
+      "CLIPSE__FLOGGNAW6",
+      "CLIPSE__FLOGGNAW5",
+      "CLIPSE__FLOGGNAW4",
+      "CLIPSE__FLOGGNAW3",
+      "CLIPSE__FLOGGNAW2"
+    ],
+    "videos": [
+      {
+        "publicId": "CLIPSE__FLOGGNAW7",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "publicId": "CLIPSE__FLOGGNAW1",
+        "width": 2560,
+        "height": 1440
+      }
+    ]
+  },
+  "JordanAir_-5": {
+    "photos": [
+      "JordanAir_-4",
+      "JordanAir_-3",
+      "JordanAir_-2",
+      "JordanAir_-1",
+      "JordanAir_-0"
+    ],
+    "videos": [
+      {
+        "publicId": "TATUM_BTD",
+        "width": 3840,
+        "height": 2160
+      }
+    ]
+  },
+  "NO_CAPS": {
+    "photos": [
+      "NO_CAPS_GIF"
+    ],
+    "videos": [
+      {
+        "publicId": "NO_CAPS-3",
+        "width": 1440,
+        "height": 1080
+      }
+    ]
+  },
+  "CloverCoffee": {
+    "photos": [
+      "6",
+      "3",
+      "1",
+      "7",
+      "5",
+      "2",
+      "4",
+      "8",
+      "2_2"
+    ],
+    "videos": [
+      {
+        "publicId": "clover-coffee",
+        "width": 768,
+        "height": 960
+      }
+    ]
+  },
   "AmineNewBalance-19": {
     "photos": [
       "AmineNewBalance-9",
@@ -30,7 +154,10 @@
     ]
   },
   "EHNikeAirMax-1": {
-    "photos": ["EHNikeAirMax-0"],
+    "photos": [
+      "FEELTHEUNREAL",
+      "EHNikeAirMax-0"
+    ],
     "videos": [
       {
         "publicId": "EHNikeAirMax-1/ojtdijxsq64x8fm54e9s",
@@ -39,25 +166,457 @@
       }
     ]
   },
-  "CloverCoffee": {
+  "ASSPIZZA_FOR_SUPREME": {
     "photos": [
-      "6",
-      "3",
-      "1",
-      "7",
-      "5",
-      "2",
-      "4",
-      "8",
-      "2_2"
+      "ASSPIZZA_FOR_SUPREME_3",
+      "ASSPIZZA_FOR_SUPREME_7",
+      "ASSPIZZA_FOR_SUPREME_4",
+      "ASSPIZZA_FOR_SUPREME_5",
+      "ASSPIZZA_FOR_SUPREME_6",
+      "ASSPIZZA_FOR_SUPREME_1",
+      "ASSPIZZA_FOR_SUPREME_2",
+      "ASSPIZZA_FOR_SUPREME_8"
     ],
-    "videos": [
-      {
-        "publicId": "clover-coffee",
-        "width": 768,
-        "height": 960
-      }
-    ]
+    "videos": []
+  },
+  "ASSPIZZA_2017": {
+    "photos": [
+      "ASSPIZZA_2017"
+    ],
+    "videos": []
+  },
+  "SOUNDCLOUD": {
+    "photos": [
+      "SOUNDCLOUD11",
+      "SOUNDCLOUD12",
+      "SOUNDCLOUD10",
+      "SOUNDCLOUD5",
+      "SOUNDCLOUD7",
+      "SOUNDCLOUD8",
+      "SOUNDCLOUD3",
+      "SOUNDCLOUD4",
+      "SOUNDCLOUD2",
+      "SOUNDCLOUD1"
+    ],
+    "videos": []
+  },
+  "MARC_JACOBS": {
+    "photos": [
+      "MARC_JACOBS5",
+      "MARC_JACOBS4",
+      "MARC_JACOBS6",
+      "MARC_JACOBS2",
+      "MARC_JACOBS9",
+      "MARC_JACOBS1",
+      "MARC_JACOBS3",
+      "MARC_JACOBS11",
+      "MARC_JACOBS10",
+      "MARC_JACOBS7",
+      "MARC_JACOBS8",
+      "MARC_JACOBS12"
+    ],
+    "videos": []
+  },
+  "GQ_REQ": {
+    "photos": [
+      "GQ_REQ"
+    ],
+    "videos": []
+  },
+  "DONDA": {
+    "photos": [
+      "DONDA_1",
+      "DONDA_3",
+      "DONDA_4"
+    ],
+    "videos": []
+  },
+  "CLOVER": {
+    "photos": [
+      "CLOVER"
+    ],
+    "videos": []
+  },
+  "F1LTHY_FOR_CLOVER": {
+    "photos": [
+      "FL1THY_FOR_CLOVER_9",
+      "FL1THY_FOR_CLOVER_8",
+      "FL1THY_FOR_CLOVER_7",
+      "FL1THY_FOR_CLOVER_6",
+      "FL1THY_FOR_CLOVER_0",
+      "FL1THY_FOR_CLOVER_5",
+      "FL1THY_FOR_CLOVER_4",
+      "FL1THY_FOR_CLOVER_3",
+      "FL1THY_FOR_CLOVER_2",
+      "FL1THY_FOR_CLOVER_1"
+    ],
+    "videos": []
+  },
+  "AUDI": {
+    "photos": [
+      "ASAA"
+    ],
+    "videos": []
+  },
+  "ELDER_STATESMAN": {
+    "photos": [
+      "ELDER_STATESMAN_MISSING",
+      "ELDER_STATESMAN_0",
+      "ELDER_STATESMAN_05",
+      "ELDER_STATESMAN_08",
+      "ELDER_STATESMAN_010",
+      "ELDER_STATESMAN_06",
+      "ELDER_STATESMAN_09",
+      "ELDER_STATESMAN_04",
+      "ELDER_STATESMAN_07",
+      "ELDER_STATESMAN_03",
+      "ELDER_STATESMAN_01"
+    ],
+    "videos": []
+  },
+  "LIFE_OF_P_IERRE": {
+    "photos": [
+      "LIFE_OF_P_IERRE_5_4",
+      "LIFE_OF_P_IERRE_5_3",
+      "LIFE_OF_P_IERRE_5_7",
+      "LIFE_OF_P_IERRE_5_0",
+      "LIFE_OF_P_IERRE_5_8",
+      "LIFE_OF_P_IERRE_5_2",
+      "LIFE_OF_P_IERRE_5_5",
+      "LIFE_OF_P_IERRE_5_6",
+      "LIFE_OF_P_IERRE_5_1"
+    ],
+    "videos": []
+  },
+  "DON_TOLIVER_APPLE_MUSIC": {
+    "photos": [
+      "DON_TOLIVER_APPLE_MUSIC_11",
+      "DON_TOLIVER_APPLE_MUSIC_0",
+      "DON_TOLIVER_APPLE_MUSIC_8",
+      "DON_TOLIVER_APPLE_MUSIC_3",
+      "DON_TOLIVER_APPLE_MUSIC_5",
+      "DON_TOLIVER_APPLE_MUSIC_10",
+      "DON_TOLIVER_APPLE_MUSIC_6",
+      "DON_TOLIVER_APPLE_MUSIC_4",
+      "DON_TOLIVER_APPLE_MUSIC_1",
+      "DON_TOLIVER_APPLE_MUSIC_12",
+      "DON_TOLIVER_APPLE_MUSIC_7",
+      "DON_TOLIVER_APPLE_MUSIC_2",
+      "DON_TOLIVER_APPLE_MUSIC_9"
+    ],
+    "videos": []
+  },
+  "LIL_TRACY_FOR_OFFICE": {
+    "photos": [
+      "LIL_TRACY_FOR_OFFICE2",
+      "LIL_TRACY_FOR_OFFICE4",
+      "LIL_TRACY_FOR_OFFICE3",
+      "LIL_TRACY_FOR_OFFICE1",
+      "LIL_TRACY_FOR_OFFICE5"
+    ],
+    "videos": []
+  },
+  "TURN_THAT_SHIT_OFF": {
+    "photos": [
+      "TURN_THAT_SHIT_OFF_1",
+      "TURN_THAT_SHIT_OFF_2"
+    ],
+    "videos": []
+  },
+  "TONY_EFFE": {
+    "photos": [
+      "TONY_EFFE_04",
+      "TONY_EFFE_03",
+      "TONY_EFFE_1",
+      "TONY_EFFE_0"
+    ],
+    "videos": []
+  },
+  "EE_GATORADE": {
+    "photos": [
+      "EE_GATORADE"
+    ],
+    "videos": []
+  },
+  "ASAP_ROCKY_FOR_PRADA": {
+    "photos": [
+      "ASAP_ROCKY_FOR_PRADA_7",
+      "ASAP_ROCKY_FOR_PRADA_5",
+      "ASAP_ROCKY_FOR_PRADA_4",
+      "ASAP_ROCKY_FOR_PRADA_3",
+      "ASAP_ROCKY_FOR_PRADA_2",
+      "ASAP_ROCKY_FOR_PRADA_1",
+      "ASAP_ROCKY_FOR_PRADA_0"
+    ],
+    "videos": []
+  },
+  "HELMUT_LANG": {
+    "photos": [
+      "HELMUT_LANG11",
+      "HELMUT_LANG10",
+      "HELMUT_LANG9",
+      "HELMUT_LANG8",
+      "HELMUT_LANG7",
+      "HELMUT_LANG6",
+      "HELMUT_LANG5",
+      "HELMUT_LANG4",
+      "HELMUT_LANG3",
+      "HELMUT_LANG2",
+      "HELMUT_LANG1"
+    ],
+    "videos": []
+  },
+  "AMINE_NEW_BALANCE_YB": {
+    "photos": [
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_14",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_13",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_12",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_11",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_10",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_9",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_8",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_7",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_6",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_5",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_4",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_3",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_2",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_1",
+      "AMINE_NEW_BALANCE_YELLOW_BROWN_0"
+    ],
+    "videos": []
+  },
+  "ASSPIZZA_BACKYARD": {
+    "photos": [
+      "ASSPIZZA_BACKYARD6",
+      "ASSPIZZA_BACKYARD5",
+      "ASSPIZZA_BACKYARD4",
+      "ASSPIZZA_BACKYARD3",
+      "ASSPIZZA_BACKYARD2",
+      "ASSPIZZA_BACKYARD1"
+    ],
+    "videos": []
+  },
+  "VC_FOR_VC": {
+    "photos": [
+      "VC_FOR_VC_10",
+      "VC_FOR_VC_9",
+      "VC_FOR_VC_8",
+      "VC_FOR_VC_7",
+      "VC_FOR_VC_6",
+      "VC_FOR_VC_5",
+      "VC_FOR_VC_4",
+      "VC_FOR_VC_3",
+      "VC_FOR_VC_2",
+      "VC_FOR_VC_0"
+    ],
+    "videos": []
+  },
+  "NIKE_DUNK": {
+    "photos": [
+      "NIKE_DUNK_17",
+      "NIKE_DUNK_16",
+      "NIKE_DUNK_15",
+      "NIKE_DUNK_14",
+      "NIKE_DUNK_13",
+      "NIKE_DUNK_12",
+      "NIKE_DUNK_11",
+      "NIKE_DUNK_10",
+      "NIKE_DUNK_9",
+      "NIKE_DUNK_8",
+      "NIKE_DUNK_7",
+      "NIKE_DUNK_6",
+      "NIKE_DUNK_5",
+      "NIKE_DUNK_4",
+      "NIKE_DUNK_3",
+      "NIKE_DUNK_2",
+      "NIKE_DUNK_0"
+    ],
+    "videos": []
+  },
+  "FATHER_STEVE_ICECREAM": {
+    "photos": [
+      "FATHER_STEVE_ICECREAM_1",
+      "FATHER_STEVE_ICECREAM_2"
+    ],
+    "videos": []
+  },
+  "AMINE_NEW_BALANCE": {
+    "photos": [
+      "AMINE_NEW_BALANCE_7",
+      "AMINE_NEW_BALANCE_6",
+      "AMINE_NEW_BALANCE_5",
+      "AMINE_NEW_BALANCE_4",
+      "AMINE_NEW_BALANCE_3",
+      "AMINE_NEW_BALANCE_2",
+      "AMINE_NEW_BALANCE_1",
+      "AMINE_NEW_BALANCE_0",
+      "AMINE_NEW_BALANCE_22",
+      "AMINE_NEW_BALANCE_13",
+      "AMINE_NEW_BALANCE_12",
+      "AMINE_NEW_BALANCE_11",
+      "AMINE_NEW_BALANCE_10",
+      "AMINE_NEW_BALANCE_9",
+      "AMINE_NEW_BALANCE_8",
+      "AMINE_NEW_BALANCE_21",
+      "AMINE_NEW_BALANCE_20",
+      "AMINE_NEW_BALANCE_19",
+      "AMINE_NEW_BALANCE_18",
+      "AMINE_NEW_BALANCE_17",
+      "AMINE_NEW_BALANCE_16",
+      "AMINE_NEW_BALANCE_15",
+      "AMINE_NEW_BALANCE_14"
+    ],
+    "videos": []
+  },
+  "LULU_LEMON_DISNEY": {
+    "photos": [
+      "LULU_DISNEY"
+    ],
+    "videos": []
+  },
+  "MarcJacobsKids_-13": {
+    "photos": [
+      "MARCJACOBSMISSING",
+      "MarcJacobsKids_-9",
+      "MarcJacobsKids_-8",
+      "MarcJacobsKids_-7",
+      "MarcJacobsKids_-6",
+      "MarcJacobsKids_-5",
+      "MarcJacobsKids_-4",
+      "MarcJacobsKids_-3",
+      "MarcJacobsKids_-2",
+      "MarcJacobsKids_-12",
+      "MarcJacobsKids_-11",
+      "MarcJacobsKids_-10",
+      "MarcJacobsKids_-1",
+      "MarcJacobsKids_-0"
+    ],
+    "videos": []
+  },
+  "CLOVER_MODE": {
+    "photos": [
+      "CLOVER_MODE_MISSING",
+      "CLOVER_MODE_3",
+      "CLOVER_MODE_0",
+      "CLOVER_MODE_5",
+      "CLOVER_MODE_2",
+      "CLOVER_MODE_1",
+      "CLOVER_MODE_4"
+    ],
+    "videos": []
+  },
+  "DIEUSON_OCTAVE": {
+    "photos": [
+      "DIEUSON_OCTAVE_5",
+      "DIEUSON_OCTAVE_2",
+      "DIEUSON_OCTAVE_1",
+      "DIEUSON_OCTAVE_0"
+    ],
+    "videos": []
+  },
+  "GAB3": {
+    "photos": [
+      "GAB3_4",
+      "GAB3_3",
+      "GAB3_2",
+      "GAB3_1"
+    ],
+    "videos": []
+  },
+  "EBAY": {
+    "photos": [
+      "EBAY_14",
+      "EBAY_13",
+      "EBAY_12",
+      "EBAY_11",
+      "EBAY_10",
+      "EBAY_9",
+      "EBAY_8",
+      "EBAY_7",
+      "EBAY_6",
+      "EBAY_5",
+      "EBAY_4",
+      "EBAY_3",
+      "EBAY_2",
+      "EBAY_1",
+      "EBAY_0"
+    ],
+    "videos": []
+  },
+  "CosMcs": {
+    "photos": [
+      "CosMcs_4",
+      "CosMcs_5",
+      "CosMcs_3",
+      "CosMcs_1",
+      "CosMcs_0"
+    ],
+    "videos": []
+  },
+  "EMINEM": {
+    "photos": [
+      "EMINEM_11",
+      "EMINEM_9",
+      "EMINEM_7",
+      "EMINEM_6",
+      "EMINEM_4",
+      "EMINEM_5",
+      "EMINEM_3",
+      "EMINEM_2",
+      "EMINEM_1",
+      "EMINEM_0"
+    ],
+    "videos": []
+  },
+  "JAYSON_TATUM": {
+    "photos": [
+      "JAYSON_TATUM_10",
+      "JAYSON_TATUM_9",
+      "JAYSON_TATUM_8",
+      "JAYSON_TATUM_7",
+      "JAYSON_TATUM_6",
+      "JAYSON_TATUM_5",
+      "JAYSON_TATUM_3",
+      "JAYSON_TATUM_4",
+      "JAYSON_TATUM_2",
+      "JAYSON_TATUM_1",
+      "JAYSON_TATUM_0"
+    ],
+    "videos": []
+  },
+  "AIRMAX_SS22": {
+    "photos": [
+      "AIRMAX_SS22_5",
+      "AIRMAX_SS22_9",
+      "AIRMAX_SS22_7",
+      "AIRMAX_SS22_4",
+      "AIRMAX_SS22_3",
+      "AIRMAX_SS22_6",
+      "AIRMAX_SS22_0",
+      "AIRMAX_SS22_2",
+      "AIRMAX_SS22_1"
+    ],
+    "videos": []
+  },
+  "AIRMAX GO BEYOND": {
+    "photos": [
+      "AIRMAX_GO_BEYOND_10",
+      "AIRMAX_GO_BEYOND_7",
+      "AIRMAX_GO_BEYOND_11",
+      "AIRMAX_GO_BEYOND_2",
+      "AIRMAX_GO_BEYOND_9",
+      "AIRMAX_GO_BEYOND_8",
+      "AIRMAX_GO_BEYOND_0",
+      "AIRMAX_GO_BEYOND_1",
+      "AIRMAX_GO_BEYOND_5",
+      "AIRMAX_GO_BEYOND_6",
+      "AIRMAX_GO_BEYOND_3",
+      "AIRMAX_GO_BEYOND_4",
+      "Floatingroom_-0",
+      "PufferFish_-0"
+    ],
+    "videos": []
   },
   "LYFESTYLE-6": {
     "photos": [
@@ -76,12 +635,6 @@
       "Eminem-3",
       "Eminem-2",
       "Eminem-1"
-    ],
-    "videos": []
-  },
-  "Floatingroom_-1": {
-    "photos": [
-      "Floatingroom_-0"
     ],
     "videos": []
   },
@@ -169,12 +722,6 @@
     ],
     "videos": []
   },
-  "ScorpionNike_-1": {
-    "photos": [
-      "ScorpionNike_-0"
-    ],
-    "videos": []
-  },
   "NikeBirds-1": {
     "photos": [
       "NikeBirds-0"
@@ -187,7 +734,6 @@
       "JordanFrance-6",
       "JordanFrance-5",
       "JordanFrance-4",
-      "JordanFrance-3",
       "JordanFrance-2",
       "JordanFrance-1",
       "JordanFrance-0"
@@ -1011,12 +1557,6 @@
     ],
     "videos": []
   },
-  "PufferFish_-1": {
-    "photos": [
-      "PufferFish_-0"
-    ],
-    "videos": []
-  },
   "Niketoomuchair_-1": {
     "photos": [
       "Niketoomuchair_-0"
@@ -1047,38 +1587,6 @@
       "MURAKAMISlide_-2",
       "MURAKAMISlide_-1",
       "MURAKAMISlide_-0"
-    ],
-    "videos": []
-  },
-  "MCosmic-9": {
-    "photos": [
-      "MCosmic-8",
-      "MCosmic-7",
-      "MCosmic-6",
-      "MCosmic-5",
-      "MCosmic-4",
-      "MCosmic-3",
-      "MCosmic-2",
-      "MCosmic-1",
-      "MCosmic-0"
-    ],
-    "videos": []
-  },
-  "MarcJacobsKids_-13": {
-    "photos": [
-      "MarcJacobsKids_-9",
-      "MarcJacobsKids_-8",
-      "MarcJacobsKids_-7",
-      "MarcJacobsKids_-6",
-      "MarcJacobsKids_-5",
-      "MarcJacobsKids_-4",
-      "MarcJacobsKids_-3",
-      "MarcJacobsKids_-2",
-      "MarcJacobsKids_-12",
-      "MarcJacobsKids_-11",
-      "MarcJacobsKids_-10",
-      "MarcJacobsKids_-1",
-      "MarcJacobsKids_-0"
     ],
     "videos": []
   },
@@ -1195,16 +1703,6 @@
     ],
     "videos": []
   },
-  "JordanAir_-5": {
-    "photos": [
-      "JordanAir_-4",
-      "JordanAir_-3",
-      "JordanAir_-2",
-      "JordanAir_-1",
-      "JordanAir_-0"
-    ],
-    "videos": []
-  },
   "JELEELYEAAAA-9": {
     "photos": [
       "JELEELYEAAAA-8",
@@ -1216,31 +1714,6 @@
       "JELEELYEAAAA-2",
       "JELEELYEAAAA-1",
       "JELEELYEAAAA-0"
-    ],
-    "videos": []
-  },
-  "JaysonTatum-20": {
-    "photos": [
-      "JaysonTatum-9",
-      "JaysonTatum-8",
-      "JaysonTatum-7",
-      "JaysonTatum-6",
-      "JaysonTatum-5",
-      "JaysonTatum-4",
-      "JaysonTatum-3",
-      "JaysonTatum-2",
-      "JaysonTatum-19",
-      "JaysonTatum-18",
-      "JaysonTatum-17",
-      "JaysonTatum-16",
-      "JaysonTatum-15",
-      "JaysonTatum-14",
-      "JaysonTatum-13",
-      "JaysonTatum-12",
-      "JaysonTatum-11",
-      "JaysonTatum-10",
-      "JaysonTatum-1",
-      "JaysonTatum-0"
     ],
     "videos": []
   },
