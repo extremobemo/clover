@@ -4,9 +4,7 @@ import { AdvancedImage, lazyload } from '@cloudinary/react';
 import { Photo } from '../../types/types';
 
 import styles from '../../styles/HeroGallery.module.css'
-import ScrollIndicator from '../common/ScrollIndicator';
 import { useAppContext } from '../../context/AppContext';
-
 
 interface HeroGalleryProps {
   photos: Photo[],
@@ -23,6 +21,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, groupInde
  const { openModal } = useAppContext();
  const [windowWidth, setWindowWidth] = useState<number | null>(null);
  const test = groupIndex
+
  
  const getColumnGroups = () => {
   const groups = [];
@@ -68,7 +67,6 @@ const calculateHeight = (columnLength: number) => {
 
   return (
     <div className={styles.heroGalleryContainer}>
-      <ScrollIndicator/>
       {getColumnGroups().map((group, groupIndex) => (
         <React.Fragment key={`group-${groupIndex}`}> 
 

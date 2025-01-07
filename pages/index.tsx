@@ -16,6 +16,8 @@ import styles from '../styles/Index.module.css'
 import cloverProductions from './cloverProductions.json'
 import heightData from '../data/heightData'
 import IndexFooterButton from '../components/common/IndexFooterButton';
+import ScrollIndicator from '../components/common/ScrollIndicator';
+import { useScroll } from "framer-motion";
 
 interface Photo {
   image: CloudinaryImage;
@@ -43,12 +45,12 @@ const HeroPage: React.FC = () => {
   const [heightData, setHeightData] = useState<number[][][]>(allPhotosHeightData);
 
   const [isFiltered, setIsFiltered] = useState<Boolean>(false);
-
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
   const [showGreenBar, setShowGreenBar] = useState<boolean>(false);
 
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
+  const { scrollYProgress } = useScroll()
 
   //when router is ready, grab arguments from router to determine which modal to display. This helps us with browser navigation stuff. 
   useEffect(() => {
@@ -110,7 +112,6 @@ const HeroPage: React.FC = () => {
   //might need a use effect for the heroFilterState
   useEffect(() => {
     console.log(`heroFilterState updated: ${heroFilterState}`)
-
     switch (heroFilterState) {
       case 'ALL':
         setVisiblePhotos(allPhotos);
@@ -129,7 +130,7 @@ const HeroPage: React.FC = () => {
         setHeightData(allPhotosHeightData);
         break;
     }
-
+    scrollTo(0,0)
   }, [heroFilterState])
 
 
@@ -158,7 +159,7 @@ const HeroPage: React.FC = () => {
         <Curtain imageOffScreen={imageOffScreen} setImageOffScreen={setImageOffScreen} setShowGreenBar={setShowGreenBar} />
       )}
 
-      {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
+      <ScrollIndicator scrollXProgress={scrollYProgress} />
 
       <div id="content_div" style={{
         display: 'flex',
