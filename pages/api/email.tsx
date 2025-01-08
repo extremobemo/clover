@@ -8,7 +8,7 @@ const emailSchema = Joi.string().email().required();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === "POST") {
         const { data } = req.body;
-        const email: string = data;
+        const email: string = data.toLowerCase();
 
         // Validate email using Joi
         const { error } = emailSchema.validate(email);
