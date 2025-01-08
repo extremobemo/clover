@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import styles from "../styles/EmailSubmit.module.css"; 
+import styles from "../styles/emailSubmit.module.css"; 
 
 const EmailSubmit: React.FC = () => {
   const [email, setEmail] = useState<string>(""); // State for email input
