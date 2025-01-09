@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   width: 100dvw;
-  height: 30px;
+  height: 20px;
   background: black;
   transform-origin: 0%;
   z-index: 5;
@@ -17,7 +17,7 @@
   left: 0;
   right: 0;
   width: 100dvw;
-  height: 30px;
+  height: 20px;
   z-index: 4;
   background-color: white;
   overflow: hidden; /* Hide overflow to keep the text masked */
@@ -30,7 +30,7 @@
   left: 0;
   right: 0;
   width: 100dvw;
-  height: 30px;
+  height: 20px;
   z-index: 10; /* Ensure the text is above the progress bar */
   white-space: nowrap; /* Prevent text wrapping */
 }
@@ -38,7 +38,7 @@
 .bottomLeftOverlay,
 .bottomCenterOverlay,
 .bottomRightOverlay {
-  line-height: 30px;
+  line-height: 20px;
   position: absolute;
   bottom: auto;
   padding-left: 50px;
@@ -47,14 +47,14 @@
   color: #ffffff;
   overflow: hidden;
   white-space: nowrap;
-  height: 30px;
+  height: 20px;
   z-index: 8;
 }
 
 .bottomLeftBase,
 .bottomCenterBase,
 .bottomRightBase {
-  line-height: 30px;
+  line-height: 20px;
   position: fixed;
   bottom: 0;
   padding-left: 50px;
@@ -63,7 +63,7 @@
   color: #000000;
   overflow: hidden; /* Ensure text is clipped precisely */
   white-space: nowrap; /* Prevent text wrapping */
-  height: 30px;
+  height: 20px;
   z-index: 7;
 }
 
@@ -119,7 +119,7 @@
   /* Adjust width to cover "INDEX" */
   width: 100px;
    /* Adjust height to cover text area */
-  height: 30px;
+  height: 20px;
   background: none;
   border: none;
   cursor: pointer;
@@ -134,7 +134,7 @@
   bottom: 0;
   right: 0;
   width: 100px;
-  height: 30px;
+  height: 20px;
   background: none;
   border: none;
   cursor: pointer;
