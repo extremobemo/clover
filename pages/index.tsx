@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { scale } from '@cloudinary/url-gen/actions/resize';
 
 import PageTransition from "../components/common/PageTransition";
 import { AdvancedImage } from '@cloudinary/react';
@@ -21,10 +22,10 @@ interface Photo {
   folder: string;
 }
 
-const CloverProductionsSet  = new Set(
-[
-  ...cloverProductions  
-]);
+const CloverProductionsSet = new Set(
+  [
+    ...cloverProductions
+  ]);
 
 const allPhotosHeightData = heightData.allPhotosHeightData;
 
@@ -60,7 +61,7 @@ const HeroPage: React.FC = () => {
     if (typeof gallery === 'string') {
       openModal('gallery', gallery)
 
-    } else if(typeof page ==='string'){
+    } else if (typeof page === 'string') {
       openModal(page, null);
     } else {
       closeModal();
@@ -73,9 +74,12 @@ const HeroPage: React.FC = () => {
       try {
         const response = await fetch('/api/photos');
         const data = await response.json();
-  
-        const cloudinaryPhotos : Photo[] = data.map((photo: HeroImageData) => {
-          const cloudImage : CloudinaryImage = cld.image(photo.public_id).resize(auto().width(1000));
+
+        const cloudinaryPhotos: Photo[] = data.map((photo: HeroImageData) => {
+          const cloudImage: CloudinaryImage =
+            photo.public_id.includes('_GIF')
+              ? cld.image(photo.public_id).resize(auto())
+              : cld.image(photo.public_id).resize(auto().width(1000));
           return {
             image: cloudImage,
             folder: photo.folder,
@@ -83,7 +87,7 @@ const HeroPage: React.FC = () => {
         });
 
         setAllPhotos(cloudinaryPhotos);
-       
+
         let productionPhotos = cloudinaryPhotos.filter(photo => CloverProductionsSet.has(photo.folder));
         setProductionPhotos(productionPhotos);
 
@@ -125,36 +129,37 @@ const HeroPage: React.FC = () => {
         setHeightData(allPhotosHeightData);
         break;
     }
-    
+
   }, [heroFilterState])
 
 
-  const toggleFilter = () =>
-  {
-    if(isFiltered){
+  const toggleFilter = () => {
+    if (isFiltered) {
       setVisiblePhotos(allPhotos)
       setHeightData(allPhotosHeightData)
     }
-    else{
+    else {
       setVisiblePhotos(productionPhotos)
       setHeightData(filteredPhotosHeightData)
     }
 
     setIsFiltered(!isFiltered);
   }
-  
+
 
   return (
     <div id="outermost_div"
-      style={{ display: 'flex', justifyContent: 'center',
-      overflowY: 'hidden', height: '100dvh', overflowX: 'hidden'}} >
+      style={{
+        display: 'flex', justifyContent: 'center',
+        overflowY: 'hidden', height: '100dvh', overflowX: 'hidden'
+      }} >
 
       {!imageOffScreen && (
-        <Curtain imageOffScreen={imageOffScreen} setImageOffScreen={setImageOffScreen} setShowGreenBar={setShowGreenBar}/>
+        <Curtain imageOffScreen={imageOffScreen} setImageOffScreen={setImageOffScreen} setShowGreenBar={setShowGreenBar} />
       )}
 
       {/* {showGreenBar && (<GreenBar text="CLOVER." />)} */}
-      
+
       <div id="content_div" style={{
         display: 'flex',
         position: 'absolute',
@@ -166,16 +171,16 @@ const HeroPage: React.FC = () => {
         maxWidth: '100vw',
       }}>
 
-        <HeroGallery photos={visiblePhotos} heightData={heightData} /> 
+        <HeroGallery photos={visiblePhotos} heightData={heightData} />
 
       </div>
 
-      {showModal && <Modal state={modalState} onClose={ () => closeModal()} public_id={publicId} /> }
-      <CloverFooterButton/>
-      <IndexFooterButton/>
+      {showModal && <Modal state={modalState} onClose={() => closeModal()} public_id={publicId} />}
+      <CloverFooterButton />
+      <IndexFooterButton />
       {/* <button className={styles.invisibleFilterToggleButton} onClick={toggleFilter} disabled={showModal}/> */}
     </div>
-    
+
   );
 };
 

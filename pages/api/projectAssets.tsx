@@ -55,6 +55,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       description: description || { title: '', subject: '', functions: '', year: '' },
     };
 
+    responseData.imagePublicIds = photoPublicIds.filter(id => !id.includes("_GIF"));
+
     // Send the results array as JSON response
     res.status(200).json(responseData);
 

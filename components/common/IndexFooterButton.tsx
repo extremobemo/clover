@@ -80,24 +80,27 @@ export default function IndexFooterButton() {
             exit="exit"
             variants={menuVariants}>
             <div className={styles.menu}>
-              <motion.div
+            <motion.div
                 whileHover={{ scale: 1.1, x: 3 }}
-                className={heroFilterState === 'CLOVERPRODUCTION' ? styles.selectedMenuItem : styles.menuItem}
-                onClick={() => handleMenuClickHelper('CLOVERPRODUCTION')}>
-                PRODUCTION
+                className={heroFilterState === 'ALL' ? styles.selectedMenuItem : styles.menuItem}
+                onClick={() => handleMenuClickHelper('ALL')}>
+                ALL
               </motion.div>
+
               <motion.div
                 whileHover={{ scale: 1.1, x: 3 }}
                 className={heroFilterState === 'VIDEO' ? styles.selectedMenuItem : styles.menuItem}
                 onClick={() => handleMenuClickHelper('VIDEO')}>
                 VIDEO
               </motion.div>
+
               <motion.div
                 whileHover={{ scale: 1.1, x: 3 }}
-                className={heroFilterState === 'ALL' ? styles.selectedMenuItem : styles.menuItem}
-                onClick={() => handleMenuClickHelper('ALL')}>
-                ALL
+                className={heroFilterState === 'CLOVERPRODUCTION' ? styles.selectedMenuItem : styles.menuItem}
+                onClick={() => handleMenuClickHelper('CLOVERPRODUCTION')}>
+                PRODUCTION
               </motion.div>
+              
             </div>
           </motion.div>
 
