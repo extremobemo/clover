@@ -132,7 +132,7 @@ const CloverEffect = () => {
         position: 'fixed',
         top: '50%',
         left: '50%',
-        height: '30dvw',
+        height: '40dvw',
         width: '30dvh',
         transform: 'translate(-50%, -50%)',
         display: 'flex',
@@ -152,17 +152,17 @@ const CloverEffect = () => {
   >
     {index === 2 ? (
       <motion.img
-        src={`/${letter}.png`}
+        src={`/${letter}.webp`}
         alt={letter}
         style={{ width: '18vw', height: 'auto', willChange: 'transform', }}
       />
     ) : (
       <motion.img
-        src={`/${letter}.png`}
+        src={`/${letter}.webp`}
         alt={letter}
-        style={{ width: '15vw', height: 'auto', ...getPositionStyle(index), willChange: 'transform', }}
+        style={{ width: '20vw', height: 'auto', ...getPositionStyle(index), willChange: 'transform', }}
         animate={{
-          x: [-20, 20, -20], // Moves side-to-side
+          x: [-10, 10, -10], // Moves side-to-side
           rotate: [-4, 6, -4], // Rotates back and forth
         }}
         transition={{
