@@ -76,7 +76,7 @@ const calculateHeight = (columnLength: number) => {
         {group.widePhoto.length > 0 && (
             <div className={styles.widePhotoContainer}>
               {group.widePhoto.map(photo => (
-                <div style={{ width: '100%', padding: '0px' }}>
+                <div style={{ width: '100%', paddingTop: '4px' }}>
                   <AdvancedImage 
                     onClick={() => openModal('gallery', photo.folder)}
                     onContextMenu={preventRightClick} cldImg={photo.image} 
@@ -89,7 +89,7 @@ const calculateHeight = (columnLength: number) => {
           
        {/* VARYING HEIGHT OF COLUMNS BASED ON NUMBER OF PHOTOS IN THE COLUMN
         if there are 5 photos, height stays the same, */}
-          <div style={{ display: 'flex', gap: '4px', height: calculateHeight(group.leftColumn.length), }}> 
+          <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length), }}> 
 
           {/* Left Column */}
           <div className={styles.leftColumnContainer}>
