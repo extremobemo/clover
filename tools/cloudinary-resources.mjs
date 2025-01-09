@@ -64,6 +64,22 @@ const fetchData = async () => {
       }
     });
 
+    // Sort photos based on numeric suffix
+    for (const folder in folderDictionary) {
+      folderDictionary[folder].photos.sort((a, b) => {
+        const getNumericSuffix = (id) => {
+          // Extract the trailing number using a regex
+          const match = id.match(/(\d+)$/); // Matches numbers at the end of the string
+          return match ? parseInt(match[1], 10) : 0; // Default to 0 if no number is found
+        };
+
+        const aNumber = getNumericSuffix(a);
+        const bNumber = getNumericSuffix(b);
+
+        return aNumber - bNumber; // Compare the numeric suffixes
+      });
+    }
+
     // Output data to a JSON file
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0]; // Extracts YYYY-MM-DD from ISO string

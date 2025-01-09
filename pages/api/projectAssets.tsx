@@ -46,7 +46,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     let videoData: Video[] = assetFolder.videos;
     let count = 0;
 
-    photoPublicIds.sort();
     videoData.sort((a, b) => a.publicId.localeCompare(b.publicId));
 
     const responseData = {
