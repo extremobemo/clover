@@ -1,4 +1,27 @@
 {
+  "LULU_DISNEY": {
+    "photos": [
+      "LULULEMON_DISNEY_1",
+      "LULULEMON_DISNEY_2",
+      "LULULEMON_DISNEY_3",
+      "LULULEMON_DISNEY_4",
+      "LULULEMON_DISNEY_5",
+      "LULULEMON_DISNEY_6",
+      "LULULEMON_DISNEY_7",
+      "LULULEMON_DISNEY_8",
+      "LULULEMON_DISNEY_9",
+      "LULULEMON_DISNEY_10",
+      "LULULEMON_DISNEY_11",
+      "LULULEMON_DISNEY_12"
+    ],
+    "videos": [
+      {
+        "publicId": "LULULEMON_DISNEY_13",
+        "width": 1280,
+        "height": 720
+      }
+    ]
+  },
   "EEMCD-3": {
     "photos": [
       "EEMCD-0",
@@ -179,6 +202,110 @@
         "height": 1080
       }
     ]
+  },
+  "AMINE_NEW_BALANCE_YB": {
+    "photos": [
+      "AMINE_NEW_BALANCE_YB_1",
+      "AMINE_NEW_BALANCE_YB_2",
+      "AMINE_NEW_BALANCE_YB_3",
+      "AMINE_NEW_BALANCE_YB_4",
+      "AMINE_NEW_BALANCE_YB_5",
+      "AMINE_NEW_BALANCE_YB_6",
+      "AMINE_NEW_BALANCE_YB_7",
+      "AMINE_NEW_BALANCE_YB_8",
+      "AMINE_NEW_BALANCE_YB_9",
+      "AMINE_NEW_BALANCE_YB_10",
+      "AMINE_NEW_BALANCE_YB_11",
+      "AMINE_NEW_BALANCE_YB_12",
+      "AMINE_NEW_BALANCE_YB_13",
+      "AMINE_NEW_BALANCE_YB_14",
+      "AMINE_NEW_BALANCE_YB_15"
+    ],
+    "videos": []
+  },
+  "ASAP_ROCKY_FOR_PRADA": {
+    "photos": [
+      "ASAP_ROCKY_FOR_PRADA_1",
+      "ASAP_ROCKY_FOR_PRADA_2",
+      "ASAP_ROCKY_FOR_PRADA_3",
+      "ASAP_ROCKY_FOR_PRADA_4",
+      "ASAP_ROCKY_FOR_PRADA_5",
+      "ASAP_ROCKY_FOR_PRADA_6",
+      "ASAP_ROCKY_FOR_PRADA_7"
+    ],
+    "videos": []
+  },
+  "KodakBlack_-9": {
+    "photos": [
+      "KODAK_FOR_ASSPIZZA_1",
+      "KODAK_FOR_ASSPIZZA_2",
+      "KODAK_FOR_ASSPIZZA_3",
+      "KODAK_FOR_ASSPIZZA_4",
+      "KODAK_FOR_ASSPIZZA_5",
+      "KODAK_FOR_ASSPIZZA_6",
+      "KODAK_FOR_ASSPIZZA_7",
+      "KODAK_FOR_ASSPIZZA_8"
+    ],
+    "videos": []
+  },
+  "VC_FOR_VC": {
+    "photos": [
+      "VC_FOR_VC_1",
+      "VC_FOR_VC_2",
+      "VC_FOR_VC_3",
+      "VC_FOR_VC_4",
+      "VC_FOR_VC_5",
+      "VC_FOR_VC_6",
+      "VC_FOR_VC_7",
+      "VC_FOR_VC_8",
+      "VC_FOR_VC_9",
+      "VC_FOR_VC_11"
+    ],
+    "videos": []
+  },
+  "VenedaCarterIsabella-9": {
+    "photos": [
+      "vc_ic_01",
+      "vc_ic_04",
+      "vc_ic_05",
+      "vc_ic_09",
+      "vc_ic_23"
+    ],
+    "videos": []
+  },
+  "khaled-11": {
+    "photos": [
+      "KHALED_JORDAN_1",
+      "KHALED_JORDAN_4",
+      "KHALED_JORDAN_6",
+      "KHALED_JORDAN_7",
+      "KHALED_JORDAN_11",
+      "KHALED_JORDAN_13",
+      "KHALED_JORDAN_16",
+      "KHALED_JORDAN_20",
+      "KHALED_JORDAN_27",
+      "KHALED_JORDAN_30",
+      "KHALED_JORDAN_32"
+    ],
+    "videos": []
+  },
+  "AIRMAX GO BEYOND": {
+    "photos": [
+      "AIRMAX_GO_BEYOND_0",
+      "AIRMAX_GO_BEYOND_1",
+      "AIRMAX_GO_BEYOND_2",
+      "AIRMAX_GO_BEYOND_4",
+      "AIRMAX_GO_BEYOND_5",
+      "AIRMAX_GO_BEYOND_6",
+      "AIRMAX_GO_BEYOND_7",
+      "AIRMAX_GO_BEYOND_8",
+      "AIRMAX_GO_BEYOND_9",
+      "AIRMAX_GO_BEYOND_10",
+      "AIRMAX_GO_BEYOND_11",
+      "AIRMAX_GO_BEYOND_12",
+      "AIRMAX_GO_BEYOND_13"
+    ],
+    "videos": []
   },
   "JELEELYEAAAA-9": {
     "photos": [
@@ -442,23 +569,6 @@
     ],
     "videos": []
   },
-  "AIRMAX GO BEYOND": {
-    "photos": [
-      "AIRMAX_GO_BEYOND_1",
-      "AIRMAX_GO_BEYOND_2",
-      "AIRMAX_GO_BEYOND_4",
-      "AIRMAX_GO_BEYOND_5",
-      "AIRMAX_GO_BEYOND_6",
-      "AIRMAX_GO_BEYOND_7",
-      "AIRMAX_GO_BEYOND_8",
-      "AIRMAX_GO_BEYOND_9",
-      "AIRMAX_GO_BEYOND_10",
-      "AIRMAX_GO_BEYOND_11",
-      "AIRMAX_GO_BEYOND_12",
-      "AIRMAX_GO_BEYOND_13"
-    ],
-    "videos": []
-  },
   "ASSPIZZA_FOR_SUPREME": {
     "photos": [
       "ASSPIZZA_FOR_SUPREME_1",
@@ -631,18 +741,6 @@
     ],
     "videos": []
   },
-  "ASAP_ROCKY_FOR_PRADA": {
-    "photos": [
-      "ASAP_ROCKY_FOR_PRADA_0",
-      "ASAP_ROCKY_FOR_PRADA_1",
-      "ASAP_ROCKY_FOR_PRADA_2",
-      "ASAP_ROCKY_FOR_PRADA_3",
-      "ASAP_ROCKY_FOR_PRADA_4",
-      "ASAP_ROCKY_FOR_PRADA_5",
-      "ASAP_ROCKY_FOR_PRADA_7"
-    ],
-    "videos": []
-  },
   "HELMUT_LANG": {
     "photos": [
       "HELMUT_LANG1",
@@ -659,26 +757,6 @@
     ],
     "videos": []
   },
-  "AMINE_NEW_BALANCE_YB": {
-    "photos": [
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_0",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_1",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_2",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_3",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_4",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_5",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_6",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_7",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_8",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_9",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_10",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_11",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_12",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_13",
-      "AMINE_NEW_BALANCE_YELLOW_BROWN_14"
-    ],
-    "videos": []
-  },
   "ASSPIZZA_BACKYARD": {
     "photos": [
       "ASSPIZZA_BACKYARD1",
@@ -687,43 +765,6 @@
       "ASSPIZZA_BACKYARD4",
       "ASSPIZZA_BACKYARD5",
       "ASSPIZZA_BACKYARD6"
-    ],
-    "videos": []
-  },
-  "VC_FOR_VC": {
-    "photos": [
-      "VC_FOR_VC_0",
-      "VC_FOR_VC_2",
-      "VC_FOR_VC_3",
-      "VC_FOR_VC_4",
-      "VC_FOR_VC_5",
-      "VC_FOR_VC_6",
-      "VC_FOR_VC_7",
-      "VC_FOR_VC_8",
-      "VC_FOR_VC_9",
-      "VC_FOR_VC_10"
-    ],
-    "videos": []
-  },
-  "NIKE_DUNK": {
-    "photos": [
-      "NIKE_DUNK_0",
-      "NIKE_DUNK_2",
-      "NIKE_DUNK_3",
-      "NIKE_DUNK_4",
-      "NIKE_DUNK_5",
-      "NIKE_DUNK_6",
-      "NIKE_DUNK_7",
-      "NIKE_DUNK_8",
-      "NIKE_DUNK_9",
-      "NIKE_DUNK_10",
-      "NIKE_DUNK_11",
-      "NIKE_DUNK_12",
-      "NIKE_DUNK_13",
-      "NIKE_DUNK_14",
-      "NIKE_DUNK_15",
-      "NIKE_DUNK_16",
-      "NIKE_DUNK_17"
     ],
     "videos": []
   },
@@ -831,20 +872,6 @@
       "VersaceXSsense-17",
       "VersaceXSsense-18",
       "VersaceXSsense-19"
-    ],
-    "videos": []
-  },
-  "VenedaCarterIsabella-9": {
-    "photos": [
-      "VenedaCarterIsabella-0",
-      "VenedaCarterIsabella-1",
-      "VenedaCarterIsabella-2",
-      "VenedaCarterIsabella-3",
-      "VenedaCarterIsabella-4",
-      "VenedaCarterIsabella-5",
-      "VenedaCarterIsabella-6",
-      "VenedaCarterIsabella-7",
-      "VenedaCarterIsabella-8"
     ],
     "videos": []
   },
@@ -1778,20 +1805,6 @@
     ],
     "videos": []
   },
-  "KodakBlack_-9": {
-    "photos": [
-      "KodakBlack_-0",
-      "KodakBlack_-1",
-      "KodakBlack_-2",
-      "KodakBlack_-3",
-      "KodakBlack_-4",
-      "KodakBlack_-5",
-      "KodakBlack_-6",
-      "KodakBlack_-7",
-      "KodakBlack_-8"
-    ],
-    "videos": []
-  },
   "HypeBeastXClover-6": {
     "photos": [
       "HypeBeastXClover-0",
@@ -2002,22 +2015,6 @@
       "ninja-0",
       "ninja-1",
       "ninja-2"
-    ],
-    "videos": []
-  },
-  "khaled-11": {
-    "photos": [
-      "khaled-0",
-      "khaled-1",
-      "khaled-2",
-      "khaled-3",
-      "khaled-4",
-      "khaled-5",
-      "khaled-6",
-      "khaled-7",
-      "khaled-8",
-      "khaled-9",
-      "khaled-10"
     ],
     "videos": []
   },
