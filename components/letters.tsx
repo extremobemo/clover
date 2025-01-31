@@ -7,6 +7,7 @@ const randomInRange = (min : number, max : number) => Math.random() * (max - min
 const CloverEffect = () => {
   const [scrollY, setScrollY] = useState(0);
   const [letterWidth, setLetterWidth] = useState(0); // Dynamic letter width
+  const [letterHeight, setLetterHeight] = useState(0); // Dynamic letter width
 
   useEffect(() => {
     const curtain = document.getElementById('curtain');
@@ -29,7 +30,9 @@ const CloverEffect = () => {
   }, []);
 
   const letters = ['c', 'l', 'o', 'v', 'e', 'r'];
-  const widthData = ['28dvw', '17dvw','20dvw','26dvw','17dvw','22dvw',]
+  const widthData = ['28dvw', '17dvw','20dvw','20dvw','16dvw','18dvw',]
+  const maxWidthData = ['600px', '450px','400px','400px','425px','425px',]
+
   const totalWidth = (letters.length * letterWidth);
   const centerOffset = (totalWidth / 2) -  (letterWidth  / 2);
 
@@ -38,18 +41,25 @@ const CloverEffect = () => {
     // Dynamic letter width
     useEffect(() => {
       if (typeof window !== 'undefined') {
-        const updateLetterWidth = () => {
-          setLetterWidth(window.innerWidth * 0.15); // Calculate 15vw
+        const updateLetterDimensions = () => {
+          const maxWidth = 250; // Set a max width for the letters
+          const maxHeight = 400; // Set a max height for the letters
+          const calculatedWidth = window.innerWidth * 0.15;
+          const calculatedHeight = window.innerWidth * 0.15; // Adjust as needed for height
+    
+          setLetterWidth(Math.min(calculatedWidth, maxWidth)); // Limit the max width
+          setLetterHeight(Math.min(calculatedHeight, maxHeight)); // Limit the max height
         };
-  
-        updateLetterWidth();
-        window.addEventListener('resize', updateLetterWidth);
-  
+    
+        updateLetterDimensions();
+        window.addEventListener('resize', updateLetterDimensions);
+    
         return () => {
-          window.removeEventListener('resize', updateLetterWidth);
+          window.removeEventListener('resize', updateLetterDimensions);
         };
       }
     }, []);
+    
 
   useEffect(() => {
     // Update windowHeight when the component mounts
@@ -68,17 +78,19 @@ const CloverEffect = () => {
   const offsets = [
     { x: -0, y: -15, rotation: 0 },  // C
     { x: 40, y: 0, rotation: 0 },      // L
-    { x: -10, y: 20, rotation: -10 },        // O
-    { x: 5, y: 20, rotation: 5 },     // V
-    { x: 0, y: 20, rotation: 2 },      // E
+    { x: -25, y: 25, rotation: -10 },        // O
+    { x: 5, y: 23, rotation: 0 },     // V
+    { x: 0, y: 22, rotation: 2 },      // E
     { x: 0, y: -3, rotation: -3 },     // R
   ];
 
   const getPositionStyle = (index : number) => {
 
     const movementFactor = scrollY * 0.04;
-  
-    const initialX = (index * letterWidth) - centerOffset;
+    const initialX = (index * (letterWidth + 3)) - centerOffset;
+
+    // const initialX = (index * letterWidth) - centerOffset + (index === 3 ? 0 : 0) + (index === 4 ? 0 : 0) +
+    // (index === 5 ? 0 : 0);
     const initialY = 0; 
   
     // Define movement vectors for each letter
@@ -104,7 +116,7 @@ const CloverEffect = () => {
   
 
     const maxScroll = windowHeight; 
-    const opacity = Math.max(.95 - (scrollY / maxScroll) || 0, 0);
+    const opacity = Math.max(.90 - (scrollY / maxScroll) || 0, 0);
     const scale = 1 + (scrollY * 0.001); // Adjust the factor for desired growth speed
     const scale2 = 2; // Adjust the factor for desired growth speed
     const rotation = offsets[index].rotation; 
@@ -140,7 +152,7 @@ const CloverEffect = () => {
         transform: 'translate(-50%, -50%)',
         display: 'flex',
         justifyContent: 'space-evenly', // Natural spacing
-        maxWidth: '50vw',
+        // maxWidth: '50vw',
         pointerEvents: 'none',
       }}>
        {letters.map((letter, index) => (
@@ -150,7 +162,7 @@ const CloverEffect = () => {
       position: 'absolute',
       ...getPositionStyle(index),
       willChange: 'transform',
-      zIndex: index === 2 ? 99999 : 0
+      zIndex: index === 2 ? 0 : 99999
     }}
   >
 {index === 2 ? (
@@ -163,10 +175,10 @@ const CloverEffect = () => {
       <motion.img
         src={`/${letter}.webp`}
         alt={letter}
-        style={{ width: widthData[index], height: 'auto', ...getPositionStyle(index), willChange: 'transform' }}
+        style={{ width: widthData[index], height: 'auto', willChange: 'transform' }}
         animate={{
           x: [0, 0, 0], // Moves side-to-side
-          rotate: [-4, 6, -4], // Rotates back and forth
+          rotate: [-2, 3, -2], // Rotates back and forth
         }}
         transition={{
           x: {
