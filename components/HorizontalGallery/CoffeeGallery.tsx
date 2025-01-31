@@ -206,9 +206,6 @@ const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
                     </div>
                   </motion.div>
                 )}
-                {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
-                  <div className={styles.thumbnailPlaceholder} key={`placeholder-${index}`} />
-                ))}
               </div>
               <motion.div
                 initial={{ opacity: 0 }}
