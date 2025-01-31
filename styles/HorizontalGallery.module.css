@@ -52,7 +52,7 @@
 
 @media (max-width: 768px) {
   .thumbnailscontainer {
-    padding-left: 30px;
+    padding-left: 25dvw;
     /* Reduced padding for mobile screens */
   }
 }
