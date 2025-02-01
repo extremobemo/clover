@@ -5,6 +5,11 @@ body {
   overflow: hidden;
 }
 
+::selection {
+  background-color: #39993A;
+  color: white;
+}
+
 @font-face {
   font-family: "KAMAR";
   src: url("/fonts/KAMAR.TTF") format("truetype");
