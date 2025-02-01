@@ -30,6 +30,8 @@ const CloverEffect = () => {
 
   const letters = ['c', 'l', 'o', 'v', 'e', 'r'];
   const widthData = ['28dvw', '17dvw','20dvw','26dvw','17dvw','22dvw',]
+  const maxWidthData = ['350px', '200px','200px','300px','200px','260px',]
+
   const totalWidth = (letters.length * letterWidth);
   const centerOffset = (totalWidth / 2) -  (letterWidth  / 2);
 
@@ -39,7 +41,12 @@ const CloverEffect = () => {
     useEffect(() => {
       if (typeof window !== 'undefined') {
         const updateLetterWidth = () => {
-          setLetterWidth(window.innerWidth * 0.15); // Calculate 15vw
+          const maxWidth = 200; // Set a max width for the letters
+          const maxHeight = 400; // Set a max height for the letters
+          const calculatedWidth = window.innerWidth * 0.15;
+          const calculatedHeight = window.innerWidth * 0.15; // Adjust as needed for height
+    
+          setLetterWidth(Math.min(calculatedWidth, maxWidth)); // Limit the max width
         };
   
         updateLetterWidth();
@@ -150,20 +157,20 @@ const CloverEffect = () => {
       position: 'absolute',
       ...getPositionStyle(index),
       willChange: 'transform',
-      zIndex: index === 2 ? 99999 : 0
+      zIndex: index === 2 ? 0 : 999
     }}
   >
 {index === 2 ? (
       <motion.img
         src={`/${letter}.webp`}
         alt={letter}
-        style={{ width: '20vw', height: 'auto', willChange: 'transform', scale: 1.25 }}
+        style={{ width: '20vw', height: 'auto', maxWidth: '300px', willChange: 'transform', scale: 1.25 }}
       />
     ) : (
       <motion.img
         src={`/${letter}.webp`}
         alt={letter}
-        style={{ width: widthData[index], height: 'auto', ...getPositionStyle(index), willChange: 'transform' }}
+        style={{ width: widthData[index], maxWidth: maxWidthData[index], height: 'auto', ...getPositionStyle(index), willChange: 'transform' }}
         animate={{
           x: [0, 0, 0], // Moves side-to-side
           rotate: [-4, 6, -4], // Rotates back and forth
