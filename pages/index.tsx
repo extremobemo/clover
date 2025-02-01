@@ -13,7 +13,10 @@ import { HeroImageData } from '../types/types';
 import { useAppContext } from '../context/AppContext';
 import CloverFooterButton from '../components/common/CloverFooterButton'
 import styles from '../styles/Index.module.css'
+
 import cloverProductions from './cloverProductions.json'
+import cloverVideos from './cloverVideos.json'
+
 import heightData from '../data/heightData'
 import IndexFooterButton from '../components/common/IndexFooterButton';
 import ScrollIndicator from '../components/common/ScrollIndicator';
@@ -24,29 +27,27 @@ interface Photo {
   folder: string;
 }
 
-const CloverProductionsSet = new Set(
-  [
-    ...cloverProductions
-  ]);
+const CloverProductionsSet = new Set([ ...cloverProductions ]);
+const CloverVideosSet = new Set([ ...cloverVideos ]);
 
 const allPhotosHeightData = heightData.allPhotosHeightData;
-
-const filteredPhotosHeightData = heightData.filteredPhotosHeightData;
-
+const productionPhotosHeightData = heightData.productionPhotosHeightData;
+const videoPhotosHeightData = heightData.videoPhotosHeightData;
 
 const HeroPage: React.FC = () => {
   const router = useRouter();
   const { showModal, modalState, publicId, openModal, closeModal, heroFilterState } = useAppContext();
 
   const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
+
   const [productionPhotos, setProductionPhotos] = useState<Photo[]>([]);
+  const [videoPhotos, setVideoPhotos] = useState<Photo[]>([]);
+
   const [visiblePhotos, setVisiblePhotos] = useState<Photo[]>([]);
 
   const [heightData, setHeightData] = useState<number[][][]>(allPhotosHeightData);
 
-  const [isFiltered, setIsFiltered] = useState<Boolean>(false);
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
-  const [showGreenBar, setShowGreenBar] = useState<boolean>(false);
 
   const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
@@ -93,9 +94,11 @@ const HeroPage: React.FC = () => {
         let productionPhotos = cloudinaryPhotos.filter(photo => CloverProductionsSet.has(photo.folder));
         setProductionPhotos(productionPhotos);
 
+        let videoPhotos = cloudinaryPhotos.filter(photo => CloverVideosSet.has(photo.folder));
+        setVideoPhotos(videoPhotos);
+
         //TODO: once we have videos, will need to create a set of folder names kinda like we've got for CloverProductions 
         // and use that to create the video set
-
 
         //initialize photos to display as all photos
         setVisiblePhotos(cloudinaryPhotos);
@@ -119,11 +122,13 @@ const HeroPage: React.FC = () => {
         break;
       case 'CLOVERPRODUCTION':
         setVisiblePhotos(productionPhotos);
-        setHeightData(filteredPhotosHeightData);
+        setHeightData(productionPhotosHeightData);
+        setVisiblePhotos(productionPhotos)
         break;
       case 'VIDEO': //TODO: once we've created new set, utilize that.
-        setVisiblePhotos(productionPhotos);
-        setHeightData(filteredPhotosHeightData);
+        setVisiblePhotos(videoPhotos);
+        setHeightData(videoPhotosHeightData);
+        setVisiblePhotos(videoPhotos)
         break;
       default:
         setVisiblePhotos(allPhotos);
@@ -133,21 +138,6 @@ const HeroPage: React.FC = () => {
     scrollTo(0,0)
   }, [heroFilterState])
 
-
-  const toggleFilter = () => {
-    if (isFiltered) {
-      setVisiblePhotos(allPhotos)
-      setHeightData(allPhotosHeightData)
-    }
-    else {
-      setVisiblePhotos(productionPhotos)
-      setHeightData(filteredPhotosHeightData)
-    }
-
-    setIsFiltered(!isFiltered);
-  }
-
-
   return (
     <div id="outermost_div"
       style={{
@@ -156,7 +146,7 @@ const HeroPage: React.FC = () => {
       }} >
 
       {!imageOffScreen && (
-        <Curtain imageOffScreen={imageOffScreen} setImageOffScreen={setImageOffScreen} setShowGreenBar={setShowGreenBar} />
+        <Curtain imageOffScreen={imageOffScreen} setImageOffScreen={setImageOffScreen} />
       )}
 
       <ScrollIndicator scrollXProgress={scrollYProgress} />
@@ -172,7 +162,7 @@ const HeroPage: React.FC = () => {
         maxWidth: '100vw',
       }}>
 
-        <HeroGallery photos={visiblePhotos} heightData={heightData} />
+        <HeroGallery photos={visiblePhotos} heightData={heightData} filterState={heroFilterState} />
 
       </div>
 

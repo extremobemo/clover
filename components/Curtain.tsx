@@ -5,10 +5,9 @@ import styles from '../styles/Curtain.module.css';
 interface CurtainProps  {
   imageOffScreen : boolean,
   setImageOffScreen : (value: boolean) => void, 
-  setShowGreenBar : (value: boolean) => void,
 };
 
-const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, setShowGreenBar }) => {
+const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen }) => {
   
   useEffect(() => {
     const curtain = document.getElementById('curtain');
@@ -17,7 +16,6 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
 
     if (savedImageOffScreen) {
       setImageOffScreen(JSON.parse(savedImageOffScreen));
-      setShowGreenBar(true)
     }
   
     const handleScroll = () => {
@@ -27,9 +25,6 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
       if (scrollPosition && scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
         sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
-        setTimeout(() => {
-          setShowGreenBar(true);
-        }, 100);
       }
     };
   
@@ -42,7 +37,7 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
         curtain.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [setImageOffScreen, setShowGreenBar]);
+  }, [setImageOffScreen]);
 
   if (imageOffScreen) return null; // Do nothing if image is off-screen
 
