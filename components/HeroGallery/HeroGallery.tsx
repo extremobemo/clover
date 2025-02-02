@@ -5,50 +5,70 @@ import HeroGalleryGroup from '../HeroGallery/HeroGalleryGroup';
 interface HeroGalleryProps {
   photos: Photo[];
   heightData: number[][][];
+  filterState: String;
 }
 
-const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData }) => {
+interface GroupConfig {
+  start: number;
+  end: number;
+  groupIndex: number;
+}
 
-  const firstGroup = photos.slice(0, 11); // 1
-  const secondGroup = photos.slice(11, 18); // 2
-  const thirdGroup = photos.slice(18, 19);
-  const fourthGroup = photos.slice(19, 26); // 3
-  const fifth = photos.slice(26, 27);
-  const sixth = photos.slice(27, 33); // 4
-  const seventh = photos.slice(33, 42); // 5
-  const eigth = photos.slice(42, 47); // 6
-  const ninth = photos.slice(47, 56); // 7
-  const tenth = photos.slice(57, 68) // 8
-  const eleventh = photos.slice(68, 75) // 8
+const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, filterState }) => {
 
+  let groupConfigs: GroupConfig[] = [];
+  console.log(photos)
+  if (filterState === 'ALL') {
+    groupConfigs = [
+      { start: 0, end: 11, groupIndex: 0 },
+      { start: 11, end: 18, groupIndex: 1 },
+      { start: 18, end: 19, groupIndex: 0 },
+      { start: 19, end: 26, groupIndex: 2 },
+      { start: 26, end: 27, groupIndex: 0 },
+      { start: 27, end: 33, groupIndex: 3 },
+      { start: 33, end: 42, groupIndex: 4 },
+      { start: 42, end: 47, groupIndex: 5 },
+      { start: 47, end: 56, groupIndex: 6 },
+      { start: 57, end: 68, groupIndex: 7 },
+      { start: 68, end: 75, groupIndex: 7 },
+    ];
+  } else if (filterState === 'CLOVERPRODUCTION') {
+    groupConfigs = [
+      { start: 12, end: 16, groupIndex: 0 },
+      { start: 0, end: 6, groupIndex: 1 },
+      { start: 6, end: 12, groupIndex: 2 },
+      // { start: 9, end: 12, groupIndex: 0 },
+      // { start: 12, end: 18, groupIndex: 0 },
+    ];
+  } else if (filterState === 'VIDEO') {
+    groupConfigs = [
+      { start: 12, end: 16, groupIndex: 0 },
+      { start: 0, end: 6, groupIndex: 1 },
+      { start: 6, end: 12, groupIndex: 2 },
+    ];
+  }
+  
+  const groups = groupConfigs.map(({ start, end, groupIndex }) => ({
+    photos: photos.slice(start, end),
+    groupIndex,
+  }));
 
+console.log(groups)
 
   return (
     <div style={{ paddingTop: '40px', paddingBottom: '40px' }}>
-      <HeroGalleryGroup photos={firstGroup} heightData={heightData} groupIndex={0} />
-
-      <HeroGalleryGroup photos={secondGroup} heightData={heightData} groupIndex={1} />
-
-      <HeroGalleryGroup photos={thirdGroup} heightData={heightData} groupIndex={0}/>
-
-      <HeroGalleryGroup photos={fourthGroup} heightData={heightData} groupIndex={2}/>
-
-      <HeroGalleryGroup photos={fifth} heightData={heightData} groupIndex={0}/>
-
-      <HeroGalleryGroup photos={sixth} heightData={heightData} groupIndex={3}/>
-
-      <HeroGalleryGroup photos={seventh} heightData={heightData} groupIndex={4}/>
-
-      <HeroGalleryGroup photos={eigth} heightData={heightData} groupIndex={5}/>
-
-      <HeroGalleryGroup photos={ninth} heightData={heightData} groupIndex={6}/>
-
-      <HeroGalleryGroup photos={tenth} heightData={heightData} groupIndex={7}/>
-
-      <HeroGalleryGroup photos={eleventh} heightData={heightData} groupIndex={7}/>
-
+      {groups.map((group, index) => (
+        <HeroGalleryGroup
+          key={index}
+          photos={group.photos}
+          heightData={heightData}
+          groupIndex={group.groupIndex}
+        />
+      ))}
     </div>
   );
 };
+
+  
 
 export default HeroGallery;

@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 20dvw;
+  padding: 0px 40dvw;
   overflow-y: hidden;
 }
 
@@ -52,7 +52,7 @@
 
 @media (max-width: 768px) {
   .thumbnailscontainer {
-    padding-left: 30px;
+    padding-left: 25dvw;
     /* Reduced padding for mobile screens */
   }
 }

@@ -5,10 +5,9 @@ import styles from '../styles/Curtain.module.css';
 interface CurtainProps  {
   imageOffScreen : boolean,
   setImageOffScreen : (value: boolean) => void, 
-  setShowGreenBar : (value: boolean) => void,
 };
 
-const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, setShowGreenBar }) => {
+const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen }) => {
   
   useEffect(() => {
     const curtain = document.getElementById('curtain');
@@ -17,7 +16,6 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
 
     if (savedImageOffScreen) {
       setImageOffScreen(JSON.parse(savedImageOffScreen));
-      setShowGreenBar(true)
     }
   
     const handleScroll = () => {
@@ -27,9 +25,6 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
       if (scrollPosition && scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
         sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
-        setTimeout(() => {
-          setShowGreenBar(true);
-        }, 100);
       }
     };
   
@@ -42,7 +37,7 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
         curtain.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [setImageOffScreen, setShowGreenBar]);
+  }, [setImageOffScreen]);
 
   if (imageOffScreen) return null; // Do nothing if image is off-screen
 
@@ -56,6 +51,20 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen, s
         alt="BTS" // Provide an alt text for accessibility
         style={{ width: '100%', height: '100dvh' }} // Adjust the styles as needed
       />
+
+<div className={styles.chevron}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M12 15.5a1 1 0 0 1-.707-.293l-5-5a1 1 0 0 1 1.414-1.414L12 13.086l4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5A1 1 0 0 1 12 15.5z"
+        clipRule="evenodd"
+      />
+    </svg>
+  </div>
 
         </div>
     </div>

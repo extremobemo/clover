@@ -35,10 +35,12 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, groupInde
 
     // Populate columns with the remaining photos
     for (let j = i + 1; j < i + 11; j++) {
-      if (j % 2 === 0) {
-        photos[j] ? leftColumn.push(photos[j]) : console.log("be careful spongebob");
-      } else {
-        photos[j] ? rightColumn.push(photos[j]) : console.log("spongebob be careful");
+      if (photos[j]) {
+        if (j % 2 === 0) {
+          leftColumn.push(photos[j]);
+        } else {
+          rightColumn.push(photos[j]);
+        }
       }
     }
 

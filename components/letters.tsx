@@ -29,6 +29,8 @@ const CloverEffect = () => {
   }, []);
 
   const letters = ['c', 'l', 'o', 'v', 'e', 'r'];
+  const widthData = ['28dvw', '17dvw','20dvw','26dvw','17dvw','22dvw',]
+  const maxWidthData = ['350px', '200px','200px','300px','200px','260px',]
 
   const totalWidth = (letters.length * letterWidth);
   const centerOffset = (totalWidth / 2) -  (letterWidth  / 2);
@@ -39,7 +41,12 @@ const CloverEffect = () => {
     useEffect(() => {
       if (typeof window !== 'undefined') {
         const updateLetterWidth = () => {
-          setLetterWidth(window.innerWidth * 0.15); // Calculate 15vw
+          const maxWidth = 200; // Set a max width for the letters
+          const maxHeight = 400; // Set a max height for the letters
+          const calculatedWidth = window.innerWidth * 0.15;
+          const calculatedHeight = window.innerWidth * 0.15; // Adjust as needed for height
+    
+          setLetterWidth(Math.min(calculatedWidth, maxWidth)); // Limit the max width
         };
   
         updateLetterWidth();
@@ -66,12 +73,12 @@ const CloverEffect = () => {
   }, []);
   
   const offsets = [
-    { x: -80, y: -100, rotation: 15 },  // C
-    { x: -0, y: -0, rotation: 0 },      // L
-    { x: 0, y: 60, rotation: 0 },        // O
-    { x: 0, y: -80, rotation: 10 },     // V
-    { x: 0, y: -20, rotation: 0 },      // E
-    { x: 0, y: -90, rotation: 5 },     // R
+    { x: -0, y: -15, rotation: 0 },  // C
+    { x: 40, y: 0, rotation: 0 },      // L
+    { x: -10, y: 20, rotation: -10 },        // O
+    { x: 5, y: 20, rotation: 5 },     // V
+    { x: 0, y: 20, rotation: 2 },      // E
+    { x: 0, y: -3, rotation: -3 },     // R
   ];
 
   const getPositionStyle = (index : number) => {
@@ -104,13 +111,16 @@ const CloverEffect = () => {
   
 
     const maxScroll = windowHeight; 
-    const opacity = Math.max(.85 - (scrollY / maxScroll) || 0, 0);
+    const opacity = Math.max(.95 - (scrollY / maxScroll) || 0, 0);
     const scale = 1 + (scrollY * 0.001); // Adjust the factor for desired growth speed
+    const scale2 = 2; // Adjust the factor for desired growth speed
     const rotation = offsets[index].rotation; 
+    const Yoffset = offsets[index].y;
+    const Xoffset = offsets[index].x;
 
     if (index === 2) { 
       return {
-        transform: `translate(${initialX + finalX}px, ${initialY + finalY}px) rotate(${rotation}deg)`,
+        transform: `translate(${Xoffset + finalX}px, ${Yoffset + finalY}px) rotate(${rotation}deg)`,
         // opacity: opacity,
         // scale: scale,
         transition: 'transform, opacity, scale',
@@ -118,7 +128,7 @@ const CloverEffect = () => {
     }
 
     return {
-      transform: `translate(${initialX + finalX}px, ${initialY + finalY}px) rotate(${rotation}deg) scale(${scale})`,
+      transform: `translate(${initialX + finalX}px,${Yoffset + finalY}px) rotate(${rotation}deg) scale(${scale})`,
       opacity: opacity,
       scale: scale,
       transition: 'transform, opacity, scale',
@@ -147,32 +157,32 @@ const CloverEffect = () => {
       position: 'absolute',
       ...getPositionStyle(index),
       willChange: 'transform',
-      zIndex: index === 2 ? 99999 : 0
+      zIndex: index === 2 ? 0 : 999
     }}
   >
-    {index === 2 ? (
+{index === 2 ? (
       <motion.img
         src={`/${letter}.webp`}
         alt={letter}
-        style={{ width: '18vw', height: 'auto', willChange: 'transform', }}
+        style={{ width: '20vw', height: 'auto', maxWidth: '300px', willChange: 'transform', scale: 1.25 }}
       />
     ) : (
       <motion.img
         src={`/${letter}.webp`}
         alt={letter}
-        style={{ width: '20vw', height: 'auto', ...getPositionStyle(index), willChange: 'transform', }}
+        style={{ width: widthData[index], maxWidth: maxWidthData[index], height: 'auto', ...getPositionStyle(index), willChange: 'transform' }}
         animate={{
-          x: [-10, 10, -10], // Moves side-to-side
+          x: [0, 0, 0], // Moves side-to-side
           rotate: [-4, 6, -4], // Rotates back and forth
         }}
         transition={{
           x: {
-            duration: 20,
+            duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
           },
           rotate: {
-            duration: 20,
+            duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
           },

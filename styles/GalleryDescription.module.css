@@ -3,30 +3,30 @@
   flex-direction: column;
   justify-content: flex-start;
   max-width: 400px;
-  margin-left: 20px;
+  margin-left: 10px;
   font-family: "Times New Roman", Times, serif;
 }
 
 .title {
   margin-top: 0;
-  margin-bottom: 0px;
-  font-size: 1.4em;
-  font-weight: normal;
+  margin-bottom: 8px;
+  font-size: 1.2em;
+  font-weight: lighter;
 }
 
 .subject {
   margin: 0;
-  font-size: 1em;
-  font-weight: normal;
+  font-size: .8em;
+  font-weight: lighter;
 }
 
 .functions {
   margin: 0;
-  font-size: 0.9em;
-  font-style: italic;
+  font-size: 0.7em;
+  font-style: lighter;
 }
 
 .year {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }

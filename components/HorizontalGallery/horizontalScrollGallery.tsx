@@ -9,7 +9,7 @@ import { Video } from "../../types/types";
 
 import { useScroll } from "framer-motion";
 import { useRef } from "react";
-import { AdvancedImage } from '@cloudinary/react';
+import { AdvancedImage, lazyload } from '@cloudinary/react';
 import { CldVideoPlayer } from "next-cloudinary";
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
@@ -174,13 +174,14 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
                     // whileHover={{ scale: 1.1 }}  
                     style={{ placeContent: 'center' }}>
                     <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} />
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} 
+                      plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}/>
                     </div>
                   </motion.div>
                 ))}
-                {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
+                {/* {Array.from({ length: expectedPhotos - photos.length }, (_, index) => (
                   <div className={styles.thumbnailPlaceholder} key={`placeholder-${index}`} />
-                ))}
+                ))} */}
               </div>
               <motion.div
                 initial={{ opacity: 0 }}
