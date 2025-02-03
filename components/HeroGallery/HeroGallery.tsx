@@ -17,6 +17,7 @@ interface GroupConfig {
 const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, filterState }) => {
 
   let groupConfigs: GroupConfig[] = [];
+  console.log("Photos displayed")
   console.log(photos)
   if (filterState === 'ALL') {
     groupConfigs = [
@@ -34,17 +35,19 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, filterSta
     ];
   } else if (filterState === 'CLOVERPRODUCTION') {
     groupConfigs = [
-      { start: 12, end: 16, groupIndex: 0 },
-      { start: 0, end: 6, groupIndex: 1 },
-      { start: 6, end: 12, groupIndex: 2 },
-      // { start: 9, end: 12, groupIndex: 0 },
+      { start: 0, end: 5, groupIndex: 0 },
+      { start: 5, end: 12, groupIndex: 1 },
+      { start: 12, end: 17, groupIndex: 2 },
+     // { start: 10, end: 15, groupIndex: 3 },
+      { start: 17, end: 20, groupIndex: 4 },
       // { start: 12, end: 18, groupIndex: 0 },
     ];
   } else if (filterState === 'VIDEO') {
     groupConfigs = [
-      { start: 12, end: 16, groupIndex: 0 },
-      { start: 0, end: 6, groupIndex: 1 },
-      { start: 6, end: 12, groupIndex: 2 },
+      { start: 0, end: 5, groupIndex: 0 },
+      { start: 5, end: 10, groupIndex: 1 },
+      { start: 10, end: 17, groupIndex: 2},
+      { start: 17, end: 18, groupIndex: 3 },
     ];
   }
   
@@ -52,7 +55,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, filterSta
     photos: photos.slice(start, end),
     groupIndex,
   }));
-
+console.log("Groups")
 console.log(groups)
 
   return (

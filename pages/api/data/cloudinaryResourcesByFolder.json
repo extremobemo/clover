@@ -22,6 +22,18 @@
       }
     ]
   },
+  "COMPLEX_EMBELLISHMENT": {
+    "photos": [
+      "COMPLEX_EMBELLISHMENT_1",
+      "COMPLEX_EMBELLISHMENT_2",
+      "COMPLEX_EMBELLISHMENT_3",
+      "COMPLEX_EMBELLISHMENT_4",
+      "COMPLEX_EMBELLISHMENT_5",
+      "COMPLEX_EMBELLISHMENT_6"
+    ],
+    "videos" : [
+    ]
+  },
   "EEMCD-3": {
     "photos": [
       "EEMCD-0",
@@ -538,10 +550,17 @@
   },
   "SheckWesBeast_-8": {
     "photos": [
+      "BEAST_GIF",
       "BEAST_1",
       "BEAST_3"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "Beast",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "AngusCloudR.I.P-10": {
     "photos": [
@@ -737,9 +756,29 @@
   },
   "EE_GATORADE": {
     "photos": [
-      "EE_GATORADE"
+      "GATORADE_EE_6",
+      "GATORADE_EE_1",
+      "GATORADE_EE_3",
+      "GATORADE_EE_5",
+      "GATORADE_EE_GIF"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "GATORADE_EE_4",
+        "width": 1080,
+        "height": 1350
+      },
+      {
+        "publicId": "GATORADE_EE_2",
+        "width": 1080,
+        "height": 1350
+      },
+      {
+        "publicId": "GATORADE_EE_7",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "HELMUT_LANG": {
     "photos": [
@@ -777,6 +816,7 @@
   },
   "AMINE_NEW_BALANCE": {
     "photos": [
+      "AMINE_NEW_BALANCE_GIF",
       "AMINE_NEW_BALANCE_0",
       "AMINE_NEW_BALANCE_1",
       "AMINE_NEW_BALANCE_2",
@@ -801,7 +841,13 @@
       "AMINE_NEW_BALANCE_21",
       "AMINE_NEW_BALANCE_22"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "AMINE_NEW_BALANCE",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "LULU_LEMON_DISNEY": {
     "photos": [
@@ -811,12 +857,19 @@
   },
   "DIEUSON_OCTAVE": {
     "photos": [
+      "KODAK_GIF",
       "DIEUSON_OCTAVE_0",
       "DIEUSON_OCTAVE_1",
       "DIEUSON_OCTAVE_2",
       "DIEUSON_OCTAVE_5"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "KODAK_VIDEO",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "ZEXinthestu-7": {
     "photos": [
