@@ -1,29 +1,12 @@
+import styles from "../../styles/InfoContact.module.css"
+
+
 export default function Coffee() {
     return (
 
-        <div style={{
-            maxWidth: '600px',
-            marginLeft: '25px',
-            marginRight: '25px',
-            marginBottom: '25px',
-            marginTop: '10px',
-            padding: "20px",
-            backgroundColor: '#f5f6f2',
-            background: '#f5f6f2',
-            //background: 'linear-gradient(to bottom, #ffffff, #f0f0f0)',
-            borderRadius: '4px', // Slightly rounded corners for a card-like effect
-            boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.25)', // More shadow at the bottom
-            border: '1px solid rgba(0, 0, 0, 0.05)'
-        }}>
+        <div className={styles.businessCard} >
             {/* <h3 style={{ textAlign: 'center' }}>INFO/CONTACT</h3> */}
-            <p style={{
-                textAlign: 'center',
-                fontSize: 'clamp(1rem, 1.8vw, 1.5rem)',
-                fontFamily: "'Georgia', serif", // Adds a slightly "printed" look
-                color: "#525050", // Softer than pure black
-                letterSpacing: "0.5px", // Tiny spacing for a premium feel
-                textShadow: "0px 1px 1px rgba(0, 0, 0, 0.5)" // Soft ink effect
-            }}>Clover is a Global Creative Studio and Production Company founded in New York City by{' '}
+            <p className={styles.cardText}>Clover is a Global Creative Studio and Production Company founded in New York City by{' '}
                 <a
                     href="https://www.youtube.com/watch?v=Xgc3tJmlYBE&t=103s"
                     target="_blank"
