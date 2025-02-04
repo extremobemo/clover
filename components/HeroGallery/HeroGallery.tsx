@@ -36,11 +36,9 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, filterSta
   } else if (filterState === 'CLOVERPRODUCTION') {
     groupConfigs = [
       { start: 0, end: 5, groupIndex: 0 },
-      { start: 5, end: 12, groupIndex: 1 },
-      { start: 12, end: 17, groupIndex: 2 },
-     // { start: 10, end: 15, groupIndex: 3 },
-      { start: 17, end: 20, groupIndex: 4 },
-      // { start: 12, end: 18, groupIndex: 0 },
+      { start: 6, end: 13, groupIndex: 1 },
+      { start: 13, end: 18, groupIndex: 2 },
+      { start: 5, end: 6, groupIndex: 4 },
     ];
   } else if (filterState === 'VIDEO') {
     groupConfigs = [
