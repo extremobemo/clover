@@ -59,27 +59,30 @@ useEffect(() => {
   return () => window.removeEventListener('resize', handleResize);
 }, []);
 
-const calculateHeight = (columnLength: number, groupIndex: number) => {
+const calculateHeight = (columnLength: number, groupIndex: number) => { // For hero groups
+  const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
 
-  if(filterState === "VIDEO" && groupIndex == 0) {
-    return '37vw';
-  }
-  
-  if(filterState === "VIDEO" && groupIndex == 1) {
-    return '50vw';
-  }
+  const heights: Record<"VIDEO" | "CLOVERPRODUCTION", { mobile: string[]; desktop: string[] }> = {
+    VIDEO: { mobile: ['60vw', '65vw', '100vw'], desktop: ['55vw', '65vw', '100vw'] },
+    CLOVERPRODUCTION: { mobile: ['65vw', '100vw', '75vw'], desktop: ['55vw', '80vw', '70vw'] },
+  };
 
-  if(filterState === "VIDEO" && groupIndex == 2) {
-    return '70vw';
-  }
-  // else if(filterState === "VIDEO" && groupIndex == 2) {
-  //   return '80vw';
-  // }
-  // Fallback height if windowWidth is not yet available
-  const width = windowWidth || 1024; // Default width for SSR
-  return width <= 768 ? `${columnLength * 40}vw` : `${columnLength * 30}vw`;
-  // return `${columnLength * 40}vw`;
+  return heights[filterState as keyof typeof heights]?.[isMobile ? 'mobile' : 'desktop'][groupIndex] 
+    ?? `${columnLength * (isMobile ? 40 : 30)}vw`;
 };
+
+
+const calculateWidth = (groupIndex: number) => { // For wide photos
+  const heights: Record<"VIDEO" | "CLOVERPRODUCTION", string[]> = {
+    VIDEO: ['50dvw', '50dvw', '50dvw', '30dvw'],
+    CLOVERPRODUCTION: ['30dvw', '50dvw', '70dvw', '10dvw'],
+  };
+
+  const fallbackWidth = windowWidth ?? 1024; // Default to 1024 if null
+  return heights[filterState as keyof typeof heights]?.[groupIndex] ?? 
+  `${ fallbackWidth <= 768 ? 70 : 50}vw`;
+};
+
   
 
   return (
@@ -89,7 +92,7 @@ const calculateHeight = (columnLength: number, groupIndex: number) => {
 
         {/* Wide photo spanning both columns */}
         {group.widePhoto.length > 0 && (
-            <div className={styles.widePhotoContainer}>
+            <div className={styles.widePhotoContainer} style={{width: calculateWidth(groupIndex)}}>
               {group.widePhoto.map(photo => (
                 <div style={{ width: '100%', paddingTop: '4px' }}>
                   <AdvancedImage 
