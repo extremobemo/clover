@@ -49,7 +49,8 @@ export default function Coffee() {
                     alt="Clover NYC"
                     style={{
                         width: '100px',
-                        display: 'block'
+                        display: 'block',
+                        //marginBottom: '10px'
                     }} />
             </div>
 
