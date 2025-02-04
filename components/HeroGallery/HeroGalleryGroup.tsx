@@ -10,18 +10,18 @@ interface HeroGalleryProps {
   photos: Photo[],
   heightData: number[][][],
   groupIndex: number;
+  filterState: String;
 }
 
 const preventRightClick = (e: React.MouseEvent) => {
   e.preventDefault();
 }
 
-const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, groupIndex }) => {
+const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, groupIndex, filterState }) => {
   
  const { openModal } = useAppContext();
  const [windowWidth, setWindowWidth] = useState<number | null>(null);
  const test = groupIndex
-
  
  const getColumnGroups = () => {
   const groups = [];
@@ -59,7 +59,22 @@ useEffect(() => {
   return () => window.removeEventListener('resize', handleResize);
 }, []);
 
-const calculateHeight = (columnLength: number) => {
+const calculateHeight = (columnLength: number, groupIndex: number) => {
+
+  if(filterState === "VIDEO" && groupIndex == 0) {
+    return '37vw';
+  }
+  
+  if(filterState === "VIDEO" && groupIndex == 1) {
+    return '50vw';
+  }
+
+  if(filterState === "VIDEO" && groupIndex == 2) {
+    return '70vw';
+  }
+  // else if(filterState === "VIDEO" && groupIndex == 2) {
+  //   return '80vw';
+  // }
   // Fallback height if windowWidth is not yet available
   const width = windowWidth || 1024; // Default width for SSR
   return width <= 768 ? `${columnLength * 40}vw` : `${columnLength * 30}vw`;
@@ -69,7 +84,7 @@ const calculateHeight = (columnLength: number) => {
 
   return (
     <div className={styles.heroGalleryContainer}>
-      {getColumnGroups().map((group, groupIndex) => (
+      {getColumnGroups().map((group, index) => (
         <React.Fragment key={`group-${groupIndex}`}> 
 
         {/* Wide photo spanning both columns */}
@@ -89,7 +104,7 @@ const calculateHeight = (columnLength: number) => {
           
        {/* VARYING HEIGHT OF COLUMNS BASED ON NUMBER OF PHOTOS IN THE COLUMN
         if there are 5 photos, height stays the same, */}
-          <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length), }}> 
+          <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length, groupIndex), }}> 
 
           {/* Left Column */}
           <div className={styles.leftColumnContainer}>
