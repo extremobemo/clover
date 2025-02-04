@@ -50,8 +50,8 @@ const photoHeightData = {
   productionPhotosHeightData: [
     [
       // Group 1
-      [1, 25, 5, 5, 5],   // Column 1
-      [0, 20, 5, 5, 5],    // Column 2
+      [0, 35, 5, 5, 5],   // Column 1
+      [0, 30, 5, 5, 5],    // Column 2
     ],
     [
       // Group 2
