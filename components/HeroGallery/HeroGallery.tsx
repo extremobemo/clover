@@ -64,6 +64,7 @@ console.log(groups)
           photos={group.photos}
           heightData={heightData}
           groupIndex={group.groupIndex}
+          filterState={filterState}
         />
       ))}
     </div>

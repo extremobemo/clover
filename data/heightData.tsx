@@ -88,8 +88,8 @@ const photoHeightData = {
     ],
     [
       // Group 3
-      [1, 20, 5, 5, 5],   // Column 1
-      [1, 25, 5, 5, 5],    // Column 2
+      [10, 35, 30, 0, 0],   // Column 1
+      [1, 20, 5, 5, 5],    // Column 2
     ],
     [
       // Group 4
