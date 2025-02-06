@@ -4,9 +4,9 @@ import styles from "../../styles/InfoContact.module.css"
 export default function Coffee() {
     return (
 
-        <div className={styles.businessCard} >
+        <div className={styles.notABusinessCard} >
             {/* <h3 style={{ textAlign: 'center' }}>INFO/CONTACT</h3> */}
-            <p className={styles.cardText}>Clover is a Global Creative Studio and Production Company founded in New York City by{' '}
+            <p className={styles.newText}>Clover is a Global Creative Studio and Production Company founded in New York City by{' '}
                 <a
                     href="https://www.youtube.com/watch?v=Xgc3tJmlYBE&t=103s"
                     target="_blank"
