@@ -98,7 +98,7 @@ const calculateHeight = (columnLength: number) => {
                 style={{ height: `${heightData[test][0][index]}%` }}
               >
                 <AdvancedImage
-                  onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
+                  className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
                   cldImg={photo.image} style={{ objectFit: 'contain', objectPosition: 'right' }}
                 />
               </div>
@@ -112,7 +112,7 @@ const calculateHeight = (columnLength: number) => {
                  style={{ height: `${heightData[test][1][index]}%` }}
                 >
                   <AdvancedImage
-                    onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
+                    className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
                     cldImg={photo.image} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
                     plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}
                   />
