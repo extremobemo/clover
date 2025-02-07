@@ -1,53 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { AdvancedImage, lazyload } from '@cloudinary/react';
-import { Photo } from '../../types/types';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { GalleryGroup } from '../../types/types';
 
 import styles from '../../styles/HeroGallery.module.css'
 import { useAppContext } from '../../context/AppContext';
+import { auto } from '@cloudinary/url-gen/actions/resize';
 
 interface HeroGalleryProps {
-  photos: Photo[],
-  heightData: number[][][],
+  group: GalleryGroup;
+  filterState: string;
   groupIndex: number;
-  filterState: String;
 }
 
 const preventRightClick = (e: React.MouseEvent) => {
   e.preventDefault();
 }
+const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupIndex}) => {
 
-const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, groupIndex, filterState }) => {
+  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
   
  const { openModal } = useAppContext();
  const [windowWidth, setWindowWidth] = useState<number | null>(null);
- const test = groupIndex
- 
- const getColumnGroups = () => {
-  const groups = [];
-  for (let i = 0; i < photos.length; i += 11) {
-    // Manually set the wide photo to be the first in each group
-    const leftColumn: Photo[] = [];
-    const rightColumn: Photo[] = [];
-
-    // Use the first photo in each group as the wide photo
-    const widePhoto = photos[i] ? [photos[i]] : [];
-
-    // Populate columns with the remaining photos
-    for (let j = i + 1; j < i + 11; j++) {
-      if (photos[j]) {
-        if (j % 2 === 0) {
-          leftColumn.push(photos[j]);
-        } else {
-          rightColumn.push(photos[j]);
-        }
-      }
-    }
-
-    groups.push({ leftColumn, rightColumn, widePhoto });
-  }
-  return groups;
-};
 
 useEffect(() => {
   // Set window width only on the client
@@ -75,7 +49,7 @@ const calculateHeight = (columnLength: number, groupIndex: number) => { // For h
 const calculateWidth = (groupIndex: number) => { // For wide photos
   const heights: Record<"VIDEO" | "CLOVERPRODUCTION", string[]> = {
     VIDEO: ['50dvw', '50dvw', '50dvw', '30dvw'],
-    CLOVERPRODUCTION: ['30dvw', '50dvw', '70dvw', '10dvw'],
+    CLOVERPRODUCTION: ['30dvw', '50dvw', '70dvw', '60dvw'],
   };
 
   const fallbackWidth = windowWidth ?? 1024; // Default to 1024 if null
@@ -85,23 +59,27 @@ const calculateWidth = (groupIndex: number) => { // For wide photos
 
   
 
+const generateUrl = (publicId : string ) => {
+  return publicId.includes('_GIF')
+              ? cld.image(publicId).resize(auto())
+              : cld.image(publicId).resize(auto().width(1000));
+}
+  
   return (
     <div className={styles.heroGalleryContainer}>
-      {getColumnGroups().map((group, index) => (
-        <React.Fragment key={`group-${groupIndex}`}> 
+      
+        <React.Fragment key={`group-${group}`}> 
 
         {/* Wide photo spanning both columns */}
-        {group.widePhoto.length > 0 && (
+        {group.widePhoto  && (
             <div className={styles.widePhotoContainer} style={{width: calculateWidth(groupIndex)}}>
-              {group.widePhoto.map(photo => (
                 <div style={{ width: '100%', paddingTop: '4px' }}>
                   <AdvancedImage 
-                    onClick={() => openModal('gallery', photo.folder)}
-                    onContextMenu={preventRightClick} cldImg={photo.image} 
+                    onClick={() => openModal('gallery', group.widePhoto.folderName)}
+                    onContextMenu={preventRightClick} cldImg={generateUrl(group.widePhoto.publicId)} 
                     className={styles.widePhoto}
                   />
                 </div>
-              ))}
             </div>
           )}
           
@@ -113,11 +91,11 @@ const calculateWidth = (groupIndex: number) => { // For wide photos
           <div className={styles.leftColumnContainer}>
             {group.leftColumn.map((photo, index) => (
               <div className={styles.leftColumnFlex}
-                style={{ height: `${heightData[test][0][index]}%` }}
+                style={{ height: `${group.leftColumnHeights[index]}%` }}
               >
                 <AdvancedImage
-                  onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
-                  cldImg={photo.image} style={{ objectFit: 'contain', objectPosition: 'right' }}
+                  onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
+                  cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'right' }}
                 />
               </div>
             ))}
@@ -127,11 +105,11 @@ const calculateWidth = (groupIndex: number) => { // For wide photos
             <div className={styles.rightColumnContainer}>
               {group.rightColumn.map((photo, index) => (
                 <div className={styles.rightColumnFlex}
-                 style={{ height: `${heightData[test][1][index]}%` }}
+                 style={{ height: `${group.rightColumnHeights[index]}%` }}
                 >
                   <AdvancedImage
-                    onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
-                    cldImg={photo.image} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
+                    onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
+                    cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
                     plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}
                   />
                 </div>
@@ -139,7 +117,6 @@ const calculateWidth = (groupIndex: number) => { // For wide photos
           </div>
         </div>
         </React.Fragment>
-      ))}
     </div>
   );
 };
