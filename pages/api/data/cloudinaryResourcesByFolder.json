@@ -22,6 +22,26 @@
       }
     ]
   },
+  "NIKE_DUNK": {
+    "photos": [
+      "NikeDunk_1",
+      "NikeDunk_2",
+      "NikeDunk_3",
+      "NikeDunk_4",
+      "NikeDunk_5",
+      "NikeDunk_6",
+      "NikeDunk_7",
+      "NikeDunk_8",
+      "NikeDunk_9",
+      "NikeDunk_10",
+      "NikeDunk_11",
+      "NikeDunk_12",
+      "NikeDunk_13",
+      "NikeDunk_14"
+    ],
+    "videos": [
+    ]
+  },
   "COMPLEX_EMBELLISHMENT": {
     "photos": [
       "COMPLEX_EMBELLISHMENT_1",
@@ -36,6 +56,7 @@
   },
   "EEMCD-3": {
     "photos": [
+      "EEMCD_GIF",
       "EEMCD-0",
       "EEMCD-1",
       "EEMCD-2"
@@ -871,6 +892,27 @@
       }
     ]
   },
+  "GiggsBBC": {
+    "photos": [
+      "GiggsBBC_GIF",
+      "GiggsBBC_1",
+      "GiggsBBC_2",
+      "GiggsBBC_3",
+      "GiggsBBC_4",
+      "GiggsBBC_5",
+      "GiggsBBC_6",
+      "GiggsBBC_7",
+      "GiggsBBC_8",
+      "GiggsBBC_9"
+    ],
+    "videos": [
+      {
+        "publicId": "GiggsBBC_10",
+        "width": 960,
+        "height": 720
+      }
+    ]
+  },
   "ZEXinthestu-7": {
     "photos": [
       "ZEXinthestu-0",
@@ -880,6 +922,19 @@
       "ZEXinthestu-4",
       "ZEXinthestu-5",
       "ZEXinthestu-6"
+    ],
+    "videos": []
+  },
+  "NBAxHENNY": {
+    "photos": [
+      "NBAxHENNY_1",
+      "NBAxHENNY_2",
+      "NBAxHENNY_3",
+      "NBAxHENNY_4",
+      "NBAxHENNY_5",
+      "NBAxHENNY_6",
+      "NBAxHENNY_7",
+      "NBAxHENNY_8"
     ],
     "videos": []
   },
@@ -2020,6 +2075,7 @@
   },
   "BeatsCampaign_-17": {
     "photos": [
+      "BeatsCampaign_GIF",
       "BeatsCampaign_-0",
       "BeatsCampaign_-1",
       "BeatsCampaign_-2",
