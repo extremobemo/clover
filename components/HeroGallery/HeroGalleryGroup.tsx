@@ -37,8 +37,8 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
     const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
 
     const heights: Record<"VIDEO" | "CLOVERPRODUCTION", { mobile: string[]; desktop: string[] }> = {
-      VIDEO: { mobile: ['60vw', '65vw', '100vw'], desktop: ['55vw', '65vw', '100vw'] },
-      CLOVERPRODUCTION: { mobile: ['65vw', '100vw', '75vw'], desktop: ['55vw', '80vw', '70vw'] },
+      VIDEO: { mobile: ['60vw', '65vw', '100vw'], desktop: ['70vw', '65vw', '60vw'] },
+      CLOVERPRODUCTION: { mobile: ['65vw', '100vw', '75vw'], desktop: ['75vw', '80vw', '120vw'] },
     };
 
     return heights[filterState as keyof typeof heights]?.[isMobile ? 'mobile' : 'desktop'][groupIndex]
@@ -48,8 +48,8 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
 
   const calculateWidth = (groupIndex: number) => { // For wide photos
     const heights: Record<"VIDEO" | "CLOVERPRODUCTION", string[]> = {
-      VIDEO: ['50dvw', '50dvw', '50dvw', '30dvw'],
-      CLOVERPRODUCTION: ['30dvw', '50dvw', '70dvw', '60dvw'],
+      VIDEO: ['50dvw', '50dvw', '48dvw', '40dvw'],
+      CLOVERPRODUCTION: ['45dvw', '50dvw', '70dvw', '60dvw'],
     };
 
     const fallbackWidth = windowWidth ?? 1024; // Default to 1024 if null
@@ -88,36 +88,38 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
         {group.leftColumn.length > 0 && group.rightColumn.length > 0 &&
          <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length, groupIndex), }}>
 
-          {/* Left Column */}
-          <div className={styles.leftColumnContainer}>
-            {group.leftColumn.map((photo, index) => (
-              <div className={styles.leftColumnFlex}
-                style={{ height: `${group.leftColumnHeights[index]}%` }}
-              >
-                <AdvancedImage
-                  className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
-                  cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'right' }}
-                />
-              </div>
-            ))}
-          </div>
+         {/* Left Column */}
+         <div className={styles.leftColumnContainer}>
+           {group.leftColumn.map((photo, index) => (
+             <div className={styles.leftColumnFlex}
+               style={{ height: `${group.leftColumnHeights[index]}%` }}
+             >
+               <AdvancedImage
+                 className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
+                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'right' }}
+               />
+             </div>
+           ))}
+         </div>
 
-          {/* Right Column */}
-            <div className={styles.rightColumnContainer}>
-              {group.rightColumn.map((photo, index) => (
-                <div className={styles.rightColumnFlex}
-                 style={{ height: `${group.rightColumnHeights[index]}%` }}
-                >
-                  <AdvancedImage
-                    className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
-                    cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
-                    plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}
-                  />
-                </div>
-              ))}
-          </div>
-        </div>
-        </React.Fragment>
+         {/* Right Column */}
+         <div className={styles.rightColumnContainer}>
+           {group.rightColumn.map((photo, index) => (
+             <div className={styles.rightColumnFlex}
+               style={{ height: `${group.rightColumnHeights[index]}%` }}
+             >
+               <AdvancedImage
+                 className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
+                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'left' }}
+                 plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
+               />
+             </div>
+           ))}
+         </div>
+       </div>
+        }
+       
+      </React.Fragment>
     </div>
   );
 };

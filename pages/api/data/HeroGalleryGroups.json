@@ -530,16 +530,16 @@
         }
       ],
       "leftColumnHeights": [
-        1,
-        25,
-        5,
+        15,
+        14,
+        0,
         5,
         5
       ],
       "rightColumnHeights": [
-        0,
+        10,
+        10,
         20,
-        5,
         5,
         5
       ]
@@ -586,17 +586,17 @@
         }
       ],
       "leftColumnHeights": [
-        2,
-        20,
         10,
-        5,
+        25,
+        10,
+        6,
         5
       ],
       "rightColumnHeights": [
-        0,
-        1,
-        25,
-        5,
+        15,
+        15,
+        10,
+        10,
         5
       ]
     },
@@ -642,18 +642,18 @@
         }
       ],
       "leftColumnHeights": [
-        15,
+        12,
         5,
         5,
         5,
         5
       ],
       "rightColumnHeights": [
-        35,
-        2,
+        10,
         5,
-        5,
-        5
+        15,
+        3,
+        0
       ]
     }
   ],
@@ -694,11 +694,12 @@
       ],
       "leftColumnHeights": [
         2,
-        20
+        10
       ],
       "rightColumnHeights": [
-        12,
-        1
+        5,
+        25,
+        5
       ]
     },
     {
@@ -745,16 +746,16 @@
         }
       ],
       "leftColumnHeights": [
-        1,
-        20,
+        12,
+        10,
         5,
         5,
         5
       ],
       "rightColumnHeights": [
-        1,
-        25,
-        5,
+        15,
+        13,
+        10,
         5,
         5
       ]
