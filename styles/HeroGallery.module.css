@@ -57,9 +57,14 @@
 .widePhoto {
   width: 50dvw;
   max-height: 80dvw; 
+  cursor: pointer;
   @media (max-width: 768px) {
     max-height: 50dvw;
     width: 70dvw;
   }
   object-fit: cover;
+}
+/* more specific class to add pointer cursor to non-wide photos */
+.clickablePhoto {
+  cursor: pointer;
 }
