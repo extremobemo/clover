@@ -12,7 +12,6 @@ import styles from '../styles/Index.module.css'
 import cloverProductions from './cloverProductions.json'
 import cloverVideos from './cloverVideos.json'
 
-import heightData from '../data/heightData'
 import IndexFooterButton from '../components/common/IndexFooterButton';
 import ScrollIndicator from '../components/common/ScrollIndicator';
 import { useScroll } from "framer-motion";
@@ -21,13 +20,6 @@ interface Photo {
   image: CloudinaryImage;
   folder: string;
 }
-
-const CloverProductionsSet = new Set([ ...cloverProductions ]);
-const CloverVideosSet = new Set([ ...cloverVideos ]);
-
-const allPhotosHeightData = heightData.allPhotosHeightData;
-const productionPhotosHeightData = heightData.productionPhotosHeightData;
-const videoPhotosHeightData = heightData.videoPhotosHeightData;
 
 const HeroPage: React.FC = () => {
   const router = useRouter();

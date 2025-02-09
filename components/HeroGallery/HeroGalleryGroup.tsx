@@ -37,8 +37,8 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
     const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
 
     const heights: Record<"VIDEO" | "CLOVERPRODUCTION", { mobile: string[]; desktop: string[] }> = {
-      VIDEO: { mobile: ['60vw', '65vw', '100vw'], desktop: ['70vw', '65vw', '60vw'] },
-      CLOVERPRODUCTION: { mobile: ['65vw', '100vw', '75vw'], desktop: ['75vw', '80vw', '120vw'] },
+      VIDEO: { mobile: ['110vw', '65vw', '75vw'], desktop: ['70vw', '65vw', '60vw'] },
+      CLOVERPRODUCTION: { mobile: ['120vw', '110vw', '140vw'], desktop: ['75vw', '80vw', '120vw'] },
     };
 
     return heights[filterState as keyof typeof heights]?.[isMobile ? 'mobile' : 'desktop'][groupIndex]
