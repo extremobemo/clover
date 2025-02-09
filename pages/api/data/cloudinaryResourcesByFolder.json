@@ -22,8 +22,41 @@
       }
     ]
   },
+  "NIKE_DUNK": {
+    "photos": [
+      "NikeDunk_1",
+      "NikeDunk_2",
+      "NikeDunk_3",
+      "NikeDunk_4",
+      "NikeDunk_5",
+      "NikeDunk_6",
+      "NikeDunk_7",
+      "NikeDunk_8",
+      "NikeDunk_9",
+      "NikeDunk_10",
+      "NikeDunk_11",
+      "NikeDunk_12",
+      "NikeDunk_13",
+      "NikeDunk_14"
+    ],
+    "videos": [
+    ]
+  },
+  "COMPLEX_EMBELLISHMENT": {
+    "photos": [
+      "COMPLEX_EMBELLISHMENT_1",
+      "COMPLEX_EMBELLISHMENT_2",
+      "COMPLEX_EMBELLISHMENT_3",
+      "COMPLEX_EMBELLISHMENT_4",
+      "COMPLEX_EMBELLISHMENT_5",
+      "COMPLEX_EMBELLISHMENT_6"
+    ],
+    "videos" : [
+    ]
+  },
   "EEMCD-3": {
     "photos": [
+      "EEMCD_GIF",
       "EEMCD-0",
       "EEMCD-1",
       "EEMCD-2"
@@ -538,10 +571,17 @@
   },
   "SheckWesBeast_-8": {
     "photos": [
+      "BEAST_GIF",
       "BEAST_1",
       "BEAST_3"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "Beast",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "AngusCloudR.I.P-10": {
     "photos": [
@@ -737,9 +777,29 @@
   },
   "EE_GATORADE": {
     "photos": [
-      "EE_GATORADE"
+      "GATORADE_EE_6",
+      "GATORADE_EE_1",
+      "GATORADE_EE_3",
+      "GATORADE_EE_5",
+      "GATORADE_EE_GIF"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "GATORADE_EE_4",
+        "width": 1080,
+        "height": 1350
+      },
+      {
+        "publicId": "GATORADE_EE_2",
+        "width": 1080,
+        "height": 1350
+      },
+      {
+        "publicId": "GATORADE_EE_7",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "HELMUT_LANG": {
     "photos": [
@@ -777,6 +837,7 @@
   },
   "AMINE_NEW_BALANCE": {
     "photos": [
+      "AMINE_NEW_BALANCE_GIF",
       "AMINE_NEW_BALANCE_0",
       "AMINE_NEW_BALANCE_1",
       "AMINE_NEW_BALANCE_2",
@@ -801,7 +862,13 @@
       "AMINE_NEW_BALANCE_21",
       "AMINE_NEW_BALANCE_22"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "AMINE_NEW_BALANCE",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   },
   "LULU_LEMON_DISNEY": {
     "photos": [
@@ -811,12 +878,40 @@
   },
   "DIEUSON_OCTAVE": {
     "photos": [
+      "KODAK_GIF",
       "DIEUSON_OCTAVE_0",
       "DIEUSON_OCTAVE_1",
       "DIEUSON_OCTAVE_2",
       "DIEUSON_OCTAVE_5"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "KODAK_VIDEO",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "GiggsBBC": {
+    "photos": [
+      "GiggsBBC_GIF",
+      "GiggsBBC_1",
+      "GiggsBBC_2",
+      "GiggsBBC_3",
+      "GiggsBBC_4",
+      "GiggsBBC_5",
+      "GiggsBBC_6",
+      "GiggsBBC_7",
+      "GiggsBBC_8",
+      "GiggsBBC_9"
+    ],
+    "videos": [
+      {
+        "publicId": "GiggsBBC_10",
+        "width": 960,
+        "height": 720
+      }
+    ]
   },
   "ZEXinthestu-7": {
     "photos": [
@@ -827,6 +922,19 @@
       "ZEXinthestu-4",
       "ZEXinthestu-5",
       "ZEXinthestu-6"
+    ],
+    "videos": []
+  },
+  "NBAxHENNY": {
+    "photos": [
+      "NBAxHENNY_1",
+      "NBAxHENNY_2",
+      "NBAxHENNY_3",
+      "NBAxHENNY_4",
+      "NBAxHENNY_5",
+      "NBAxHENNY_6",
+      "NBAxHENNY_7",
+      "NBAxHENNY_8"
     ],
     "videos": []
   },
@@ -1967,6 +2075,7 @@
   },
   "BeatsCampaign_-17": {
     "photos": [
+      "BeatsCampaign_GIF",
       "BeatsCampaign_-0",
       "BeatsCampaign_-1",
       "BeatsCampaign_-2",

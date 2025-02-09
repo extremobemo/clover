@@ -46,7 +46,6 @@
   display: flex;
   justify-content: center;
   margin-top: 4px;
-  width: 50dvw;
   max-height: 80dvw; 
   margin: 0 auto;
   @media (max-width: 768px) {
@@ -55,12 +54,10 @@
 }
 
 .widePhoto {
-  width: 50dvw;
-  max-height: 80dvw; 
   cursor: pointer;
+  width: 100%;
   @media (max-width: 768px) {
     max-height: 50dvw;
-    width: 70dvw;
   }
   object-fit: cover;
 }

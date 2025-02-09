@@ -1,127 +1,125 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { AdvancedImage, lazyload } from '@cloudinary/react';
-import { Photo } from '../../types/types';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { GalleryGroup } from '../../types/types';
 
 import styles from '../../styles/HeroGallery.module.css'
 import { useAppContext } from '../../context/AppContext';
+import { auto } from '@cloudinary/url-gen/actions/resize';
 
 interface HeroGalleryProps {
-  photos: Photo[],
-  heightData: number[][][],
+  group: GalleryGroup;
+  filterState: string;
   groupIndex: number;
 }
 
 const preventRightClick = (e: React.MouseEvent) => {
   e.preventDefault();
 }
+const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupIndex }) => {
 
-const HeroGallery: React.FC<HeroGalleryProps> = ({ photos, heightData, groupIndex }) => {
-  
- const { openModal } = useAppContext();
- const [windowWidth, setWindowWidth] = useState<number | null>(null);
- const test = groupIndex
+  const cld = new Cloudinary({ cloud: { cloudName: 'ddlip2prr' } });
 
- 
- const getColumnGroups = () => {
-  const groups = [];
-  for (let i = 0; i < photos.length; i += 11) {
-    // Manually set the wide photo to be the first in each group
-    const leftColumn: Photo[] = [];
-    const rightColumn: Photo[] = [];
+  const { openModal } = useAppContext();
+  const [windowWidth, setWindowWidth] = useState<number | null>(null);
 
-    // Use the first photo in each group as the wide photo
-    const widePhoto = photos[i] ? [photos[i]] : [];
+  useEffect(() => {
+    // Set window width only on the client
+    setWindowWidth(window.innerWidth);
 
-    // Populate columns with the remaining photos
-    for (let j = i + 1; j < i + 11; j++) {
-      if (photos[j]) {
-        if (j % 2 === 0) {
-          leftColumn.push(photos[j]);
-        } else {
-          rightColumn.push(photos[j]);
-        }
-      }
-    }
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
 
-    groups.push({ leftColumn, rightColumn, widePhoto });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const calculateHeight = (columnLength: number, groupIndex: number) => { // For hero groups
+    const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
+
+    const heights: Record<"VIDEO" | "CLOVERPRODUCTION", { mobile: string[]; desktop: string[] }> = {
+      VIDEO: { mobile: ['110vw', '65vw', '75vw'], desktop: ['70vw', '65vw', '60vw'] },
+      CLOVERPRODUCTION: { mobile: ['120vw', '110vw', '140vw'], desktop: ['75vw', '80vw', '120vw'] },
+    };
+
+    return heights[filterState as keyof typeof heights]?.[isMobile ? 'mobile' : 'desktop'][groupIndex]
+      ?? `${columnLength * (isMobile ? 40 : 30)}vw`;
+  };
+
+
+  const calculateWidth = (groupIndex: number) => { // For wide photos
+    const heights: Record<"VIDEO" | "CLOVERPRODUCTION", string[]> = {
+      VIDEO: ['50dvw', '50dvw', '48dvw', '40dvw'],
+      CLOVERPRODUCTION: ['45dvw', '50dvw', '70dvw', '60dvw'],
+    };
+
+    const fallbackWidth = windowWidth ?? 1024; // Default to 1024 if null
+    return heights[filterState as keyof typeof heights]?.[groupIndex] ??
+      `${fallbackWidth <= 768 ? 70 : 50}vw`;
+  };
+
+
+
+  const generateUrl = (publicId: string) => {
+    return publicId.includes('_GIF')
+      ? cld.image(publicId).resize(auto())
+      : cld.image(publicId).resize(auto().width(1000));
   }
-  return groups;
-};
-
-useEffect(() => {
-  // Set window width only on the client
-  setWindowWidth(window.innerWidth);
-
-  const handleResize = () => setWindowWidth(window.innerWidth);
-  window.addEventListener('resize', handleResize);
-
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
-
-const calculateHeight = (columnLength: number) => {
-  // Fallback height if windowWidth is not yet available
-  const width = windowWidth || 1024; // Default width for SSR
-  return width <= 768 ? `${columnLength * 40}vw` : `${columnLength * 30}vw`;
-  // return `${columnLength * 40}vw`;
-};
-  
 
   return (
     <div className={styles.heroGalleryContainer}>
-      {getColumnGroups().map((group, groupIndex) => (
-        <React.Fragment key={`group-${groupIndex}`}> 
+
+      <React.Fragment key={`group-${group}`}>
 
         {/* Wide photo spanning both columns */}
-        {group.widePhoto.length > 0 && (
-            <div className={styles.widePhotoContainer}>
-              {group.widePhoto.map(photo => (
-                <div style={{ width: '100%', paddingTop: '4px' }}>
-                  <AdvancedImage 
-                    onClick={() => openModal('gallery', photo.folder)}
-                    onContextMenu={preventRightClick} cldImg={photo.image} 
-                    className={styles.widePhoto}
-                  />
-                </div>
-              ))}
+        {group.widePhoto && (
+          <div className={styles.widePhotoContainer} style={{ width: calculateWidth(groupIndex) }}>
+            <div style={{ width: '100%', paddingTop: '4px' }}>
+              <AdvancedImage
+                onClick={() => openModal('gallery', group.widePhoto.folderName)}
+                onContextMenu={preventRightClick} cldImg={generateUrl(group.widePhoto.publicId)}
+                className={styles.widePhoto}
+              />
             </div>
-          )}
-          
-       {/* VARYING HEIGHT OF COLUMNS BASED ON NUMBER OF PHOTOS IN THE COLUMN
+          </div>
+        )}
+
+        {/* VARYING HEIGHT OF COLUMNS BASED ON NUMBER OF PHOTOS IN THE COLUMN
         if there are 5 photos, height stays the same, */}
-          <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length), }}> 
+        {group.leftColumn.length > 0 && group.rightColumn.length > 0 &&
+         <div style={{ display: 'flex', gap: '8px', height: calculateHeight(group.leftColumn.length, groupIndex), }}>
 
-          {/* Left Column */}
-          <div className={styles.leftColumnContainer}>
-            {group.leftColumn.map((photo, index) => (
-              <div className={styles.leftColumnFlex}
-                style={{ height: `${heightData[test][0][index]}%` }}
-              >
-                <AdvancedImage
-                  className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
-                  cldImg={photo.image} style={{ objectFit: 'contain', objectPosition: 'right' }}
-                />
-              </div>
-            ))}
-          </div>
+         {/* Left Column */}
+         <div className={styles.leftColumnContainer}>
+           {group.leftColumn.map((photo, index) => (
+             <div className={styles.leftColumnFlex}
+               style={{ height: `${group.leftColumnHeights[index]}%` }}
+             >
+               <AdvancedImage
+                 className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
+                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'right' }}
+               />
+             </div>
+           ))}
+         </div>
 
-          {/* Right Column */}
-            <div className={styles.rightColumnContainer}>
-              {group.rightColumn.map((photo, index) => (
-                <div className={styles.rightColumnFlex}
-                 style={{ height: `${heightData[test][1][index]}%` }}
-                >
-                  <AdvancedImage
-                    className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folder)} onContextMenu={preventRightClick}
-                    cldImg={photo.image} style={{ objectFit: 'contain',  objectPosition: 'left'  }}
-                    plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}
-                  />
-                </div>
-              ))}
-          </div>
-        </div>
-        </React.Fragment>
-      ))}
+         {/* Right Column */}
+         <div className={styles.rightColumnContainer}>
+           {group.rightColumn.map((photo, index) => (
+             <div className={styles.rightColumnFlex}
+               style={{ height: `${group.rightColumnHeights[index]}%` }}
+             >
+               <AdvancedImage
+                 className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
+                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'left' }}
+                 plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
+               />
+             </div>
+           ))}
+         </div>
+       </div>
+        }
+       
+      </React.Fragment>
     </div>
   );
 };

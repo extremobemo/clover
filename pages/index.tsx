@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { scale } from '@cloudinary/url-gen/actions/resize';
-
-import PageTransition from "../components/common/PageTransition";
-import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
-import { auto } from '@cloudinary/url-gen/actions/resize';
 import Modal from '../components/HorizontalGallery/ModalGallery';
 import Curtain from '../components/Curtain';
 import HeroGallery from '../components/HeroGallery/HeroGallery';
-import { HeroImageData } from '../types/types';
+import { GalleryData, GalleryGroup, HeroImageData } from '../types/types';
 import { useAppContext } from '../context/AppContext';
 import CloverFooterButton from '../components/common/CloverFooterButton'
 import styles from '../styles/Index.module.css'
@@ -17,7 +12,6 @@ import styles from '../styles/Index.module.css'
 import cloverProductions from './cloverProductions.json'
 import cloverVideos from './cloverVideos.json'
 
-import heightData from '../data/heightData'
 import IndexFooterButton from '../components/common/IndexFooterButton';
 import ScrollIndicator from '../components/common/ScrollIndicator';
 import { useScroll } from "framer-motion";
@@ -27,25 +21,17 @@ interface Photo {
   folder: string;
 }
 
-const CloverProductionsSet = new Set([ ...cloverProductions ]);
-const CloverVideosSet = new Set([ ...cloverVideos ]);
-
-const allPhotosHeightData = heightData.allPhotosHeightData;
-const productionPhotosHeightData = heightData.productionPhotosHeightData;
-const videoPhotosHeightData = heightData.videoPhotosHeightData;
-
 const HeroPage: React.FC = () => {
   const router = useRouter();
   const { showModal, modalState, publicId, openModal, closeModal, heroFilterState } = useAppContext();
 
-  const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
+  const [allGroups, setAllGroups] = useState<GalleryGroup[]>([]);
 
-  const [productionPhotos, setProductionPhotos] = useState<Photo[]>([]);
-  const [videoPhotos, setVideoPhotos] = useState<Photo[]>([]);
+  const [productionGroups, setProductionGroups] = useState<GalleryGroup[]>([]);
 
-  const [visiblePhotos, setVisiblePhotos] = useState<Photo[]>([]);
+  const [videoGroups, setVideoGroups] = useState<GalleryGroup[]>([]);
 
-  const [heightData, setHeightData] = useState<number[][][]>(allPhotosHeightData);
+  const [visibleGroups, setVisibleGroups] = useState<GalleryGroup[]>([]);
 
   const [imageOffScreen, setImageOffScreen] = useState<boolean>(false);
 
@@ -75,35 +61,15 @@ const HeroPage: React.FC = () => {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await fetch('/api/photos');
-        const data = await response.json();
 
-        const cloudinaryPhotos: Photo[] = data.map((photo: HeroImageData) => {
-          const cloudImage: CloudinaryImage =
-            photo.public_id.includes('_GIF')
-              ? cld.image(photo.public_id).resize(auto())
-              : cld.image(photo.public_id).resize(auto().width(1000));
-          return {
-            image: cloudImage,
-            folder: photo.folder,
-          };
-        });
+        const groupsResponse = await fetch('/api/groups');
+        const groups : GalleryData = await groupsResponse.json();
 
-        setAllPhotos(cloudinaryPhotos);
+        setAllGroups(groups.allPhotosGroups)
+        setVisibleGroups(groups.allPhotosGroups);
 
-        let productionPhotos = cloudinaryPhotos.filter(photo => CloverProductionsSet.has(photo.folder));
-        setProductionPhotos(productionPhotos);
-
-        let videoPhotos = cloudinaryPhotos.filter(photo => CloverVideosSet.has(photo.folder));
-        setVideoPhotos(videoPhotos);
-
-        //TODO: once we have videos, will need to create a set of folder names kinda like we've got for CloverProductions 
-        // and use that to create the video set
-
-        //initialize photos to display as all photos
-        setVisiblePhotos(cloudinaryPhotos);
-
-        setHeightData(allPhotosHeightData);
+        setProductionGroups(groups.cloverProductionsGroups);
+        setVideoGroups(groups.videosGroups);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
@@ -117,22 +83,16 @@ const HeroPage: React.FC = () => {
     console.log(`heroFilterState updated: ${heroFilterState}`)
     switch (heroFilterState) {
       case 'ALL':
-        setVisiblePhotos(allPhotos);
-        setHeightData(allPhotosHeightData);
+        setVisibleGroups(allGroups);
         break;
       case 'CLOVERPRODUCTION':
-        setVisiblePhotos(productionPhotos);
-        setHeightData(productionPhotosHeightData);
-        setVisiblePhotos(productionPhotos)
+        setVisibleGroups(productionGroups);
         break;
       case 'VIDEO': //TODO: once we've created new set, utilize that.
-        setVisiblePhotos(videoPhotos);
-        setHeightData(videoPhotosHeightData);
-        setVisiblePhotos(videoPhotos)
+        setVisibleGroups(videoGroups);
         break;
       default:
-        setVisiblePhotos(allPhotos);
-        setHeightData(allPhotosHeightData);
+        setVisibleGroups(allGroups);
         break;
     }
     scrollTo(0,0)
@@ -162,7 +122,7 @@ const HeroPage: React.FC = () => {
         maxWidth: '100vw',
       }}>
 
-        <HeroGallery photos={visiblePhotos} heightData={heightData} filterState={heroFilterState} />
+        <HeroGallery galleryGroups={visibleGroups} filterState={heroFilterState}/>
 
       </div>
 
