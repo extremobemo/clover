@@ -46,16 +46,19 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
   };
 
 
-  const calculateWidth = (groupIndex: number) => { // For wide photos
-    const heights: Record<"VIDEO" | "CLOVERPRODUCTION", string[]> = {
-      VIDEO: ['50dvw', '50dvw', '48dvw', '40dvw'],
-      CLOVERPRODUCTION: ['45dvw', '50dvw', '70dvw', '60dvw'],
-    };
+  const calculateWidth = (groupIndex: number) => {
+    const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
 
+    const widths: Record<"VIDEO" | "CLOVERPRODUCTION", { mobile: string[]; desktop: string[] }> = {
+      VIDEO: { mobile: ['70vw', '65vw', '60vw', '70vw'], desktop: ['50dvw', '50dvw', '48dvw', '40dvw'] },
+      CLOVERPRODUCTION: { mobile: ['65vw', '70vw', '80vw', '75vw'], desktop: ['45dvw', '50dvw', '70dvw', '60dvw'] },
+    };
+  
     const fallbackWidth = windowWidth ?? 1024; // Default to 1024 if null
-    return heights[filterState as keyof typeof heights]?.[groupIndex] ??
+    return widths[filterState as keyof typeof widths]?.[isMobile ? 'mobile' : 'desktop'][groupIndex] ??
       `${fallbackWidth <= 768 ? 70 : 50}vw`;
   };
+  
 
 
 
