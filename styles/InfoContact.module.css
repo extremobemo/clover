@@ -1,0 +1,48 @@
+.businessCard {
+    width: fit-content;
+    min-width: 300px;
+    max-width: 700px;
+    aspect-ratio: 1.75; /* Enforces the landscape aspect ratio */
+    margin: 10px auto 25px; /* Centers card with space */
+    padding: 20px;
+    background-color: #f5f6f2;
+    background: linear-gradient(to bottom, #f5f6f2, #f0f0f0);
+    border-radius: 4px; /* Slightly rounded corners for a card-like effect */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25); /* More shadow at the bottom */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.notABusinessCard {
+    max-width: 700px;
+    margin: 10px auto 25px;
+    padding: 20px;
+}
+
+.newText {
+    text-align: center;
+    font-size:1.3rem;
+}
+
+.cardText {
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: Georgia, serif;
+    color: #525050;
+    letter-spacing: .5px;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 755px) {
+    .businessCard {
+        aspect-ratio: 0.54;
+        max-width: 300px;
+    }
+
+    .cardText {
+        font-size: 1rem;
+    }
+
+    .newText {
+        font-size: 1.2rem;
+    }
+}
