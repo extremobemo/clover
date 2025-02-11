@@ -78,7 +78,7 @@ const CloverEffect = () => {
     { x: -10, y: 20, rotation: -10 },        // O
     { x: 5, y: 20, rotation: 5 },     // V
     { x: 0, y: 20, rotation: 2 },      // E
-    { x: 0, y: -3, rotation: -3 },     // R
+    { x: 0, y: -3, rotation: -7 },     // R
   ];
 
   const getPositionStyle = (index : number) => {
@@ -112,7 +112,7 @@ const CloverEffect = () => {
 
     const maxScroll = windowHeight; 
     const opacity = Math.max(.95 - (scrollY / maxScroll) || 0, 0);
-    const scale = 1 + (scrollY * 0.001); // Adjust the factor for desired growth speed
+    const scale = 1.1 + (scrollY * 0.001); // Adjust the factor for desired growth speed
     const scale2 = 2; // Adjust the factor for desired growth speed
     const rotation = offsets[index].rotation; 
     const Yoffset = offsets[index].y;
@@ -120,7 +120,7 @@ const CloverEffect = () => {
 
     if (index === 2) { 
       return {
-        transform: `translate(${Xoffset + finalX}px, ${Yoffset + finalY}px) rotate(${rotation}deg)`,
+        
         // opacity: opacity,
         // scale: scale,
         transition: 'transform, opacity, scale',
@@ -148,12 +148,15 @@ const CloverEffect = () => {
         display: 'flex',
         justifyContent: 'space-evenly', // Natural spacing
         maxWidth: '50vw',
+        maxHeight: "475px",
         pointerEvents: 'none',
+        zIndex: 9
       }}>
        {letters.map((letter, index) => (
   <div
     key={index}
     style={{
+      maxWidth: '500px',
       position: 'absolute',
       ...getPositionStyle(index),
       willChange: 'transform',
@@ -162,8 +165,8 @@ const CloverEffect = () => {
   >
 {index === 2 ? (
       <motion.img
-        src={`/${letter}.webp`}
-        alt={letter}
+        src={`/${letter}.wefbp`}
+        alt={" "}
         style={{ width: '20vw', height: 'auto', maxWidth: '300px', willChange: 'transform', scale: 1.25 }}
       />
     ) : (
