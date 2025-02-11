@@ -44,31 +44,34 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen })
   return (
     <div id="curtain" className={styles.curtain}>
       <CloverEffect />
+  
       <div id="video_div" className={styles.videoDiv}>
-      <img
-        className={styles.fullscreenImage}
-        src="/bts.jpg"
-        alt="BTS" // Provide an alt text for accessibility
-        style={{ width: '100%', height: '100dvh' }} // Adjust the styles as needed
-      />
-
-<div className={styles.chevron}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M12 15.5a1 1 0 0 1-.707-.293l-5-5a1 1 0 0 1 1.414-1.414L12 13.086l4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5A1 1 0 0 1 12 15.5z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </div>
-
+        <img
+          className={styles.fullscreenImage}
+          src="/bts.jpg"
+          alt="BTS"
+          style={{ width: '100%', height: '100dvh' }}
+        />
+        
+        {/* "O" is now positioned in the center on top of everything */}
+        <img className={styles.letterO} src="/o.webp" alt="O" />
+  
+        <div className={styles.chevron}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12 15.5a1 1 0 0 1-.707-.293l-5-5a1 1 0 0 1 1.414-1.414L12 13.086l4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5A1 1 0 0 1 12 15.5z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
+      </div>
     </div>
-  );
+  );  
 };
 
 export default Curtain;
