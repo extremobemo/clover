@@ -32,11 +32,15 @@ const menuVariants: Variants = {
 
 
 export default function IndexFooterButton() {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const { handleIndexMenuClick, heroFilterState } = useAppContext();
+  const { handleIndexMenuClick, heroFilterState, showIndexMenuInitially } = useAppContext();
+
+  const [isMenuOpen, setMenuOpen] = useState(showIndexMenuInitially);
+  
   const menuRef = useRef<HTMLDivElement>(null); // Typed ref for the menu container
 
-
+  useEffect(() => {
+    setMenuOpen(showIndexMenuInitially)
+  }, [showIndexMenuInitially])
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
@@ -47,8 +51,8 @@ export default function IndexFooterButton() {
         setMenuOpen(false);
       }
     };
-
-    if (isMenuOpen) {
+    //don't add this listener when we're trying to show users where menus are
+    if (isMenuOpen && !showIndexMenuInitially) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);

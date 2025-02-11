@@ -1,6 +1,7 @@
 import CloverEffect from '../components/letters';
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Curtain.module.css';
+import { useAppContext } from '../context/AppContext';
 
 interface CurtainProps  {
   imageOffScreen : boolean,
@@ -8,7 +9,8 @@ interface CurtainProps  {
 };
 
 const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen }) => {
-  
+  const {setMenuVisibility} = useAppContext();
+
   useEffect(() => {
     const curtain = document.getElementById('curtain');
 
@@ -16,6 +18,8 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen })
 
     if (savedImageOffScreen) {
       setImageOffScreen(JSON.parse(savedImageOffScreen));
+      //if we're not showing curtain, menus should start in hidden state
+      setMenuVisibility(false);
     }
   
     const handleScroll = () => {
@@ -25,6 +29,8 @@ const Curtain : React.FC<CurtainProps> = ({ imageOffScreen, setImageOffScreen })
       if (scrollPosition && scrollPosition > threshold && !sessionStorage.getItem('imageOffScreen')) {
         setImageOffScreen(true);
         sessionStorage.setItem('imageOffScreen', JSON.stringify(true));
+        //hide menus once curtain is all the way up
+        setMenuVisibility(false);
       }
     };
   

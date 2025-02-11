@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import styles from '../../styles/CloverFooter.module.css';
 import { useAppContext } from '../../context/AppContext';
@@ -32,10 +32,16 @@ const menuVariants: Variants = {
 
 
 export default function CloverFooterButton() {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const { openModal } = useAppContext();
+  const { openModal, showCloverMenuInitially } = useAppContext();
+
+  const [isMenuOpen, setMenuOpen] = useState(showCloverMenuInitially);
+ 
   const menuRef = useRef<HTMLDivElement>(null); // Typed ref for the menu container
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
+
+  useEffect(() => {
+    setMenuOpen(showCloverMenuInitially)
+  }, [showCloverMenuInitially])
 
   // Close menu if clicked outside
   useEffect(() => {
@@ -44,8 +50,8 @@ export default function CloverFooterButton() {
         setMenuOpen(false);
       }
     };
-
-    if (isMenuOpen) {
+    //don't add this listener when we're trying to show users where menus are
+    if (isMenuOpen && !showCloverMenuInitially) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -71,7 +77,7 @@ export default function CloverFooterButton() {
               <motion.div whileHover={{ scale: 1.1, x: -3 }} className={styles.menuItem} onClick={() => { openModal('coffee', null); setMenuOpen(false) }}>COFFEE</motion.div>
               <motion.div
                 whileHover={{ scale: 1.1, x: -3 }}
-                className={styles.menuItem} onClick={() => { window.open("https://shop.cianmoore.com", "_blank")?.focus(); setMenuOpen(false) }}>SHOP</motion.div>
+                className={styles.menuItem} onClick={() => { window.open("https://shop.clovernyc.com", "_blank")?.focus(); setMenuOpen(false) }}>SHOP</motion.div>
             </div>
           </motion.div>
 
