@@ -99,7 +99,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
              >
                <AdvancedImage
                  className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
-                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'right' }}
+                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', objectPosition: 'right',  height: '100%' }}
                />
              </div>
            ))}
@@ -113,7 +113,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
              >
                <AdvancedImage
                  className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
-                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'contain', objectPosition: 'left' }}
+                 cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', objectPosition: 'left', height: '100%' }}
                  plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
                />
              </div>

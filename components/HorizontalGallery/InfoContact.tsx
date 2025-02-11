@@ -11,7 +11,7 @@ export default function Coffee() {
                     href="https://www.youtube.com/watch?v=Xgc3tJmlYBE&t=103s"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: '#0077cc', textDecoration: 'none', fontWeight: 'bold' }}
+                    style={{ color: '#39993A', textDecoration: 'none', fontWeight: 'bold' }}
                 >
                     Cian Moore
                 </a>.
@@ -53,6 +53,16 @@ export default function Coffee() {
                         //marginBottom: '10px'
                     }} />
             </div>
+
+            <br /> <br />
+
+            <div style={{ textAlign: 'center', color: "white" }}>
+  <br /> <br />
+  @extremobemo
+  @jerwizzle
+  <br /> <br />
+</div>
+
 
 
         </div>
