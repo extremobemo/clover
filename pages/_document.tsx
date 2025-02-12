@@ -6,6 +6,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+        <meta property="og:title" content="CLOVER NYC" />
+        <meta property="og:image" content="https://res.cloudinary.com/ddlip2prr/image/upload/v1739345817/WEBGRAPH.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:type" content="website" />
           {/* Other head elements */}
         </Head>
         <body>
