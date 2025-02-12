@@ -141,23 +141,20 @@ const CoffeeGallery: React.FC<CoffeeGalleryProps> = ({ public_id }) => {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '100vh',
+                    maxHeight: isMobile ? '45dvh' : '60dvh',
                     textAlign: 'center',
                   }}>
-                  <p style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: "1.4em" }}>CLOVER COFFEE</span> <br /><br /> A creative project launched in 2022 by clover. Inspired by their love for New York City's
-                    vibrant coffee culture, Cian and his team set out to create a space where people could gather,
-                    play chess, and enjoy great coffee in a laid-back, community-driven environment.
+                  {/* <p style={{ textAlign: 'center' }}> */}
+                    Clover Coffee is a creative project launched in 2022. Inspired by their love for New York City's vibrant coffee culture,
+                    Cian and his team set out to create a space where people could gather, play chess, and enjoy great coffee in a laid-back, community-driven environment.
                     <br /> <br />
-                    Taking an old halal food cart and transforming it into a unique mobile coffee experience, Clover Coffee
-                    is a testament to the agency’s DIY ethos. Designed and built in-house, this self-funded,
-                    self-sustained project has evolved into an enterprise in its own right.
+                    Taking an old halal food cart and transforming it into a unique mobile coffee experience, Clover Coffee is a testament to the agency’s DIY ethos. 
+                    Designed and built in-house, this self-funded, self-sustained project has evolved into an enterprise in its own right.
                     <br /> <br />
-                    Whether it's parked on a bustling New York City street corner or popping up
-                    at local events, Clover Coffee brings a fresh, creative twist to the city’s
-                    coffee scene<br />
-                    — ONE CUP AT A TIME —
-                  </p>
+                    Whether its parked on a bustling New York City street corner or popping 
+                    up at local events, Clover Coffee brings a fresh,
+                     creative twist to the citys coffee scene one cup at a time.
+                  {/* </p> */}
                 </div>
 
             
