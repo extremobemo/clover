@@ -42,8 +42,8 @@ export default function NewInfoContact() {
         <Image
           src="/CloverStamp.png"// Replace with your image path
           alt="Bottom image"
-          width={150} // Adjust as needed
-          height={150} // Adjust as needed
+          width={125} // Adjust as needed
+          height={125} // Adjust as needed
           className="object-contain"
         />
       </div>
