@@ -112,9 +112,7 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
   return (
     <>
       {/* Only show scroll indicator once loading is complete */}
-      {!loading && <ScrollIndicator scrollXProgress={scrollXProgress} />}
-
-      {loading && <ScrollIndicator />}
+      <ScrollIndicator scrollXProgress={scrollXProgress} />
       <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh' }} id="scroll-container" ref={carouselRef}>
         <PageTransition>
           {/* adding this motion.section seemed to help with glitchy loading */}
