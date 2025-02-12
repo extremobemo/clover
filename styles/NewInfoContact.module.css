@@ -1,0 +1,54 @@
+.container {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+  }
+  
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 50dvw;
+    margin-bottom: 50px;
+
+    
+  }
+
+  .textContainer p {
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    font-family: "KAMAR", sans-serif;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  .contactText {
+    font-size: clamp(.8rem, 6dvw, 1.4rem);
+  }
+  
+  .bottomImage {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 15vh;
+    width: auto;
+  }
+
+  @media (max-width: 755px) {
+    .textContainer {
+        max-width: 85dvw;
+    }
+
+    .textContainer p{
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        line-height: 1;
+    }
+    
+
+    .imageContainer img {
+        width: 40%; /* Increase image size for small screens */
+    }
+}
