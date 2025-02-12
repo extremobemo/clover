@@ -174,8 +174,7 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
                     // whileHover={{ scale: 1.1 }}  
                     style={{ placeContent: 'center' }}>
                     <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} 
-                      plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}/>
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad}/>
                     </div>
                   </motion.div>
                 ))}

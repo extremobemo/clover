@@ -226,7 +226,8 @@
   "EHNikeAirMax-1": {
     "photos": [
       "NIKE_HAALAND_GIF",
-      "EHNikeAirMax-0"
+      "EHNikeAirMax-0",
+      "EHNikeAirMax-1"
     ],
     "videos": [
       {
@@ -991,44 +992,18 @@
   },
   "FatherSteveMouses-38": {
     "photos": [
-      "FatherSteveMouses-0",
-      "FatherSteveMouses-1",
-      "FatherSteveMouses-2",
-      "FatherSteveMouses-3",
-      "FatherSteveMouses-4",
-      "FatherSteveMouses-5",
-      "FatherSteveMouses-6",
-      "FatherSteveMouses-7",
-      "FatherSteveMouses-8",
-      "FatherSteveMouses-9",
-      "FatherSteveMouses-10",
-      "FatherSteveMouses-11",
-      "FatherSteveMouses-12",
-      "FatherSteveMouses-13",
-      "FatherSteveMouses-14",
-      "FatherSteveMouses-15",
-      "FatherSteveMouses-16",
-      "FatherSteveMouses-17",
-      "FatherSteveMouses-18",
-      "FatherSteveMouses-19",
-      "FatherSteveMouses-20",
-      "FatherSteveMouses-21",
-      "FatherSteveMouses-22",
-      "FatherSteveMouses-23",
-      "FatherSteveMouses-24",
-      "FatherSteveMouses-25",
-      "FatherSteveMouses-26",
-      "FatherSteveMouses-27",
-      "FatherSteveMouses-28",
-      "FatherSteveMouses-29",
-      "FatherSteveMouses-30",
-      "FatherSteveMouses-31",
-      "FatherSteveMouses-32",
-      "FatherSteveMouses-33",
-      "FatherSteveMouses-34",
-      "FatherSteveMouses-35",
-      "FatherSteveMouses-36",
-      "FatherSteveMouses-37"
+      "STEVEN_SAVOCA_1",
+      "STEVEN_SAVOCA_2",
+      "STEVEN_SAVOCA_3",
+      "STEVEN_SAVOCA_4",
+      "STEVEN_SAVOCA_5",
+      "STEVEN_SAVOCA_6",
+      "STEVEN_SAVOCA_7",
+      "STEVEN_SAVOCA_8",
+      "STEVEN_SAVOCA_9",
+      "STEVEN_SAVOCA_10",
+      "STEVEN_SAVOCA_11",
+      "STEVEN_SAVOCA_12"
     ],
     "videos": []
   },
@@ -2094,7 +2069,13 @@
       "BeatsCampaign_-15",
       "BeatsCampaign_-16"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "BEATS_VID",
+        "width": 1080,
+        "height": 1350
+      }
+    ]
   },
   "nebraska-9": {
     "photos": [
