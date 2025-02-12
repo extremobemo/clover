@@ -49,6 +49,20 @@
     "year": "2024"
   },
   {
+    "id": "COMPLEX_EMBELLISHMENT",
+    "title": "Embelishment",
+    "subject": "Complex Magazine",
+    "functions": "Production, Creative Development, Photodesign",
+    "year": "2024"
+  },
+  {
+    "id": "GiggsBBC",
+    "title": "Giggs for BBC Classics",
+    "subject": "Billionaire Boys Club ",
+    "functions": "Production, Creative Development, Photodesign",
+    "year": "2024"
+  },
+  {
     "id": "JAYSON_TATUM",
     "title": "Jayson Tatum 1",
     "subject": "Jayson Tatum for Jordan",
@@ -189,7 +203,7 @@
     "year": "2022"
   },
   {
-    "id": "LULU_LEMON_DISNEY",
+    "id": "LULU_DISNEY",
     "title": "Happily Ever After",
     "subject": "Lululemon x Disney",
     "functions": "Production, Creative Development, Photodesign",
