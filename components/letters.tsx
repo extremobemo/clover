@@ -164,9 +164,7 @@ const CloverEffect = () => {
     }}
   >
 {index === 2 ? (
-      <motion.img
-        src={`/${letter}.wefbp`}
-        alt={" "}
+      <div
         style={{ width: '20vw', height: 'auto', maxWidth: '300px', willChange: 'transform', scale: 1.25 }}
       />
     ) : (
