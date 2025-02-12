@@ -50,7 +50,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
     const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
 
     const widths: Record<"VIDEO" | "CLOVERPRODUCTION", { mobile: string[]; desktop: string[] }> = {
-      VIDEO: { mobile: ['70vw', '65vw', '60vw', '70vw'], desktop: ['50dvw', '50dvw', '48dvw', '40dvw'] },
+      VIDEO: { mobile: ['70vw', '65vw', '60vw', '70vw', '60vw'], desktop: ['50dvw', '50dvw', '48dvw', '40dvw', '40vw'] },
       CLOVERPRODUCTION: { mobile: ['65vw', '70vw', '80vw', '75vw'], desktop: ['45dvw', '50dvw', '70dvw', '60dvw'] },
     };
   
