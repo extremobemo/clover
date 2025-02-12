@@ -30,7 +30,6 @@ const menuVariants: Variants = {
   },
 };
 
-
 export default function IndexFooterButton() {
   const { handleIndexMenuClick, heroFilterState, showIndexMenuInitially } = useAppContext();
 
