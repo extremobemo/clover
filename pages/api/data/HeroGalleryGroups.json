@@ -19,7 +19,7 @@
           "folderName": "LYFESTYLE-6"
         },
         {
-          "publicId": "JAYSON_TATUM_5",
+          "publicId": "JAYSON_TATUM_4",
           "folderName": "JAYSON_TATUM"
         },
         {
@@ -147,7 +147,7 @@
           "folderName": "EBAYNewauthen-20"
         },
         {
-          "publicId": "KODAK_GIF",
+          "publicId": "DIEUSON_OCTAVE_1",
           "folderName": "DIEUSON_OCTAVE"
         },
         {
@@ -157,14 +157,14 @@
       ],
       "leftColumnHeights": [
         0,
-        10,
+        20,
         20,
         0,
         0
       ],
       "rightColumnHeights": [
         20,
-        0,
+        20,
         22,
         0,
         0
@@ -182,7 +182,7 @@
     },
     {
       "widePhoto": {
-        "publicId": "TATUM_BTD_6",
+        "publicId": "BTD_GIF",
         "folderName": "JordanAir_-5"
       },
       "leftColumn": [
@@ -191,8 +191,8 @@
           "folderName": "CLIPSE_FLOGGNAW"
         },
         {
-          "publicId": "MARCJACOBSMISSING",
-          "folderName": "MarcJacobsKids_-13"
+          "publicId": "PNY_0",
+          "folderName": "PNY"
         }
       ],
       "rightColumn": [
@@ -217,7 +217,7 @@
         0
       ],
       "rightColumnHeights": [
-        0,
+        8,
         0,
         1,
         6,
@@ -231,7 +231,7 @@
       },
       "leftColumn": [
         {
-          "publicId": "SheckWesMUDBOY-3",
+          "publicId": "MUDBOY_COVER",
           "folderName": "SheckWesMUDBOY-6"
         },
         {
@@ -267,14 +267,14 @@
       ],
       "leftColumnHeights": [
         15,
-        0,
-        0,
-        15,
+        10,
+        7,
+        30,
         6
       ],
       "rightColumnHeights": [
-        5,
-        10,
+        7,
+        20,
         18,
         20,
         12
@@ -372,7 +372,7 @@
         0,
         15,
         9,
-        15,
+        10,
         0
       ]
     },
@@ -395,7 +395,7 @@
           "folderName": "YEATTXRAY-6"
         },
         {
-          "publicId": "FatherSteveMouses-0",
+          "publicId": "STEVEN_SAVOCA_12",
           "folderName": "FatherSteveMouses-38"
         },
         {
@@ -417,13 +417,14 @@
           "folderName": "CloverGloves-14"
         },
         {
-          "publicId": "LIFE_OF_P_IERRE_5_0",
+          "publicId": "LIFE_COVER",
           "folderName": "LIFE_OF_P_IERRE"
         },
         {
           "publicId": "ELDER_STATESMAN_05",
           "folderName": "ELDER_STATESMAN"
         }
+        
       ],
       "leftColumnHeights": [
         0,
@@ -436,8 +437,8 @@
         3,
         6,
         4,
-        8,
-        0
+        0,
+        3
       ]
     },
     {
@@ -445,20 +446,14 @@
         "publicId": "GQ_REQ",
         "folderName": "GQ_REQ"
       },
-      "leftColumn": [],
-      "rightColumn": [],
-      "leftColumnHeights": [],
-      "rightColumnHeights": []
-    },
-    {
-      "widePhoto": {
-        "publicId": "ASSPIZZA_FOR_SUPREME_2",
-        "folderName": "ASSPIZZA_FOR_SUPREME"
-      },
       "leftColumn": [
         {
-          "publicId": "SOUNDCLOUD4",
-          "folderName": "SOUNDCLOUD"
+          "publicId": "MARC_JACOBS2",
+          "folderName": "MARC_JACOBS"
+        },
+        {
+          "publicId": "ASSPIZZA_FOR_SUPREME_2",
+          "folderName": "ASSPIZZA_FOR_SUPREME"
         },
         {
           "publicId": "CLOVER",
@@ -467,8 +462,8 @@
       ],
       "rightColumn": [
         {
-          "publicId": "MARC_JACOBS2",
-          "folderName": "MARC_JACOBS"
+          "publicId": "SOUNDCLOUD4",
+          "folderName": "SOUNDCLOUD"
         },
         {
           "publicId": "ASSPIZZA_2017",
@@ -521,8 +516,8 @@
           "folderName": "GiggsBBC"
         },
         {
-          "publicId": "vanspunkyoMissing",
-          "folderName": "vanspunkyoMissing"
+          "publicId": "PNY_0",
+          "folderName": "PNY"
         },
         {
           "publicId": "HELMUT_LANG8",
@@ -596,7 +591,7 @@
         15,
         15,
         10,
-        10,
+        20,
         5
       ]
     },
@@ -718,7 +713,7 @@
     },
     {
       "widePhoto": {
-        "publicId": "LULULEMON_DISNEY_1",
+        "publicId": "LULU_GIF",
         "folderName": "LULU_DISNEY"
       },
       "leftColumn": [
@@ -762,8 +757,22 @@
     },
     {
       "widePhoto": {
-        "publicId": "TATUM_BTD_6",
+        "publicId": "BTD_GIF",
         "folderName": "JordanAir_-5"
+      },
+      "leftColumn": [
+      ],
+      "rightColumn": [
+      ],
+      "leftColumnHeights": [
+      ],
+      "rightColumnHeights": [
+      ]
+    },
+    {
+      "widePhoto": {
+        "publicId": "MJ_GIF",
+        "folderName": "MarcJacobsKids_-13"
       },
       "leftColumn": [
       ],

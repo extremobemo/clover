@@ -94,7 +94,7 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
   const [loading, setLoading] = useState(true);
   const loadedPhotos = useRef(0);
 
-  const [aspectRatio, setAspectRatio] = useState(16/9); // Default to 16:9
+  const [aspectRatio, setAspectRatio] = useState(16 / 9); // Default to 16:9
 
   useEffect(() => {
     // Reset loading state if photos array changes
@@ -112,9 +112,7 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
   return (
     <>
       {/* Only show scroll indicator once loading is complete */}
-      {!loading && <ScrollIndicator scrollXProgress={scrollXProgress} />}
-
-      {loading && <ScrollIndicator />}
+      <ScrollIndicator scrollXProgress={scrollXProgress} />
       <div style={{ overflowY: 'hidden', overflowX: 'scroll', height: '100dvh' }} id="scroll-container" ref={carouselRef}>
         <PageTransition>
           {/* adding this motion.section seemed to help with glitchy loading */}
@@ -144,22 +142,20 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
                       overflow: 'hidden'
                     }}
                   >
-                    <div style={{
-                      width: isMobile ? `calc(45dvh *  ${aspectRatio})` : `calc(60dvh *  ${aspectRatio})`,
-                      maxWidth: `calc(750px * ${aspectRatio})`,
-                      maxHeight: '750px',
-                      height: 'auto'
-                    }}
-                      className={styles.thumbnail} key={index}>
+                    <div
+                      style={{
+                        height: isMobile ? '45dvh' : '60dvh',
+                        maxHeight: '750px',
+                        width: `calc(${isMobile ? '45dvh' : '60dvh'} * ${aspectRatio})`,
+                        overflow: 'hidden'
+                      }}
+                      className={styles.thumbnail}
+                      key={index}
+                    >
                       <CldVideoPlayer
                         src={video.publicId}
-                        onMetadataLoad={({ player }: any) => {
-                          const videoElement = player?.videoElement;
-                          if (videoElement) {
-                            const ratio = video.width / video.height;
-                            setAspectRatio(ratio);
-                          }
-                        }}
+                        className={styles.videoPlayer}
+                        aspectRatio="16:9"
                       />
                     </div>
                   </motion.div>
@@ -174,8 +170,7 @@ const HorizontalGallery: React.FC<HorizontalGalleryProps> = ({ public_id }) => {
                     // whileHover={{ scale: 1.1 }}  
                     style={{ placeContent: 'center' }}>
                     <div className={styles.thumbnail} key={index}>
-                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} 
-                      plugins={[lazyload({rootMargin: '10px 20px 10px 30px', threshold: 0.25})]}/>
+                      <AdvancedImage cldImg={photo} style={{ maxHeight: isMobile ? '45dvh' : '60dvh' }} onContextMenu={preventRightClick} onLoad={handlePhotoLoad} />
                     </div>
                   </motion.div>
                 ))}
