@@ -389,7 +389,13 @@
       "MARC_JACOBS_KIDS_15",
       "MARC_JACOBS_KIDS_16"
     ],
-    "videos": []
+    "videos": [
+      {
+        "publicId": "MJ3",
+        "width": 1600,
+        "height": 1080
+      }
+    ]
   },
   "GAB3": {
     "photos": [
