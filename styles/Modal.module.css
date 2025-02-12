@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 42;
+  z-index: 4;
 }
 
 .modalBody {
@@ -38,4 +38,40 @@
   display: flex;
   justify-content: flex-end;
   font-size: 25px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  padding: 8px;
+  border: none;
+  background: transparent; /* No background */
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover .closeIcon {
+  stroke: gray; /* Slightly darker gray on hover */
+}
+
+.closeIcon {
+  width: 40px; /* Bigger size */
+  height: 40px;
+  stroke: black; /* Normal color */
+  transition: stroke 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .closeIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .closeButton {
+    right: 20px;
+  }
 }

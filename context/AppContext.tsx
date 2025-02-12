@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 // Define the shape of the context
 interface AppContextType {
     showModal: boolean;
+    showIndexMenuInitially: boolean;
+    showCloverMenuInitially: boolean;
+    setMenuVisibility: (showMenus : boolean) => void;
     modalState: string;
     handleIndexMenuClick: (state : string) => void;
     heroFilterState: string;
@@ -25,9 +28,18 @@ interface ProviderProps {
 export const ContextProvider: React.FC<ProviderProps> = ({ children }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showIndexMenuInitially, setShowIndexMenuInitially] = useState<boolean>(true);
+    const [showCloverMenuInitially, setShowCloverMenuInitially] = useState<boolean>(true);
     const [modalState, setModalState] = useState<string>('');
     const [heroFilterState, setHeroFilterState] = useState<string>('ALL');
     const [publicId, setPublicId] = useState<string | null>(null);
+
+
+    const setMenuVisibility = (showMenus: boolean) => 
+    {
+        setShowIndexMenuInitially(showMenus);
+        setShowCloverMenuInitially(showMenus);
+    }
 
     // Function to open a modal with specific state and public_id
     const openModal = (state: string, id: string | null) => {
@@ -78,7 +90,7 @@ export const ContextProvider: React.FC<ProviderProps> = ({ children }) => {
     }, [showModal]);
 
     return (
-        <AppContext.Provider value={{ showModal, modalState, handleIndexMenuClick, heroFilterState, publicId, openModal, closeModal }}>
+        <AppContext.Provider value={{ showModal, showIndexMenuInitially, showCloverMenuInitially, setMenuVisibility, modalState, handleIndexMenuClick, heroFilterState, publicId, openModal, closeModal }}>
             {children}
         </AppContext.Provider>
     );
