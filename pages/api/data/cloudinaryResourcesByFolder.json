@@ -19,6 +19,11 @@
         "publicId": "LULULEMON_DISNEY_13",
         "width": 1280,
         "height": 720
+      },
+      {
+        "publicId": "LULU_VIDEO_2",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },
@@ -38,6 +43,13 @@
       "NikeDunk_12",
       "NikeDunk_13",
       "NikeDunk_14"
+    ],
+    "videos": [
+    ]
+  },
+  "PNY": {
+    "photos": [
+      "PNY_0"
     ],
     "videos": [
     ]
