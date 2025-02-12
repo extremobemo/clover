@@ -4,6 +4,7 @@ import styles from "../../styles/Modal.module.css"
 import ScrollIndicator from "../common/ScrollIndicator";
 import CoffeeGallery from "./CoffeeGallery";
 import NewInfoContact from "./NewInfoContact"
+import { useAppContext } from "../../context/AppContext";
 
 interface ModalProps {
     onClose: Function,
@@ -43,10 +44,10 @@ const Modal: React.FC<ModalProps> = ({ onClose, public_id, state }) => {
                             )}
                         {
                             (state === 'about') && (
-                                <>
-                                    <InfoContact />
-                                    <ScrollIndicator />
-                                </>
+                               <>
+                                    <NewInfoContact/>
+                                    <ScrollIndicator/>
+                               </> 
                             )
                         }
                         {
