@@ -63,7 +63,12 @@ export default function CloverFooterButton() {
   }, [isMenuOpen]);
 
   return (
-    <div className={styles.footerContainer} ref={menuRef}>
+    <div
+      className={styles.footerContainer}
+      ref={menuRef}
+      onMouseEnter={() => setMenuOpen(true)}
+      onMouseLeave={() => setMenuOpen(false)}
+    >
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
