@@ -43,15 +43,15 @@
       ],
       "leftColumnHeights": [
         2,
-        0,
-        2,
+        6,
         4,
-        3
+        2,
+        2
       ],
       "rightColumnHeights": [
-        3,
-        4,
         0,
+        0,
+        7,
         4,
         3
       ]
@@ -158,37 +158,29 @@
         }
       ],
       "leftColumnHeights": [
-        12,
+        2,
+        4,
+        2,
         0,
-        12,
-        0,
-        0,
-        12,
-        0,
-        12,
-        0,
-        0,
-        12,
-        0,
-        12,
+        3,
+        2,
+        7,
+        3,
+        7,
+        7,
         0,
         0
       ],
       "rightColumnHeights": [
-        0,
-        10,
-        10,
-        0,
-        0,
-        12,
-        0,
-        12,
+        2,
+        2,
         0,
         0,
-        12,
+        3,
         0,
-        12,
         0,
+        3,
+        3,
         0
       ]
     },
@@ -209,8 +201,38 @@
       },
       "leftColumn": [
         {
-          "publicId": "BEAST_GIF",
+          "publicId": "backbone1",
+          "folderName": "BACKBONE"
+        },
+        {
+          "publicId": "EBAY_NEWAUTHEN_1",
+          "folderName": "EBAYNewauthen-20"
+        },
+        {
+          "publicId": "BEAST_1",
           "folderName": "SheckWesBeast_-8"
+        },
+        {
+          "publicId": "AIRMAX_SS22_1",
+          "folderName": "AIRMAX_SS22"
+        },
+        {
+          "publicId": "tone3",
+          "folderName": "TONE"
+        }
+      ],
+      "rightColumn": [
+        {
+          "publicId": "breeze_denim2",
+          "folderName": "BREEZE_DENIM"
+        },
+        {
+          "publicId": "nigo1",
+          "folderName": "NIGO"
+        },
+        {
+          "publicId": "DIEUSON_OCTAVE_1",
+          "folderName": "DIEUSON_OCTAVE"
         },
         {
           "publicId": "GiggsBBC_8",
@@ -219,20 +241,6 @@
         {
           "publicId": "CLOVER_MODE_FOR_HYPEBEAST_1",
           "folderName": "CLOVER_MODE"
-        }
-      ],
-      "rightColumn": [
-        {
-          "publicId": "EBAY_NEWAUTHEN_1",
-          "folderName": "EBAYNewauthen-20"
-        },
-        {
-          "publicId": "DIEUSON_OCTAVE_1",
-          "folderName": "DIEUSON_OCTAVE"
-        },
-        {
-          "publicId": "AIRMAX_SS22_1",
-          "folderName": "AIRMAX_SS22"
         }
       ],
       "leftColumnHeights": [
