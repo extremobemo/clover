@@ -40,3 +40,11 @@ export interface Video {
     cloverProductionsGroups: GalleryGroup[];
     videosGroups: GalleryGroup[];
   }
+
+  export interface GalleryDescription {
+    id: string;
+    title: string;
+    subject: string;
+    functions: string;
+    year: string;
+  }

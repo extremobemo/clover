@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AdvancedImage, lazyload } from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
-import { GalleryGroup } from '../../types/types';
+import { GalleryGroup, GalleryDescription } from '../../types/types';
 
 import styles from '../../styles/HeroGallery.module.css'
+import overlayStyles from '../../styles/HeroGalleryOverlay.module.css';
 import { useAppContext } from '../../context/AppContext';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 
@@ -22,8 +23,34 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
 
   const { openModal } = useAppContext();
   const [windowWidth, setWindowWidth] = useState<number | null>(null);
+  const [descriptions, setDescriptions] = useState<{[key: string]: GalleryDescription}>({});
 
   useEffect(() => {
+    const fetchDescriptions = async () => {
+      const newDescriptions: {[key: string]: GalleryDescription} = {};
+      for (const photo of group.leftColumn) {
+        if (!descriptions[photo.folderName]) {
+          const res = await fetch(`/api/projectAssets?folder=${photo.folderName}`);
+          const data = await res.json();
+          newDescriptions[photo.folderName] = data.description;
+        }
+      }
+      for (const photo of group.rightColumn) {
+        if (!descriptions[photo.folderName]) {
+          const res = await fetch(`/api/projectAssets?folder=${photo.folderName}`);
+          const data = await res.json();
+          newDescriptions[photo.folderName] = data.description;
+        }
+      }
+      if (group.widePhoto && !descriptions[group.widePhoto.folderName]) {
+        const res = await fetch(`/api/projectAssets?folder=${group.widePhoto.folderName}`);
+        const data = await res.json();
+        newDescriptions[group.widePhoto.folderName] = data.description;
+      }
+      setDescriptions(prev => ({...prev, ...newDescriptions}));
+    }
+    fetchDescriptions();
+
     // Set window width only on the client
     setWindowWidth(window.innerWidth);
 
@@ -31,7 +58,12 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [group]);
+
+  const getSubject = (folderName: string) => {
+    const description = descriptions[folderName];
+    return description ? description.subject : '';
+  };
 
   const calculateHeight = (columnLength: number, groupIndex: number) => { // For hero groups
     const isMobile = (windowWidth ?? 1024) <= 768; // Fallback to 1024 for SSR
@@ -76,13 +108,15 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
         {/* Wide photo spanning both columns */}
         {group.widePhoto && (
           <div className={styles.widePhotoContainer} style={{ width: calculateWidth(groupIndex) }}>
-            <div style={{ width: '100%', paddingTop: '4px' }}>
+            <div className={overlayStyles.itemContainer} style={{ position: 'relative' }}>
               <AdvancedImage
                 onClick={() => openModal('gallery', group.widePhoto.folderName)}
                 onContextMenu={preventRightClick} cldImg={generateUrl(group.widePhoto.publicId)}
                 className={styles.widePhoto}
-                // plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
               />
+              <div className={overlayStyles.overlay}>
+                {getSubject(group.widePhoto.folderName)}
+              </div>
             </div>
           </div>
         )}
@@ -95,7 +129,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
          {/* Left Column */}
          <div className={styles.leftColumnContainer}>
            {group.leftColumn.map((photo, index) => (
-             <div className={styles.leftColumnFlex}
+             <div className={`${styles.leftColumnFlex} ${overlayStyles.itemContainer}`}
                style={{ height: `${group.leftColumnHeights[index]}%` }}
              >
                <AdvancedImage
@@ -103,6 +137,9 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
                  cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', objectPosition: 'right',  height: '100%' }}
                   // plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
                />
+                <div className={overlayStyles.overlay}>
+                  {getSubject(photo.folderName)}
+                </div>
              </div>
            ))}
          </div>
@@ -110,7 +147,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
          {/* Right Column */}
          <div className={styles.rightColumnContainer}>
            {group.rightColumn.map((photo, index) => (
-             <div className={styles.rightColumnFlex}
+             <div className={`${styles.rightColumnFlex} ${overlayStyles.itemContainer}`}
                style={{ height: `${group.rightColumnHeights[index]}%` }}
              >
                <AdvancedImage
@@ -118,6 +155,9 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
                  cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', objectPosition: 'left', height: '100%' }}
                   // plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
                />
+                <div className={overlayStyles.overlay}>
+                  {getSubject(photo.folderName)}
+                </div>
              </div>
            ))}
          </div>
