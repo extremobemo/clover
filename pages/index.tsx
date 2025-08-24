@@ -83,12 +83,27 @@ const HeroPage: React.FC = () => {
     console.log(`heroFilterState updated: ${heroFilterState}`)
     switch (heroFilterState) {
       case 'ALL':
+        console.log("-----------------")
+        console.log("-----------------")
+        console.log("All")
+        console.log("-----------------")
+        console.log("-----------------")
         setVisibleGroups(allGroups);
         break;
       case 'CLOVERPRODUCTION':
+        console.log("-----------------")
+        console.log("-----------------")
+        console.log("Clover Productions")
+        console.log("-----------------")
+        console.log("-----------------")
         setVisibleGroups(productionGroups);
         break;
       case 'VIDEO': //TODO: once we've created new set, utilize that.
+      console.log("-----------------")
+        console.log("-----------------")
+        console.log("VIDEO")
+        console.log("-----------------")
+        console.log("-----------------")
         setVisibleGroups(videoGroups);
         break;
       default:

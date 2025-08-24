@@ -47,4 +47,6 @@ export interface Video {
     subject: string;
     functions: string;
     year: string;
+    mainGalleryTitle1: string;
+    mainGalleryTitle2: string;
   }
