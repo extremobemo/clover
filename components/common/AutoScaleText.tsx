@@ -27,8 +27,6 @@ const AutoScaleText: React.FC<AutoScaleTextProps> = ({
     console.log(`Parent ID: ${parentId}`)
     console.log(`Text: ${text}`)
 
-    parentId = null;
-
     // Use parentId if given, otherwise fallback to natural parent
     let parent = parentId
       ? document.getElementById(parentId)
