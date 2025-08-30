@@ -14,7 +14,8 @@
   transition: opacity 0.3s ease-in-out;
   z-index: 1;
   font-family: "KAMAR", sans-serif;
-  font-size: xxx-large;
+  font-size: 3vw;
+  pointer-events: none;
 
 }
 

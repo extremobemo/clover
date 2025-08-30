@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AdvancedImage, lazyload } from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { GalleryGroup, GalleryDescription } from '../../types/types';
@@ -7,7 +7,7 @@ import styles from '../../styles/HeroGallery.module.css'
 import overlayStyles from '../../styles/HeroGalleryOverlay.module.css';
 import { useAppContext } from '../../context/AppContext';
 import { auto } from '@cloudinary/url-gen/actions/resize';
-import AutoScaleText from '../common/AutoScaleText';
+
 
 
 interface HeroGalleryProps {
@@ -26,6 +26,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
   const { openModal } = useAppContext();
   const [windowWidth, setWindowWidth] = useState<number | null>(null);
   const [descriptions, setDescriptions] = useState<{ [key: string]: GalleryDescription }>({});
+  const [dimensions, setDimensions] = useState<{ [key: string]: { width: number; height: number } }>({});
 
   useEffect(() => {
     const fetchDescriptions = async () => {
@@ -53,42 +54,25 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
     }
     fetchDescriptions();
 
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
     // Set window width only on the client
     setWindowWidth(window.innerWidth);
 
-    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
   }, [group]);
 
-  const getGalleryTitle1 = (folderName: string) => {
+  const getGalleryTitles = (folderName: string) => {
     const description = descriptions[folderName];
-
-    //TESTING: defaulting to subject since we have all of those
-    return description?.subject; //DEFAULT TO CLOVER MODE IF TITLE NOT CONFIGURED
-
-
-    return description?.mainGalleryTitle1 == null || description?.mainGalleryTitle1 == '' ? "ClOVER MODE CLOVER MODE" : description?.mainGalleryTitle1; //DEFAULT TO CLOVER MODE IF TITLE NOT CONFIGURED
-  };
-
-  const getGalleryTitle2 = (folderName: string) => {
-    const description = descriptions[folderName];
-    //TESTING: defaulting to regular title since we have those for now
-    return description?.title; //DEFAULT TO CLOVER MODE IF TITLE NOT CONFIGURED
-
-    return description?.mainGalleryTitle2 == null || description?.mainGalleryTitle2 == '' ? "CLOVER MODE" : description?.mainGalleryTitle2; //DEFAULT TO CLOVER MODE IF TITLE NOT CONFIGURED
-
-  };
-
-  const newGetGalleryTitles = (folderName: string, parentId: string) => {
-    const description = descriptions[folderName];
-   
     return (
-      <>
-        <AutoScaleText parentId={parentId} text={getGalleryTitle1(folderName)} widthPercentage={85} />
-        <AutoScaleText parentId={parentId} text={getGalleryTitle2(folderName)} widthPercentage={85} />
-      </>
+      <div style={{ textAlign: 'center' }}>
+        <div>{description?.subject}</div>
+        <div>{description?.title}</div>
+      </div>
     );
   };
 
@@ -135,14 +119,18 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
         {/* Wide photo spanning both columns */}
         {group.widePhoto && (
           <div className={styles.widePhotoContainer} style={{ width: calculateWidth(groupIndex) }}>
-            <div className={overlayStyles.itemContainer} style={{ position: 'relative' }}>
+            <div className={overlayStyles.itemContainer} style={{ position: 'relative', width: dimensions[group.widePhoto.publicId]?.width, height: dimensions[group.widePhoto.publicId]?.height }}>
               <AdvancedImage id={`widePhotoImage-${groupIndex}-${group.widePhoto.publicId}`}
                 onClick={() => openModal('gallery', group.widePhoto.folderName)}
                 onContextMenu={preventRightClick} cldImg={generateUrl(group.widePhoto.publicId)}
                 className={styles.widePhoto}
+                onLoad={(e) => {
+                  const { width, height } = e.target as HTMLImageElement;
+                  setDimensions(prev => ({ ...prev, [group.widePhoto.publicId]: { width, height } }));
+                }}
               />
               <div className={overlayStyles.overlay}>
-                {newGetGalleryTitles(group.widePhoto.folderName, `widePhotoImage-${groupIndex}-${group.widePhoto.publicId}`)}
+                {getGalleryTitles(group.widePhoto.folderName)}
               </div>
             </div>
           </div>
@@ -157,16 +145,20 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
             <div className={styles.leftColumnContainer}>
               {group.leftColumn.map((photo, index) => (
                 <div className={`${styles.leftColumnFlex} ${overlayStyles.itemContainer}`}
-                  style={{ height: `${group.leftColumnHeights[index]}%` }}
+                  style={{ height: `${group.leftColumnHeights[index]}%`, width: dimensions[photo.publicId]?.width, height: dimensions[photo.publicId]?.height }}
                 >
                   <AdvancedImage
                     id={`leftColumnImage-${groupIndex}-${index}-${photo.publicId}`}
                     className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
-                    cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', objectPosition: 'right', height: '100%' }}
+                    cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', height: '100%' }}
+                    onLoad={(e) => {
+                      const { width, height } = e.target as HTMLImageElement;
+                      setDimensions(prev => ({ ...prev, [photo.publicId]: { width, height } }));
+                    }}
                   // plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
                   />
                   <div className={overlayStyles.overlay}>
-                    {newGetGalleryTitles(photo.folderName, `leftColumnImage-${groupIndex}-${index}-${photo.publicId}`)}
+                    {getGalleryTitles(photo.folderName)}
                   </div>
                 </div>
               ))}
@@ -176,15 +168,19 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
             <div className={styles.rightColumnContainer}>
               {group.rightColumn.map((photo, index) => (
                 <div className={`${styles.rightColumnFlex} ${overlayStyles.itemContainer}`}
-                  style={{ height: `${group.rightColumnHeights[index]}%` }}
+                  style={{ height: `${group.rightColumnHeights[index]}%`, width: dimensions[photo.publicId]?.width, height: dimensions[photo.publicId]?.height }}
                 >
                   <AdvancedImage id={`rightColumnImage-${groupIndex}-${index}-${photo.publicId}`}
                     className={styles.clickablePhoto} onClick={() => openModal('gallery', photo.folderName)} onContextMenu={preventRightClick}
                     cldImg={generateUrl(photo.publicId)} style={{ objectFit: 'fill', objectPosition: 'left', height: '100%' }}
+                    onLoad={(e) => {
+                      const { width, height } = e.target as HTMLImageElement;
+                      setDimensions(prev => ({ ...prev, [photo.publicId]: { width, height } }));
+                    }}
                   // plugins={[lazyload({ rootMargin: '10px 20px 10px 30px', threshold: 0.25 })]}
                   />
                   <div className={overlayStyles.overlay}>
-                    {newGetGalleryTitles(photo.folderName, `rightColumnImage-${groupIndex}-${index}-${photo.publicId}`)}
+                    {getGalleryTitles(photo.folderName)}
                   </div>
                 </div>
               ))}
