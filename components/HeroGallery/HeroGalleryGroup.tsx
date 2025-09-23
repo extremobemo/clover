@@ -33,20 +33,20 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
   const handleImageLoad = (imageId: string, event: React.SyntheticEvent<HTMLImageElement>) => {
     const img = event.currentTarget;
     const rect = img.getBoundingClientRect();
-    
+
     // For left column images, calculate the actual image display area
     if (imageId.includes('leftColumnImage')) {
       const naturalWidth = img.naturalWidth;
       const naturalHeight = img.naturalHeight;
       const containerWidth = rect.width;
       const containerHeight = rect.height;
-      
+
       // Calculate the actual display dimensions for object-fit: fill with object-position: right
       const imageAspectRatio = naturalWidth / naturalHeight;
       const containerAspectRatio = containerWidth / containerHeight;
-      
+
       let displayWidth, displayHeight;
-      
+
       if (imageAspectRatio > containerAspectRatio) {
         // Image is wider than container - height fills container, width is calculated
         displayHeight = containerHeight;
@@ -56,7 +56,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
         displayWidth = containerWidth;
         displayHeight = containerWidth / imageAspectRatio;
       }
-      
+
       setOverlayDimensions(prev => ({
         ...prev,
         [imageId]: {
@@ -88,7 +88,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
           right: '0'
         };
       }
-      
+
       return {
         width: `${dimensions.width}px`,
         height: `${dimensions.height}px`
@@ -181,12 +181,13 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
     const description = descriptions[folderName];
     const title1 = getGalleryTitle1(folderName);
     const title2 = getGalleryTitle2(folderName);
-   
+
+
     return (
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
         height: '100%',
@@ -194,21 +195,30 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
         boxSizing: 'border-box',
         overflow: 'hidden'
       }}>
-        <AutoScaleText 
-          parentId={parentId} 
-          text={title1} 
-          widthPercentage={90} 
-          maxFontSize={24}
-          minFontSize={6}
-        />
-        <AutoScaleText 
-          parentId={parentId} 
-          text={title2} 
-          widthPercentage={90} 
-          maxFontSize={18}
-          minFontSize={4}
-        />
+        <div
+          style={{
+            fontSize: `clamp(12px, 2vw, 50px)`,
+            whiteSpace: "normal", // keep one line
+            width: "100%",
+            textAlign: "center",
+            marginBottom: "8px"
+          }}
+        >
+          {title1}
+        </div>
+        <div
+          style={{
+            fontSize: `clamp(12px, 3vw, 50px)`,
+            whiteSpace: "normal", // keep one line
+            width: "100%",
+            textAlign: "center",
+            marginBottom: "8px"
+          }}
+        >
+          {title2}
+        </div>
       </div>
+
     );
   };
 
@@ -281,10 +291,10 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
                 >
                   <AdvancedImage
                     id={`leftColumnImage-${groupIndex}-${index}-${photo.publicId}`}
-                    className={styles.clickablePhoto} 
-                    onClick={() => openModal('gallery', photo.folderName)} 
+                    className={styles.clickablePhoto}
+                    onClick={() => openModal('gallery', photo.folderName)}
                     onContextMenu={preventRightClick}
-                    cldImg={generateUrl(photo.publicId)} 
+                    cldImg={generateUrl(photo.publicId)}
                     style={{ objectFit: 'fill', objectPosition: 'right', height: '100%' }}
                     onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => handleImageLoad(`leftColumnImage-${groupIndex}-${index}-${photo.publicId}`, e)}
                   />
@@ -298,7 +308,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
                     onMouseLeave={() => handleOverlayMouseLeave(`leftColumnImage-${groupIndex}-${index}-${photo.publicId}`)}
                     onClick={() => handleOverlayClick(`leftColumnImage-${groupIndex}-${index}-${photo.publicId}`, photo.folderName)}
                   >
-                    {newGetGalleryTitles(photo.folderName, `leftColumnImage-${groupIndex}-${index}-${photo.publicId}`)}
+                    {newGetGalleryTitles(photo.folderName, `leftColumnImage-${groupIndex}-${index}-${photo.publicId}-overlay`)}
                   </div>
                 </div>
               ))}
@@ -319,7 +329,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({ group, filterState, groupInde
                     style={{ display: 'block', height: '100%', objectFit: 'contain', objectPosition: 'left' }}
                     onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => handleImageLoad(`rightColumnImage-${groupIndex}-${index}-${photo.publicId}`, e)}
                   />
-                  <div 
+                  <div
                     className={overlayStyles.overlay}
                     style={{
                       ...getOverlayStyle(`rightColumnImage-${groupIndex}-${index}-${photo.publicId}`),
