@@ -22,7 +22,8 @@
 .leftColumnFlex {
     display: flex;
     justify-content: flex-end;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    position: relative;
 }
 
 .rightColumnContainer {
@@ -39,7 +40,8 @@
 .rightColumnFlex {
   display: flex;
   justify-content: flex-start;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
+  position: relative;
 }
 
 .widePhotoContainer {
@@ -48,7 +50,23 @@
   margin-top: 4px;
   max-height: 80dvw; 
   margin: 0 auto;
-  @media (max-width: 768px) {
+  position: relative;
+}
+
+.widePhotoFlex {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+
+}
+
+@media (max-width: 768px) {
+  .widePhotoContainer {
     width: 70dvw;
   }
 }
@@ -56,10 +74,13 @@
 .widePhoto {
   cursor: pointer;
   width: 100%;
-  @media (max-width: 768px) {
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .widePhoto {
     max-height: 50dvw;
   }
-  object-fit: cover;
 }
 /* more specific class to add pointer cursor to non-wide photos */
 .clickablePhoto {
